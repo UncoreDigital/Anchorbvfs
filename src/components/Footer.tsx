@@ -127,20 +127,6 @@ const Footer = () => {
             <p className="text-primary-foreground/40 font-inter text-sm">
               © {new Date().getFullYear()} Anchor Business Valuations. All rights reserved.
             </p>
-            <div className="flex gap-6">
-              <a
-                href="#"
-                className="text-primary-foreground/40 font-inter text-sm hover:text-gold transition-colors"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-primary-foreground/40 font-inter text-sm hover:text-gold transition-colors"
-              >
-                Terms of Service
-              </a>
-            </div>
           </div>
         </div>
       </div>
