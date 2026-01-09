@@ -147,7 +147,7 @@ const Header = () => {
           : "bg-transparent py-5"
       }`}
     >
-      <div className="container-wide flex items-center justify-between p-2">
+      <div className="container-wide flex items-center justify-between">
         {/* Logo */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -157,7 +157,7 @@ const Header = () => {
             <img
               src="/assets/logo.png"
               alt="Anchor Business Valuations Logo"
-              className="h-16 w-20 object-contain shrink-0"
+              className="h-10 w-auto object-contain"
             />
           </Link>
         </motion.div>
@@ -188,7 +188,7 @@ const Header = () => {
                     />
                   )}
                 </>,
-                `flex items-center gap-1 px-3 lg:px-1 xl:px-3 py-2 font-inter text-sm lg:text-xs xl:text-base font-medium transition-colors whitespace-nowrap ${
+                `flex items-center gap-1 px-4 py-2 font-inter text-sm font-medium transition-colors ${
                   isScrolled || !isHomePage
                     ? "text-foreground hover:text-accent"
                     : "text-primary-foreground/90 hover:text-primary-foreground"
@@ -229,47 +229,12 @@ const Header = () => {
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="hidden lg:flex items-center gap-2"
+          className="hidden lg:flex items-center gap-4"
         >
-          <div className="hidden lg:flex items-center gap-2">
-            <a
-              href="/assets/BV-Standards-Comparison-Chart-Domestic.pdf"
-              download
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="gold"
-                size="sm"
-                className="h-8 xl:h-10 text-[10px] xl:text-sm px-2 xl:px-4"
-              >
-                BV Standards (Dom)
-              </Button>
-            </a>
-            <a
-              href="/assets/BV-Standards-Comparison-Chart-International.pdf"
-              download
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="gold"
-                size="sm"
-                className="h-8 xl:h-10 text-[10px] xl:text-sm px-2 xl:px-4"
-              >
-                BV Standards (Int'l)
-              </Button>
-            </a>
-          </div>
-
           <Link to="/contact">
-            <Button
-              variant="cta"
-              size="sm"
-              className="h-8 xl:h-10 px-3 xl:px-6 text-xs xl:text-sm"
-            >
+            <Button variant="cta" size="lg">
               Get In Touch
-              <ArrowUpRight className="w-3 h-3 xl:w-4 xl:h-4 ml-2" />
+              <ArrowUpRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
         </motion.div>
@@ -393,36 +358,7 @@ const Header = () => {
                   </div>
                 ))}
 
-                <div className="mt-8 flex flex-col gap-4">
-                  <a
-                    href="/assets/BV-Standards-Comparison-Chart-Domestic.pdf"
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button
-                      variant="gold"
-                      size="lg"
-                      className="w-full justify-center text-base whitespace-normal h-auto py-3 text-center leading-tight"
-                    >
-                      BV Standards Comparison Chart (Domestic)
-                    </Button>
-                  </a>
-                  <a
-                    href="/assets/BV-Standards-Comparison-Chart-International.pdf"
-                    download
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button
-                      variant="gold"
-                      size="lg"
-                      className="w-full justify-center text-base whitespace-normal h-auto py-3 text-center leading-tight"
-                    >
-                      BV Standards Comparison Chart (Int'l)
-                    </Button>
-                  </a>
-
+                <div className="mt-8">
                   <Link
                     to="/contact"
                     onClick={() => setIsMobileMenuOpen(false)}
