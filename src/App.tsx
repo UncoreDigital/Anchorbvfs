@@ -11,7 +11,6 @@ const IndustryExpertise = lazy(() => import("./pages/IndustryExpertise"));
 const Events = lazy(() => import("./pages/Events"));
 const Articles = lazy(() => import("./pages/Articles"));
 const Contact = lazy(() => import("./pages/Contact"));
-const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
 const About = lazy(() => import("./pages/About"));
 const Staff = lazy(() => import("./pages/Staff"));
 const Team = lazy(() => import("./pages/Team"));
@@ -23,12 +22,36 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
+// Individual Service Pages
+const IRCSection409AValuation = lazy(
+  () => import("./pages/IRCSection409AValuation")
+);
+const HealthcareValuations = lazy(() => import("./pages/HealthcareValuations"));
+const EstateGiftTaxValuations = lazy(
+  () => import("./pages/EstateGiftTaxValuations")
+);
+const MatrimonialValuationLitigationSupport = lazy(
+  () => import("./pages/MatrimonialValuationLitigationSupport")
+);
+const DamagesLostProfitClaims = lazy(
+  () => import("./pages/DamagesLostProfitClaims")
+);
+const FairValueMeasurement = lazy(() => import("./pages/FairValueMeasurement"));
+const ShareholderDisputesBusinessDivorce = lazy(
+  () => import("./pages/ShareholderDisputesBusinessDivorce")
+);
+const QualityOfEarningsReport = lazy(
+  () => import("./pages/QualityOfEarningsReport")
+);
+const ValuationsForUnderwritingLendingPurposes = lazy(
+  () => import("./pages/ValuationsForUnderwritingLendingPurposes")
+);
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -36,7 +59,45 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
+
+            {/* Service Routes */}
+            <Route
+              path="/services/irc-section-409a-valuation"
+              element={<IRCSection409AValuation />}
+            />
+            <Route
+              path="/services/healthcare-valuations"
+              element={<HealthcareValuations />}
+            />
+            <Route
+              path="/services/estate-gift-tax-valuations"
+              element={<EstateGiftTaxValuations />}
+            />
+            <Route
+              path="/services/matrimonial-valuation-litigation-support"
+              element={<MatrimonialValuationLitigationSupport />}
+            />
+            <Route
+              path="/services/damages-lost-profit-claims"
+              element={<DamagesLostProfitClaims />}
+            />
+            <Route
+              path="/services/fair-value-measurement"
+              element={<FairValueMeasurement />}
+            />
+            <Route
+              path="/services/shareholder-disputes-business-divorce"
+              element={<ShareholderDisputesBusinessDivorce />}
+            />
+            <Route
+              path="/services/quality-of-earnings-report"
+              element={<QualityOfEarningsReport />}
+            />
+            <Route
+              path="/services/valuations-for-underwriting-lending-purposes"
+              element={<ValuationsForUnderwritingLendingPurposes />}
+            />
+
             <Route path="/about" element={<About />} />
             <Route path="/staff" element={<Staff />} />
             <Route path="/team" element={<Team />} />

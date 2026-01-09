@@ -34,21 +34,42 @@ const navItems: NavItem[] = [
     href: "/#services",
     hasDropdown: true,
     dropdownItems: [
-      { name: "IRC Section 409A Valuation", href: "/services/409a-valuation" },
-      { name: "Business Valuation", href: "/services/business-valuation" },
+      {
+        name: "IRC Section 409A Valuation",
+        href: "/services/irc-section-409a-valuation",
+      },
       {
         name: "Healthcare Valuations",
         href: "/services/healthcare-valuations",
       },
       {
-        name: "Mergers & Acquisitions",
-        href: "/services/mergers-acquisitions",
+        name: "Estate & Gift Tax Valuations",
+        href: "/services/estate-gift-tax-valuations",
       },
-      { name: "Litigation Support", href: "/services/litigation-support" },
-      { name: "Estate & Gift Tax", href: "/services/estate-gift-tax" },
-      { name: "Shareholder Disputes", href: "/services/shareholder-disputes" },
-      { name: "Quality of Earnings", href: "/services/quality-of-earnings" },
-      { name: "Lending Valuations", href: "/services/lending-valuations" },
+      {
+        name: "Matrimonial Valuation & Litigation Support",
+        href: "/services/matrimonial-valuation-litigation-support",
+      },
+      {
+        name: "Damages & Lost Profit Claims",
+        href: "/services/damages-lost-profit-claims",
+      },
+      {
+        name: "Fair Value Measurement",
+        href: "/services/fair-value-measurement",
+      },
+      {
+        name: "Shareholder Disputes (“Business Divorce”)",
+        href: "/services/shareholder-disputes-business-divorce",
+      },
+      {
+        name: "Quality of Earnings Report",
+        href: "/services/quality-of-earnings-report",
+      },
+      {
+        name: "Valuations for Underwriting/Lending Purposes",
+        href: "/services/valuations-for-underwriting-lending-purposes",
+      },
     ],
   },
   {
