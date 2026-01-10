@@ -87,9 +87,12 @@ const HeroSection = () => {
                   <Button
                     variant="gold"
                     size="sm"
-                    className="h-8 xl:h-10 text-[10px] xl:text-sm px-2 xl:px-4"
+                    className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
                   >
-                    BV Standards (Dom)
+                    <div className="flex flex-col items-center">
+                      <span>BV Standards Comparison Chart</span>
+                      <span>(Domestic) FREE DOWNLOAD</span>
+                    </div>
                   </Button>
                 </a>
                 <a
@@ -101,9 +104,12 @@ const HeroSection = () => {
                   <Button
                     variant="gold"
                     size="sm"
-                    className="h-8 xl:h-10 text-[10px] xl:text-sm px-2 xl:px-4"
+                    className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
                   >
-                    BV Standards (Int'l)
+                    <div className="flex flex-col items-center">
+                      <span>BV Standards Comparison Chart</span>
+                      <span>(International) FREE DOWNLOAD</span>
+                    </div>
                   </Button>
                 </a>
               </div>

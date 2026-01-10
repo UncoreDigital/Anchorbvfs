@@ -29,9 +29,9 @@ const Footer = () => {
           <div>
             <a href="/" className="flex items-center gap-2 mb-6">
               <img
-                src="/assets/logo.png"
+                src="/assets/footer/Logo.png"
                 alt="Anchor Business Valuations"
-                className="h-12 w-auto object-contain bg-white/10 rounded-lg p-1"
+                className="h-36 w-auto object-contain bg-white/1 rounded-lg p-1"
               />
             </a>
             <p className="text-primary-foreground/60 font-inter text-sm leading-relaxed mb-6">

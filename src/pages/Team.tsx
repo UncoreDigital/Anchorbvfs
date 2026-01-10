@@ -18,12 +18,6 @@ const Team = () => {
       bio: "20+ years of experience in business valuation and financial consulting. ABV, CVA, MAFF, EA, MAcc.",
     },
     {
-      name: "Rakshit Verma",
-      role: "Senior Financial Analyst",
-      image: "/assets/rakshit.jpg",
-      bio: "Rakshit Verma, ASA, ABV, specializes in business valuation and investment banking with nearly a decade of experience, primarily in the technology and healthcare sectors. He performs valuation and consulting services for various entities including acquisition accounting, goodwill impairment, and stock-based compensation.",
-    },
-    {
       name: "Prashasti Agrawal",
       role: "Senior Financial Analyst",
       image: "/assets/logo.png", // Using logo as placeholder until headshot is provided
