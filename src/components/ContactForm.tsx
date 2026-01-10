@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -32,36 +33,44 @@ const ContactForm = () => {
 
     setIsSubmitting(true);
 
-    // Construct mailto link
-    const subject = encodeURIComponent(`Contact Form: ${formData.subject}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
-    );
-    // Updated email as per client feedback
-    const mailtoLink = `mailto:djayswal023@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const { error } = await supabase.from("leads").insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: formData.subject,
+          message: formData.message,
+          consent: formData.consent,
+        },
+      ]);
 
-    // Simulate short delay for UX
-    await new Promise((resolve) => setTimeout(resolve, 800));
+      if (error) throw error;
 
-    setIsSubmitting(false);
+      toast({
+        title: "Message Sent!",
+        description: "We will get back to you within 24 hours.",
+      });
 
-    // Open email client
-    window.location.href = mailtoLink;
-
-    toast({
-      title: "Message Sent!",
-      description: "We will get back to you within 24 hours.",
-    });
-
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-      consent: false,
-    });
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+        consent: false,
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (

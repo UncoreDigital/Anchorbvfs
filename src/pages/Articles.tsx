@@ -5,49 +5,34 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageBanner from '@/components/PageBanner';
 
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+
 const Articles = () => {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'instant' });
     }, []);
 
-    const articles = [
-        {
-            title: 'Appraising Your Business with Anchor Business Valuations & Financial Services’ Trisch Garthoeffner',
-            date: 'Oct 4, 2020',
-            type: 'Podcast',
-            link: 'https://www.youtube.com/watch?v=jOH2ykV2Ojg&t=413s'
-        },
-        {
-            title: 'Practicing Solo - Interview',
-            date: 'Sep/Oct 2019',
-            type: 'Article',
-            link: 'https://www.dropbox.com/scl/fi/t0p2olpskik4qrud2u2td/NACVA_Garthoeffner-Interview.pdf?rlkey=xt3f41s3w5h9gchffihmucdm0&e=1&dl=0'
-        },
-        {
-            title: 'The Aftermath of Divorce',
-            date: 'Oct 18, 2019',
-            type: 'Article',
-            link: 'https://cmmonline.com/articles/the-aftermath-of-divorce'
-        },
-        {
-            title: 'Determining Fair Market Value',
-            date: 'Oct 8, 2017',
-            type: 'Article',
-            link: 'https://cmmonline.com/articles/determining-fair-market-value'
-        },
-        {
-            title: '‘Collaborative’ Divorce Aims to Ease the Burden of Ending a Marriage',
-            date: 'Feb 14, 2017',
-            type: 'Story',
-            link: 'https://news.wgcu.org/show/gulf-coast-life/2017-02-14/collaborative-divorce-aims-to-ease-the-burden-of-ending-a-marriage'
-        },
-        {
-            title: 'Determining Fair Market Value',
-            date: 'April 2013',
-            type: 'Article',
-            link: 'https://www.cmmagazine.cmmonline.com/publication/?i=699389&article_id=3969722&view=articleBrowser'
-        },
-    ];
+    const { data: articles = [], isLoading } = useQuery({
+        queryKey: ['articles'],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from('articles')
+                .select('*')
+                .order('published_at', { ascending: false });
+
+            if (error) throw error;
+            // Map published_at to date for compatibility if needed, but we use same semantics
+            return data.map(item => ({
+                ...item,
+                date: item.published_at // Map for UI compatibility
+            }));
+        }
+    });
+
+    if (isLoading) {
+        return <div className="min-h-screen bg-background flex items-center justify-center">Loading...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-background">

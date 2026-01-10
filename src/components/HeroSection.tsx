@@ -1,3 +1,4 @@
+import PdfLeadFormModal from "./PdfLeadFormModal";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
@@ -22,6 +23,12 @@ const slides = [
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAsset, setSelectedAsset] = useState<{
+    label: string;
+    filename: string;
+    path: string;
+  } | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -34,11 +41,26 @@ const HeroSection = () => {
   const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
+  const handleDownloadClick = (asset: {
+    label: string;
+    filename: string;
+    path: string;
+  }) => {
+    setSelectedAsset(asset);
+    setIsModalOpen(true);
+  };
+
   return (
     <section
       id="home"
       className="relative min-h-[100dvh] flex items-center overflow-hidden pt-20"
     >
+      <PdfLeadFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedAsset={selectedAsset}
+      />
+
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -78,40 +100,42 @@ const HeroSection = () => {
                 {slides[currentSlide].title}
               </h2>
               <div className="flex flex-wrap items-center gap-2">
-                <a
-                  href="/assets/BV-Standards-Comparison-Chart-Domestic.pdf"
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Button
+                  variant="gold"
+                  size="sm"
+                  className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
+                  onClick={() =>
+                    handleDownloadClick({
+                      label: "Domestic Standards",
+                      filename: "BV-Standards-Comparison-Chart-Domestic.pdf",
+                      path: "/assets/BV-Standards-Comparison-Chart-Domestic.pdf",
+                    })
+                  }
                 >
-                  <Button
-                    variant="gold"
-                    size="sm"
-                    className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
-                  >
-                    <div className="flex flex-col items-center">
-                      <span>BV Standards Comparison Chart</span>
-                      <span>(Domestic) FREE DOWNLOAD</span>
-                    </div>
-                  </Button>
-                </a>
-                <a
-                  href="/assets/BV-Standards-Comparison-Chart-International.pdf"
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  <div className="flex flex-col items-center">
+                    <span>BV Standards Comparison Chart</span>
+                    <span>(Domestic) FREE DOWNLOAD</span>
+                  </div>
+                </Button>
+
+                <Button
+                  variant="gold"
+                  size="sm"
+                  className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
+                  onClick={() =>
+                    handleDownloadClick({
+                      label: "International Standards",
+                      filename:
+                        "BV-Standards-Comparison-Chart-International.pdf",
+                      path: "/assets/BV-Standards-Comparison-Chart-International.pdf",
+                    })
+                  }
                 >
-                  <Button
-                    variant="gold"
-                    size="sm"
-                    className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
-                  >
-                    <div className="flex flex-col items-center">
-                      <span>BV Standards Comparison Chart</span>
-                      <span>(International) FREE DOWNLOAD</span>
-                    </div>
-                  </Button>
-                </a>
+                  <div className="flex flex-col items-center">
+                    <span>BV Standards Comparison Chart</span>
+                    <span>(International) FREE DOWNLOAD</span>
+                  </div>
+                </Button>
               </div>
             </motion.div>
           </div>

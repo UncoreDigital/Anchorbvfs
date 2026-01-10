@@ -27,3 +27,6 @@ dist-ssr
 anchorbvfs
 temp_extract
 temp_extract_all    
+.env
+anchor_blogs
+scripts
