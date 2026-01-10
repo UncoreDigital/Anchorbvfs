@@ -1,17 +1,23 @@
-import { ArrowUpRight, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { 
+  Mail,
+  Phone,
+  MapPin,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 const quickLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'About Us', href: '/about' },
-  { name: 'Services', href: '/#services' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Services", href: "/#services" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const services = [
-  { name: 'Business Valuation', href: '/services/business-valuation' },
-  { name: 'Litigation Support', href: '/services/litigation-support' },
-  { name: 'Mergers & Acquisitions', href: '/services/mergers-acquisitions' },
-  { name: '409A Valuation', href: '/services/409a-valuation' },
+  { name: "Business Valuation", href: "/services/business-valuation" },
+  { name: "Litigation Support", href: "/services/litigation-support" },
+  { name: "Mergers & Acquisitions", href: "/services/mergers-acquisitions" },
+  { name: "409A Valuation", href: "/services/409a-valuation" },
 ];
 
 const Footer = () => {
@@ -29,12 +35,20 @@ const Footer = () => {
               />
             </a>
             <p className="text-primary-foreground/60 font-inter text-sm leading-relaxed mb-6">
-              Anchor Business Valuations & Financial Services, LLC is a premier business valuation and consulting firm serving clients with integrity and expertise.
+              Anchor Business Valuations & Financial Services, LLC is a premier
+              business valuation and consulting firm serving clients with
+              integrity and expertise.
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Linkedin, href: 'https://www.linkedin.com/company/anchor-business-valuations-financial-services-llc/about/' },
-                { Icon: Instagram, href: 'https://www.instagram.com/anchor_business_valuations/' }
+                {
+                  Icon: Linkedin,
+                  href: "https://www.linkedin.com/company/anchor-business-valuations-financial-services-llc/about/",
+                },
+                {
+                  Icon: Instagram,
+                  href: "https://www.instagram.com/anchor_business_valuations/",
+                },
               ].map(({ Icon, href }, index) => (
                 <a
                   key={index}
@@ -125,7 +139,12 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/40 font-inter text-sm">
-              © {new Date().getFullYear()} Anchor Business Valuations. All rights reserved.
+              © {new Date().getFullYear()} Anchor Business Valuations. All
+              rights reserved.
+              <br />
+              <a href="https://uncore-digital.com/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors">
+                Powered by Uncore Digital
+              </a>
             </p>
           </div>
         </div>

@@ -1,93 +1,107 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
     id: 1,
-    name: 'Kimberly Philbin',
-    role: 'Founder, Vision 360 Capital Partners',
-    content: 'Trisch Garthoeffner is highly knowledgeable and is first to come to mind when I have a client needing business valuation, M&A, or selling consultation services.',
+    name: "Kimberly Philbin",
+    role: "Founder, Vision 360 Capital Partners",
+    content:
+      "Trisch Garthoeffner is highly knowledgeable and is first to come to mind when I have a client needing business valuation, M&A, or selling consultation services.",
     rating: 5,
-    image: 'KP',
+    image: "KP",
+    imageUrl: "/images/testimonials/image2.jpeg",
   },
   {
     id: 2,
-    name: 'Tom Cavanagh',
-    role: 'VP, Shareholder, BCC Advisers',
-    content: 'Trisch has been an invaluable resource for questions surrounding business valuations and financial modeling. With her continuous professionalism and attention to detail, she is someone I have trusted since we began working together 5+ years ago.',
+    name: "Tom Cavanagh",
+    role: "VP, Shareholder, BCC Advisers",
+    content:
+      "Trisch has been an invaluable resource for questions surrounding business valuations and financial modeling. With her continuous professionalism and attention to detail, she is someone I have trusted since we began working together 5+ years ago.",
     rating: 5,
-    image: 'TC',
+    image: "TC",
+    imageUrl: "/images/testimonials/image1.png",
   },
   {
     id: 3,
-    name: 'David North',
-    role: 'President, Garage Doors by Roy North',
-    content: 'Our company has engaged Anchor Business Valuations for 5+ consecutive years to complete a valuation of our company. The price was reasonable, and the turnaround time was excellent. I highly recommend hiring Trisch Garthoeffner and her associates!',
+    name: "David North",
+    role: "President, Garage Doors by Roy North",
+    content:
+      "Our company has engaged Anchor Business Valuations for 5+ consecutive years to complete a valuation of our company. The price was reasonable, and the turnaround time was excellent. I highly recommend hiring Trisch Garthoeffner and her associates!",
     rating: 5,
-    image: 'DN',
+    image: "DN",
   },
   {
     id: 4,
-    name: 'Anonymous',
-    role: 'Divorce Client, Spring 2024',
-    content: 'I really enjoyed working with Trisch and was very impressed with her knowledge, quality of work, and customer service. I will definitely keep Anchor in mind for future needs of myself or friends.',
+    name: "Anonymous",
+    role: "Divorce Client, Spring 2024",
+    content:
+      "I really enjoyed working with Trisch and was very impressed with her knowledge, quality of work, and customer service. I will definitely keep Anchor in mind for future needs of myself or friends.",
     rating: 5,
-    image: 'AN',
+    image: "AN",
   },
   {
     id: 5,
-    name: 'Leathem Stearn',
-    role: 'Founder',
-    content: 'I have worked extensively with Ms. Garthoeffner and found her to be competent, comprehensive, punctual and insightful in her work. I have and will continue to work with her.',
+    name: "Leathem Stearn",
+    role: "Founder",
+    content:
+      "I have worked extensively with Ms. Garthoeffner and found her to be competent, comprehensive, punctual and insightful in her work. I have and will continue to work with her.",
     rating: 5,
-    image: 'LS',
+    image: "LS",
+    imageUrl: "/images/testimonials/image3.jpeg",
   },
   {
     id: 6,
-    name: 'Paul Bosley',
-    role: 'President/Founder, Business Finance Depot',
-    content: 'Trisch Garthoeffner knows Valuation. Period, full stop.',
+    name: "Paul Bosley",
+    role: "President/Founder, Business Finance Depot",
+    content: "Trisch Garthoeffner knows Valuation. Period, full stop.",
     rating: 5,
-    image: 'PB',
+    image: "PB",
   },
   {
     id: 7,
-    name: 'Larry Amon',
-    role: 'President, TAB of SW Florida',
-    content: 'Trisch is a high energy, driven to succeed, personality that helps business owners determine the value of their companies.',
+    name: "Larry Amon",
+    role: "President, TAB of SW Florida",
+    content:
+      "Trisch is a high energy, driven to succeed, personality that helps business owners determine the value of their companies.",
     rating: 5,
-    image: 'LA',
+    image: "LA",
+    imageUrl: "/images/testimonials/image5.png",
   },
   {
     id: 8,
-    name: 'C. Zachary Meyers',
-    role: 'President, C. Zachary Meyers, PLLC',
-    content: 'Thanks for completing the valuation. With a lot of considerations, I know this was a complicated and time-consuming review. You did great with what we gave you. I am glad we used your company. Will look forward to use anchor business valuations in the future.',
+    name: "C. Zachary Meyers",
+    role: "President, C. Zachary Meyers, PLLC",
+    content:
+      "Thanks for completing the valuation. With a lot of considerations, I know this was a complicated and time-consuming review. You did great with what we gave you. I am glad we used your company. Will look forward to use anchor business valuations in the future.",
     rating: 5,
-    image: 'ZM',
+    image: "ZM",
+    imageUrl: "/images/testimonials/image4.jpeg",
   },
   {
     id: 9,
-    name: 'Dr. William Mills',
-    role: 'Founder, Marshall Medical Center',
-    content: 'Trisch was instrumental in the sale of our family’s medical practice all the way from valuation to closing. We could not have done it without her. Her professionalism, knowledge, and positive attitude made the process very easy for us. I highly recommend working with Trisch.',
+    name: "Dr. William Mills",
+    role: "Founder, Marshall Medical Center",
+    content:
+      "Trisch was instrumental in the sale of our family’s medical practice all the way from valuation to closing. We could not have done it without her. Her professionalism, knowledge, and positive attitude made the process very easy for us. I highly recommend working with Trisch.",
     rating: 5,
-    image: 'WM',
+    image: "WM",
   },
   {
     id: 10,
-    name: 'Business & Asset Protection Attorney',
-    role: 'Spring 2024',
-    content: 'Thanks for all of your hard work, Trisch. We could not have done without you.',
+    name: "Business & Asset Protection Attorney",
+    role: "Spring 2024",
+    content:
+      "Thanks for all of your hard work, Trisch. We could not have done without you.",
     rating: 5,
-    image: 'BA',
-  }
+    image: "BA",
+  },
 ];
 
 const TestimonialsSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
@@ -108,11 +122,16 @@ const TestimonialsSection = () => {
 
   const prev = () => {
     setIsAutoPlaying(false);
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
   };
 
   return (
-    <section id="testimonials" className="section-padding bg-background overflow-hidden">
+    <section
+      id="testimonials"
+      className="section-padding bg-background overflow-hidden"
+    >
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -153,7 +172,7 @@ const TestimonialsSection = () => {
             </div>
 
             {/* Card */}
-            <div className="bg-muted rounded-3xl p-8 md:p-12 relative">
+            <div className="bg-muted rounded-3xl p-8 md:p-12 relative min-h-[400px] flex flex-col justify-between">
               <div className="relative z-10">
                 {/* Content */}
                 <motion.div
@@ -169,8 +188,16 @@ const TestimonialsSection = () => {
 
                   <div className="flex items-center gap-4">
                     {/* Avatar */}
-                    <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center text-primary font-semibold">
-                      {testimonials[currentIndex].image}
+                    <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center text-primary font-semibold overflow-hidden">
+                      {testimonials[currentIndex].imageUrl ? (
+                        <img
+                          src={testimonials[currentIndex].imageUrl}
+                          alt={testimonials[currentIndex].name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        testimonials[currentIndex].image
+                      )}
                     </div>
 
                     <div>
@@ -184,9 +211,14 @@ const TestimonialsSection = () => {
 
                     {/* Rating */}
                     <div className="ml-auto flex gap-1">
-                      {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-gold text-gold" />
-                      ))}
+                      {[...Array(testimonials[currentIndex].rating)].map(
+                        (_, i) => (
+                          <Star
+                            key={i}
+                            className="w-5 h-5 fill-gold text-gold"
+                          />
+                        )
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -211,8 +243,9 @@ const TestimonialsSection = () => {
                       setIsAutoPlaying(false);
                       setCurrentIndex(index);
                     }}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-8 bg-gold' : 'bg-border'
-                      }`}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentIndex ? "w-8 bg-gold" : "bg-border"
+                    }`}
                   />
                 ))}
               </div>

@@ -23,6 +23,12 @@ const Team = () => {
       image: "/assets/rakshit.jpg",
       bio: "Rakshit Verma, ASA, ABV, specializes in business valuation and investment banking with nearly a decade of experience, primarily in the technology and healthcare sectors. He performs valuation and consulting services for various entities including acquisition accounting, goodwill impairment, and stock-based compensation.",
     },
+    {
+      name: "Prashasti Agrawal",
+      role: "Senior Financial Analyst",
+      image: "/assets/logo.png", // Using logo as placeholder until headshot is provided
+      bio: "Prashasti Agrawal is a Senior Financial Analyst at Anchor. She oversees employee logistics and ensures proper operations.",
+    },
   ];
 
   return (

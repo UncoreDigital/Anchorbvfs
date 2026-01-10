@@ -88,7 +88,8 @@ const navItems: NavItem[] = [
       { name: "FAQ", href: "/faq" },
     ],
   },
-  { name: "Contact", href: "/contact" },
+  { name: "Testimonials", href: "/#testimonials" },
+  // { name: "Contact", href: "/contact" },
 ];
 
 const Header = () => {
@@ -110,12 +111,24 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = () => {
+  const handleNavClick = (href?: string) => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
     setMobileOpenDropdowns([]);
-    // Scroll to top on navigation
-    window.scrollTo({ top: 0, behavior: "instant" });
+
+    if (href?.includes("#")) {
+      const elementId = href.split("#")[1];
+      const element = document.getElementById(elementId);
+      if (element) {
+        // Add a small delay to ensure DOM is ready if navigating from another page
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    } else {
+      // Scroll to top on navigation
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   };
 
   const toggleMobileDropdown = (name: string, e: React.MouseEvent) => {
@@ -178,7 +191,7 @@ const Header = () => {
             <img
               src="/assets/logo.png"
               alt="Anchor Business Valuations Logo"
-              className="h-10 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </Link>
         </motion.div>
@@ -214,7 +227,7 @@ const Header = () => {
                     ? "text-foreground hover:text-accent"
                     : "text-primary-foreground/90 hover:text-primary-foreground"
                 }`,
-                () => handleNavClick()
+                () => handleNavClick(item.href)
               )}
 
               {/* Dropdown Menu */}
@@ -232,7 +245,7 @@ const Header = () => {
                         <Link
                           key={dropItem.name}
                           to={dropItem.href}
-                          onClick={handleNavClick}
+                          onClick={() => handleNavClick(dropItem.href)}
                           className="block px-5 py-3 text-sm text-foreground hover:bg-muted hover:text-accent transition-colors font-inter"
                         >
                           {dropItem.name}
@@ -326,6 +339,7 @@ const Header = () => {
                           } else {
                             setIsMobileMenuOpen(false);
                             setMobileOpenDropdowns([]);
+                            handleNavClick(item.href);
                           }
                         }}
                         className="flex-1 py-2 font-playfair text-xl font-medium text-foreground hover:text-accent transition-colors"
@@ -366,6 +380,7 @@ const Header = () => {
                                   onClick={() => {
                                     setIsMobileMenuOpen(false);
                                     setMobileOpenDropdowns([]);
+                                    handleNavClick(dropItem.href);
                                   }}
                                   className="block py-2 text-base text-muted-foreground hover:text-accent transition-colors font-inter"
                                 >
