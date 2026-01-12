@@ -1,30 +1,44 @@
-import { 
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Instagram,
-} from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
 
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Services", href: "/#services" },
+  { name: "Industry Expertise", href: "/industry-expertise" },
   { name: "Contact", href: "/contact" },
 ];
 
 const services = [
-  { name: "Business Valuation", href: "/services/business-valuation" },
-  { name: "Litigation Support", href: "/services/litigation-support" },
-  { name: "Mergers & Acquisitions", href: "/services/mergers-acquisitions" },
-  { name: "409A Valuation", href: "/services/409a-valuation" },
+  {
+    name: "IRC Section 409A Valuation",
+    href: "/services/irc-section-409a-valuation",
+  },
+  {
+    name: "Healthcare Valuations",
+    href: "/services/healthcare-valuations",
+  },
+  {
+    name: "Estate & Gift Tax Valuations",
+    href: "/services/estate-gift-tax-valuations",
+  },
+  {
+    name: "Damages & Lost Profit Claims",
+    href: "/services/damages-lost-profit-claims",
+  },
+  {
+    name: "Fair Value Measurement",
+    href: "/services/fair-value-measurement",
+  },
+  {
+    name: "Quality of Earnings Report",
+    href: "/services/quality-of-earnings-report",
+  }
 ];
 
 const Footer = () => {
   return (
     <footer id="contact" className="bg-primary pt-20 pb-8">
       <div className="container-wide">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-8">
           {/* Brand Column */}
           <div>
             <a href="/" className="flex items-center gap-2 mb-6">
@@ -87,7 +101,7 @@ const Footer = () => {
             <h4 className="font-playfair text-lg font-semibold text-primary-foreground mb-6">
               Our Services
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2">
               {services.map((service) => (
                 <li key={service.name}>
                   <a
@@ -139,11 +153,15 @@ const Footer = () => {
         <div className="border-t border-primary-foreground/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-primary-foreground/40 font-inter text-sm">
-              © {new Date().getFullYear()} Anchor Business Valuations. All
-              rights reserved.
-              <br />
-              <a href="https://uncore-digital.com/" target="_blank" rel="noopener noreferrer" className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors">
-                Powered by Uncore Digital
+              © 2026 Anchor Business Valuations. All rights reserved. | Powered
+              by{" "}
+              <a
+                href="https://uncoredigital.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gold transition-colors"
+              >
+                Uncore Digital
               </a>
             </p>
           </div>
