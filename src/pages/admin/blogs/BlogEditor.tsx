@@ -11,9 +11,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CalendarIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ImageUpload } from "@/components/ui/ImageUpload";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -49,6 +57,31 @@ const BlogEditor = () => {
     },
   });
 
+  const formatDateForInput = (dateStr: string) => {
+    if (!dateStr) return "";
+    // If it's an ISO string or YYYY-MM-DD
+    if (dateStr.includes("T")) {
+      return dateStr.split("T")[0];
+    }
+    // If it's DD-MM-YYYY
+    const parts = dateStr.split("-");
+    if (parts.length === 3 && parts[0].length === 2) {
+      const [d, m, y] = parts;
+      return `${y}-${m}-${d}`;
+    }
+    return dateStr;
+  };
+
+  const formatDateForStorage = (dateStr: string) => {
+    if (!dateStr) return "";
+    const parts = dateStr.split("-");
+    if (parts[0].length === 4) {
+      const [y, m, d] = parts;
+      return `${d}-${m}-${y}`;
+    }
+    return dateStr;
+  };
+
   useEffect(() => {
     if (isEditing) {
       const fetchBlog = async () => {
@@ -73,7 +106,7 @@ const BlogEditor = () => {
             category: data.category,
             image_url: data.image_url,
             is_featured: data.is_featured,
-            published_at: data.published_at.split("T")[0],
+            published_at: formatDateForInput(data.published_at),
           });
         }
       };
@@ -85,16 +118,27 @@ const BlogEditor = () => {
   const onSubmit = async (data: BlogFormValues) => {
     setLoading(true);
     try {
+      const blogData = {
+        title: data.title,
+        excerpt: data.excerpt,
+        content: data.content,
+        author: data.author,
+        category: data.category,
+        image_url: data.image_url || null,
+        is_featured: data.is_featured,
+        published_at: formatDateForStorage(data.published_at),
+      };
+
       if (isEditing) {
         const { error } = await supabase
           .from("blogs")
-          .update(data)
+          .update(blogData)
           .eq("id", id);
 
         if (error) throw error;
         toast.success("Blog updated successfully");
       } else {
-        const { error } = await supabase.from("blogs").insert([data]);
+        const { error } = await supabase.from("blogs").insert([blogData]);
 
         if (error) throw error;
         toast.success("Blog created successfully");
@@ -163,12 +207,67 @@ const BlogEditor = () => {
               )}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-4 flex flex-col">
               <Label htmlFor="published_at">Publish Date</Label>
-              <Input
-                type="date"
-                id="published_at"
-                {...register("published_at")}
+              <Controller
+                name="published_at"
+                control={control}
+                render={({ field }) => {
+                  // Parse the current value to a Date object for the Calendar
+                  let dateValue: Date | undefined;
+                  if (field.value) {
+                    // Try parsing if it's already YYYY-MM-DD (from default/ISO)
+                    if (field.value.includes("-")) {
+                      const parts = field.value.split("-");
+                      // Check if YYYY-MM-DD or DD-MM-YYYY
+                      if (parts[0].length === 4) {
+                        // YYYY-MM-DD
+                        dateValue = new Date(field.value);
+                      } else if (parts[2].length === 4) {
+                        // DD-MM-YYYY
+                        const [d, m, y] = parts;
+                        dateValue = new Date(`${y}-${m}-${d}`);
+                      }
+                    }
+                  }
+
+                  return (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {dateValue ? (
+                            format(dateValue, "dd-MM-yyyy")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={dateValue}
+                          onSelect={(date) => {
+                            // Store as DD-MM-YYYY
+                            if (date) {
+                              field.onChange(format(date, "dd-MM-yyyy"));
+                            } else {
+                              field.onChange("");
+                            }
+                          }}
+                          disabled={(date) => date < new Date("1900-01-01")}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  );
+                }}
               />
               {errors.published_at && (
                 <p className="text-red-500 text-sm">
@@ -193,7 +292,7 @@ const BlogEditor = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="excerpt">Excerpt</Label>
+            <Label htmlFor="excerpt">Short Description</Label>
             <Textarea
               id="excerpt"
               {...register("excerpt")}

@@ -7,11 +7,15 @@ import Color from "@tiptap/extension-color";
 import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
-import { useCallback, useRef, useState } from "react";
+import Underline from "@tiptap/extension-underline";
+import { FontSize } from "./extensions/FontSize";
+import { useCallback, useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Bold,
   Italic,
+  Underline as UnderlineIcon,
+  Heading1,
   Heading2,
   Heading3,
   List,
@@ -28,11 +32,15 @@ import {
   AlignJustify,
   Crop,
   Link as LinkIcon,
+  Minus,
+  RemoveFormatting,
+  Type,
 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   Popover,
@@ -77,6 +85,15 @@ const HIGHLIGHT_COLORS = [
   "#FFFFFF",
 ];
 
+const FONT_SIZES = [
+  { label: "Small", value: "14px" },
+  { label: "Normal", value: "16px" },
+  { label: "Medium", value: "18px" },
+  { label: "Large", value: "20px" },
+  { label: "Extra Large", value: "24px" },
+  { label: "Huge", value: "32px" },
+];
+
 export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cropFileInputRef = useRef<HTMLInputElement>(null);
@@ -90,7 +107,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
     extensions: [
       StarterKit.configure({
         heading: {
-          levels: [2, 3],
+          levels: [1, 2, 3],
         },
       }),
       Image.configure({
@@ -115,6 +132,8 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           class: "text-primary underline cursor-pointer",
         },
       }),
+      Underline,
+      FontSize,
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -122,7 +141,8 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
     },
     editorProps: {
       attributes: {
-        class: "tiptap focus:outline-none min-h-[400px] px-1",
+        class:
+          "tiptap focus:outline-none min-h-[400px] px-4 py-2 prose prose-sm sm:prose-base max-w-none dark:prose-invert",
       },
       handleDrop: (view, event, slice, moved) => {
         if (!moved && event.dataTransfer?.files.length) {
@@ -222,14 +242,6 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
     event.target.value = "";
   };
 
-  const handleCropComplete = async (croppedBlob: Blob) => {
-    const file = new File([croppedBlob], `cropped-${Date.now()}.jpg`, {
-      type: "image/jpeg",
-    });
-    await uploadImage(file);
-    setImageToCrop(null);
-  };
-
   const setLink = useCallback(() => {
     const previousUrl = editor.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
@@ -260,17 +272,67 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
     setHighlightOpen(false);
   };
 
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content);
+    }
+  }, [content, editor]);
+
   if (!editor) return null;
 
   return (
     <div className="border border-border rounded-lg overflow-hidden bg-card relative">
       <div className="sticky top-0 z-10 flex flex-wrap items-center gap-1 p-2 border-b border-border bg-card/95 backdrop-blur-sm shadow-sm">
+        {/* Font Size */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-1 min-w-[3rem]"
+              title="Font Size"
+            >
+              <Type className="h-4 w-4" />
+              <span className="text-xs hidden sm:inline">Size</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {FONT_SIZES.map((size) => (
+              <DropdownMenuItem
+                key={size.value}
+                onClick={() =>
+                  editor.chain().focus().setFontSize(size.value).run()
+                }
+                className="justify-between"
+              >
+                {size.label}{" "}
+                <span className="text-xs text-muted-foreground ml-2">
+                  {size.value}
+                </span>
+              </DropdownMenuItem>
+            ))}
+            <DropdownMenuItem
+              onClick={() => editor.chain().focus().unsetFontSize().run()}
+            >
+              Reset
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <div className="w-px h-6 bg-border mx-1" />
+
         {/* Text Color Picker */}
         <Popover open={colorOpen} onOpenChange={setColorOpen}>
           <PopoverTrigger asChild>
-            <Button type="button" variant="ghost" size="sm" className="gap-1">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="gap-1"
+              title="Text Color"
+            >
               <Palette className="h-4 w-4" />
-              <span className="text-xs hidden sm:inline">Color</span>
+              <span className="sr-only">Color</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-2" align="start">
@@ -292,9 +354,15 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
         {/* Highlight Color Picker */}
         <Popover open={highlightOpen} onOpenChange={setHighlightOpen}>
           <PopoverTrigger asChild>
-            <Button type="button" variant="ghost" size="sm" className="gap-1">
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="gap-1"
+              title="Highlight Color"
+            >
               <Highlighter className="h-4 w-4" />
-              <span className="text-xs hidden sm:inline">Highlight</span>
+              <span className="sr-only">Highlight</span>
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-2" align="start">
@@ -321,6 +389,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "bg-muted" : ""}
+          title="Bold"
         >
           <Bold className="h-4 w-4" />
         </Button>
@@ -330,10 +399,35 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={editor.isActive("italic") ? "bg-muted" : ""}
+          title="Italic"
         >
           <Italic className="h-4 w-4" />
         </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          className={editor.isActive("underline") ? "bg-muted" : ""}
+          title="Underline"
+        >
+          <UnderlineIcon className="h-4 w-4" />
+        </Button>
+
         <div className="w-px h-6 bg-border mx-1" />
+
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() =>
+            editor.chain().focus().toggleHeading({ level: 1 }).run()
+          }
+          className={editor.isActive("heading", { level: 1 }) ? "bg-muted" : ""}
+          title="Heading 1"
+        >
+          <Heading1 className="h-4 w-4" />
+        </Button>
         <Button
           type="button"
           variant="ghost"
@@ -342,6 +436,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
           className={editor.isActive("heading", { level: 2 }) ? "bg-muted" : ""}
+          title="Heading 2"
         >
           <Heading2 className="h-4 w-4" />
         </Button>
@@ -353,16 +448,20 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
           className={editor.isActive("heading", { level: 3 }) ? "bg-muted" : ""}
+          title="Heading 3"
         >
           <Heading3 className="h-4 w-4" />
         </Button>
+
         <div className="w-px h-6 bg-border mx-1" />
+
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={editor.isActive("bulletList") ? "bg-muted" : ""}
+          title="Bullet List"
         >
           <List className="h-4 w-4" />
         </Button>
@@ -372,6 +471,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={editor.isActive("orderedList") ? "bg-muted" : ""}
+          title="Ordered List"
         >
           <ListOrdered className="h-4 w-4" />
         </Button>
@@ -381,16 +481,29 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={editor.isActive("blockquote") ? "bg-muted" : ""}
+          title="Blockquote"
         >
           <Quote className="h-4 w-4" />
         </Button>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+          title="Horizontal Rule"
+        >
+          <Minus className="h-4 w-4" />
+        </Button>
+
         <div className="w-px h-6 bg-border mx-1" />
+
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().setTextAlign("left").run()}
           className={editor.isActive({ textAlign: "left" }) ? "bg-muted" : ""}
+          title="Align Left"
         >
           <AlignLeft className="h-4 w-4" />
         </Button>
@@ -400,6 +513,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().setTextAlign("center").run()}
           className={editor.isActive({ textAlign: "center" }) ? "bg-muted" : ""}
+          title="Align Center"
         >
           <AlignCenter className="h-4 w-4" />
         </Button>
@@ -409,6 +523,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().setTextAlign("right").run()}
           className={editor.isActive({ textAlign: "right" }) ? "bg-muted" : ""}
+          title="Align Right"
         >
           <AlignRight className="h-4 w-4" />
         </Button>
@@ -420,10 +535,13 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           className={
             editor.isActive({ textAlign: "justify" }) ? "bg-muted" : ""
           }
+          title="Justify"
         >
           <AlignJustify className="h-4 w-4" />
         </Button>
+
         <div className="w-px h-6 bg-border mx-1" />
+
         <Button
           type="button"
           variant="ghost"
@@ -452,27 +570,29 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
         >
           <Crop className="h-4 w-4" />
         </Button>
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-        <input
-          ref={cropFileInputRef}
-          type="file"
-          accept="image/*"
-          onChange={handleCropFileChange}
-          className="hidden"
-        />
+
         <div className="flex-1" />
+
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() =>
+            editor.chain().focus().unsetAllMarks().clearNodes().run()
+          }
+          title="Clear Formatting"
+        >
+          <RemoveFormatting className="h-4 w-4" />
+        </Button>
+        <div className="w-px h-6 bg-border mx-1" />
+
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().undo().run()}
           disabled={!editor.can().undo()}
+          title="Undo"
         >
           <Undo className="h-4 w-4" />
         </Button>
@@ -482,6 +602,7 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
           size="sm"
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().redo()}
+          title="Redo"
         >
           <Redo className="h-4 w-4" />
         </Button>

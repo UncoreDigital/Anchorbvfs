@@ -196,7 +196,7 @@ const ManageLeads = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
         <div className="space-y-1">
           <label className="text-xs font-medium text-gray-500 uppercase">
-            Filter Name
+            Name
           </label>
           <Input
             placeholder="Search name..."
@@ -207,7 +207,7 @@ const ManageLeads = () => {
         </div>
         <div className="space-y-1">
           <label className="text-xs font-medium text-gray-500 uppercase">
-            Filter Email
+            Email
           </label>
           <Input
             placeholder="Search email..."
@@ -218,7 +218,7 @@ const ManageLeads = () => {
         </div>
         <div className="space-y-1">
           <label className="text-xs font-medium text-gray-500 uppercase">
-            Filter Phone
+            Phone
           </label>
           <Input
             placeholder="Search phone..."
@@ -231,7 +231,7 @@ const ManageLeads = () => {
         {activeTab === "leads" ? (
           <div className="space-y-1">
             <label className="text-xs font-medium text-gray-500 uppercase">
-              Filter Subject
+              Subject
             </label>
             <Input
               placeholder="Search subject..."
@@ -243,7 +243,7 @@ const ManageLeads = () => {
         ) : (
           <div className="space-y-1">
             <label className="text-xs font-medium text-gray-500 uppercase">
-              Filter Company
+              Company
             </label>
             <Input
               placeholder="Search company..."

@@ -54,7 +54,12 @@ const AdminLayout = () => {
       >
         <div className="h-full flex flex-col">
           <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-            <h1 className="text-xl font-playfair font-bold text-primary">
+            <h1 className="text-xl font-playfair font-bold text-primary flex items-center gap-2">
+              <img
+                src="/assets/logo.png"
+                className="w-12 h-8"
+                alt="AnchorBVFS Logo"
+              />
               Admin Panel
             </h1>
             <button
@@ -88,6 +93,20 @@ const AdminLayout = () => {
           </nav>
 
           <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="mb-4 text-center">
+              <span className="text-sm text-black">
+                powered by
+                <a
+                  href="https://uncoredigital.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  {" "}
+                  @uncoredigital{" "}
+                </a>
+              </span>
+            </div>
             <Button
               variant="outline"
               className="w-full justify-start gap-3"

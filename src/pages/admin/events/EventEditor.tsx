@@ -10,9 +10,17 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CalendarIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ImageUpload } from "@/components/ui/ImageUpload";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const eventSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -41,7 +49,35 @@ const EventEditor = () => {
     formState: { errors },
   } = useForm<EventFormValues>({
     resolver: zodResolver(eventSchema),
+    defaultValues: {
+      date: new Date().toISOString().split("T")[0],
+    },
   });
+
+  const formatDateForInput = (dateStr: string) => {
+    if (!dateStr) return "";
+    // If it's an ISO string or YYYY-MM-DD
+    if (dateStr.includes("T")) {
+      return dateStr.split("T")[0];
+    }
+    // If it's DD-MM-YYYY
+    const parts = dateStr.split("-");
+    if (parts.length === 3 && parts[0].length === 2) {
+      const [d, m, y] = parts;
+      return `${y}-${m}-${d}`;
+    }
+    return dateStr;
+  };
+
+  const formatDateForStorage = (dateStr: string) => {
+    if (!dateStr) return "";
+    const parts = dateStr.split("-");
+    if (parts[0].length === 4) {
+      const [y, m, d] = parts;
+      return `${d}-${m}-${y}`;
+    }
+    return dateStr;
+  };
 
   useEffect(() => {
     if (isEditing) {
@@ -61,7 +97,7 @@ const EventEditor = () => {
         if (data) {
           reset({
             title: data.title,
-            date: data.date,
+            date: formatDateForInput(data.date),
             time: data.time || "",
             location: data.location,
             presenters: Array.isArray(data.presenters)
@@ -88,7 +124,7 @@ const EventEditor = () => {
 
     const eventData = {
       title: data.title,
-      date: data.date,
+      date: formatDateForStorage(data.date),
       time: data.time || null,
       location: data.location,
       presenters: presentersArray,
@@ -161,12 +197,63 @@ const EventEditor = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
+            <div className="space-y-4 flex flex-col">
               <Label htmlFor="date">Date Display</Label>
-              <Input
-                id="date"
-                {...register("date")}
-                placeholder="e.g. October 8, 2025"
+              <Controller
+                name="date"
+                control={control}
+                render={({ field }) => {
+                  let dateValue: Date | undefined;
+                  if (field.value) {
+                    if (field.value.includes("-")) {
+                      const parts = field.value.split("-");
+                      if (parts[0].length === 4) {
+                        // YYYY-MM-DD
+                        dateValue = new Date(field.value);
+                      } else if (parts[2].length === 4) {
+                        // DD-MM-YYYY
+                        const [d, m, y] = parts;
+                        dateValue = new Date(`${y}-${m}-${d}`);
+                      }
+                    }
+                  }
+
+                  return (
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {dateValue ? (
+                            format(dateValue, "dd-MM-yyyy")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={dateValue}
+                          onSelect={(date) => {
+                            if (date) {
+                              field.onChange(format(date, "dd-MM-yyyy"));
+                            } else {
+                              field.onChange("");
+                            }
+                          }}
+                          disabled={(date) => date < new Date("1900-01-01")}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  );
+                }}
               />
               {errors.date && (
                 <p className="text-red-500 text-sm">{errors.date.message}</p>

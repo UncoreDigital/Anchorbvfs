@@ -82,10 +82,9 @@ const Blog = () => {
   const blogs = data?.posts || [];
   const totalPages = data?.total ? Math.ceil(data.total / ITEMS_PER_PAGE) : 0;
 
-  // If we found a specific featured post from the separate query, use it.
-  // Otherwise, use the first one from the first page.
-  const featuredPost =
-    data?.featured || (currentPage === 1 && blogs.length > 0 ? blogs[0] : null);
+  // Only use the explicitly featured post found in the query.
+  // If no post is featured, null is returned and the section is skipped.
+  const featuredPost = data?.featured;
 
   // If we rely on the first page's first item being featured, we should probably remove it from the list view on page 1?
   // Let's filter it out ONLY if we are on page 1 and it matches.
