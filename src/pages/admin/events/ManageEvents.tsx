@@ -1,4 +1,5 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
+import { EmptyState } from "@/components/EmptyState";
 import { format } from "date-fns";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -109,7 +110,7 @@ const ManageEvents = () => {
           </div>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="hidden md:block overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
@@ -130,8 +131,11 @@ const ManageEvents = () => {
                 </TableRow>
               ) : events.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8">
-                    No events found.
+                  <TableCell colSpan={4}>
+                    <EmptyState
+                      title="No events found"
+                      description="Try adjusting your search filters or create a new event."
+                    />
                   </TableCell>
                 </TableRow>
               ) : (
@@ -185,6 +189,62 @@ const ManageEvents = () => {
               )}
             </TableBody>
           </Table>
+        </div>
+
+        {/* Mobile View */}
+        <div className="md:hidden space-y-4 p-4">
+          {isLoading ? (
+            <div className="flex justify-center py-8">
+              <Loader2 className="w-6 h-6 animate-spin text-primary" />
+            </div>
+          ) : events.length === 0 ? (
+            <EmptyState
+              title="No events found"
+              description="Try adjusting your search filters or create a new event."
+            />
+          ) : (
+            events.map((event) => (
+              <div
+                key={event.id}
+                className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm space-y-3"
+              >
+                <div className="flex justify-between items-start">
+                  <h3 className="font-semibold text-gray-900">{event.title}</h3>
+                  <div className="flex items-center gap-1">
+                    <Link to={`/admin/events/${event.id}`}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-blue-600"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <DeleteDialog
+                      onDelete={() => handleDelete(event.id)}
+                      title="Delete Event"
+                      description="Are you sure you want to delete this event?"
+                    />
+                  </div>
+                </div>
+                <div className="text-sm text-gray-500 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3 h-3" />
+                    {format(new Date(event.date), "MMM d, yyyy")}
+                  </div>
+                  {event.time && (
+                    <div className="flex items-center gap-2 ml-5 text-xs">
+                      {event.time}
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3 h-3" />
+                    {event.location}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Pagination Controls */}

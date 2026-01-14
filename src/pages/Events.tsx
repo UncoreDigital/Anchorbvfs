@@ -1,13 +1,23 @@
 import { format } from "date-fns";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, User, Clock, ExternalLink } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  User,
+  Clock,
+  ExternalLink,
+  Loader2,
+} from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
 
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import DOMPurify from "dompurify";
+import { MetaTags } from "@/components/MetaTags";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const Events = () => {
   useEffect(() => {
@@ -29,15 +39,15 @@ const Events = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
     <div className="min-h-screen bg-background">
+      <MetaTags
+        title="Events & Speaking | Anchor Business Valuations"
+        description="Stay updated with our latest speaking engagements, conferences, and presentations on business valuation and financial services."
+      />
       <Header />
       <PageBanner
         title="Events & Speaking"
@@ -106,7 +116,9 @@ const Events = () => {
 
                     <div
                       className="prose prose-lg max-w-none font-inter text-foreground space-y-4 pt-2"
-                      dangerouslySetInnerHTML={{ __html: event.description }}
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(event.description),
+                      }}
                     />
 
                     {event.link && (

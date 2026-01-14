@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
+import { MetaTags } from "@/components/MetaTags";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
 import {
@@ -17,6 +18,7 @@ import {
   PaginationEllipsis,
 } from "@/components/ui/pagination";
 import { format } from "date-fns";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -87,9 +89,7 @@ const Blog = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        Loading...
-      </div>
+      <LoadingScreen />
     );
   }
 
@@ -114,6 +114,10 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <MetaTags
+        title="Blog | Anchor Business Valuations"
+        description="Insights, updates, and expert analysis from the team at Anchor Business Valuations & Financial Services."
+      />
       <Header />
       <PageBanner
         title="Blog & Insights"

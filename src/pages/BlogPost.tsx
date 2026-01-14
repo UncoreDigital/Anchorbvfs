@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -54,11 +55,7 @@ const BlogPost = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (!post) {

@@ -1,4 +1,5 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
+import { EmptyState } from "@/components/EmptyState";
 import { useState } from "react";
 import {
   useQuery,
@@ -136,8 +137,11 @@ const ManageBlogs = () => {
                 </TableRow>
               ) : blogs.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
-                    No blogs found.
+                  <TableCell colSpan={5}>
+                    <EmptyState
+                      title="No blogs found"
+                      description="Try adjusting your search filters or write a new blog post."
+                    />
                   </TableCell>
                 </TableRow>
               ) : (

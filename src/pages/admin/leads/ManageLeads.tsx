@@ -29,7 +29,10 @@ import {
   ChevronRight,
   Filter,
 } from "lucide-react";
+import { DeleteDialog } from "@/components/DeleteDialog";
 import { format } from "date-fns";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 interface Lead {
   id: number;
@@ -53,6 +56,7 @@ interface PdfDownload {
 }
 
 const ManageLeads = () => {
+  const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<"leads" | "downloads">("leads");
   const [filters, setFilters] = useState({
     name: "",
@@ -140,6 +144,19 @@ const ManageLeads = () => {
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setCurrentPage(1); // Reset to first page on filter change
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      const table = activeTab === "leads" ? "leads" : "pdf_downloads";
+      const { error } = await supabase.from(table).delete().eq("id", id);
+      if (error) throw error;
+      toast.success("Record deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["leads"] });
+      setSelectedLead(null); // Close dialog if open
+    } catch (error: any) {
+      toast.error("Error deleting record: " + error.message);
+    }
   };
 
   if (isLoading && !data) {
@@ -362,11 +379,18 @@ const ManageLeads = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setSelectedLead(lead)}
-                    className="hover:bg-primary/10 hover:text-primary"
+                    className="hover:bg-primary/10 hover:text-primary mr-2"
                   >
                     <Eye className="w-4 h-4 mr-2" />
                     View
                   </Button>
+                  <DeleteDialog
+                    onDelete={() => handleDelete(lead.id)}
+                    title="Delete Record"
+                    description={`Are you sure you want to delete this ${
+                      activeTab === "leads" ? "inquiry" : "download record"
+                    }? This action cannot be undone.`}
+                  />
                 </TableCell>
               </TableRow>
             ))}

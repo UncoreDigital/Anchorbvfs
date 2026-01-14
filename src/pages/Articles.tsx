@@ -6,13 +6,16 @@ import {
   Calendar,
   Link as LinkIcon,
   ExternalLink,
+  Loader2,
 } from "lucide-react";
+import { MetaTags } from "@/components/MetaTags";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
 
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const Articles = () => {
   useEffect(() => {
@@ -37,15 +40,15 @@ const Articles = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        Loading...
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
     <div className="min-h-screen bg-background">
+      <MetaTags
+        title="Articles & Podcasts | Anchor Business Valuations"
+        description="Explore our library of articles, podcasts, and resources on business valuation, litigation support, and financial analysis."
+      />
       <Header />
       <PageBanner
         title="Articles & Podcasts"

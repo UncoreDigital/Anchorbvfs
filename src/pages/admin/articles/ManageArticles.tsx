@@ -1,4 +1,5 @@
 import { DeleteDialog } from "@/components/DeleteDialog";
+import { EmptyState } from "@/components/EmptyState";
 import { format } from "date-fns";
 import { useState } from "react";
 import {
@@ -140,8 +141,11 @@ const ManageArticles = () => {
                 </TableRow>
               ) : articles.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
-                    No items found.
+                  <TableCell colSpan={5}>
+                    <EmptyState
+                      title="No items found"
+                      description="Try adjusting your search filters or add a new item."
+                    />
                   </TableCell>
                 </TableRow>
               ) : (

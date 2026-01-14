@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import LoadingScreen from "./components/LoadingScreen";
@@ -71,92 +72,97 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <AuthProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Suspense fallback={<LoadingScreen />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/contact" element={<Contact />} />
+    <HelmetProvider>
+      <TooltipProvider>
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Suspense fallback={<LoadingScreen />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/contact" element={<Contact />} />
 
-              {/* Service Routes */}
-              <Route
-                path="/services/irc-section-409a-valuation"
-                element={<IRCSection409AValuation />}
-              />
-              <Route
-                path="/services/healthcare-valuations"
-                element={<HealthcareValuations />}
-              />
-              <Route
-                path="/services/estate-gift-tax-valuations"
-                element={<EstateGiftTaxValuations />}
-              />
-              <Route
-                path="/services/matrimonial-valuation-litigation-support"
-                element={<MatrimonialValuationLitigationSupport />}
-              />
-              <Route
-                path="/services/damages-lost-profit-claims"
-                element={<DamagesLostProfitClaims />}
-              />
-              <Route
-                path="/services/fair-value-measurement"
-                element={<FairValueMeasurement />}
-              />
-              <Route
-                path="/services/shareholder-disputes-business-divorce"
-                element={<ShareholderDisputesBusinessDivorce />}
-              />
-              <Route
-                path="/services/quality-of-earnings-report"
-                element={<QualityOfEarningsReport />}
-              />
-              <Route
-                path="/services/valuations-for-underwriting-lending-purposes"
-                element={<ValuationsForUnderwritingLendingPurposes />}
-              />
+                {/* Service Routes */}
+                <Route
+                  path="/services/irc-section-409a-valuation"
+                  element={<IRCSection409AValuation />}
+                />
+                <Route
+                  path="/services/healthcare-valuations"
+                  element={<HealthcareValuations />}
+                />
+                <Route
+                  path="/services/estate-gift-tax-valuations"
+                  element={<EstateGiftTaxValuations />}
+                />
+                <Route
+                  path="/services/matrimonial-valuation-litigation-support"
+                  element={<MatrimonialValuationLitigationSupport />}
+                />
+                <Route
+                  path="/services/damages-lost-profit-claims"
+                  element={<DamagesLostProfitClaims />}
+                />
+                <Route
+                  path="/services/fair-value-measurement"
+                  element={<FairValueMeasurement />}
+                />
+                <Route
+                  path="/services/shareholder-disputes-business-divorce"
+                  element={<ShareholderDisputesBusinessDivorce />}
+                />
+                <Route
+                  path="/services/quality-of-earnings-report"
+                  element={<QualityOfEarningsReport />}
+                />
+                <Route
+                  path="/services/valuations-for-underwriting-lending-purposes"
+                  element={<ValuationsForUnderwritingLendingPurposes />}
+                />
 
-              <Route path="/about" element={<About />} />
-              <Route path="/staff" element={<Staff />} />
-              <Route path="/team" element={<Team />} />
-              <Route
-                path="/industry-expertise"
-                element={<IndustryExpertise />}
-              />
-              <Route path="/events" element={<Events />} />
-              <Route path="/articles" element={<Articles />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/portfolio/:id" element={<PortfolioDetail />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPost />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="/admin" element={<Login />} />
-              <Route element={<ProtectedRoute />}>
-                <Route element={<AdminLayout />}>
-                  <Route path="/admin/dashboard" element={<Dashboard />} />
-                  <Route path="/admin/leads" element={<ManageLeads />} />
-                  <Route path="/admin/blogs" element={<ManageBlogs />} />
-                  <Route path="/admin/blogs/:id" element={<BlogEditor />} />
-                  <Route path="/admin/articles" element={<ManageArticles />} />
-                  <Route
-                    path="/admin/articles/:id"
-                    element={<ArticleEditor />}
-                  />
-                  <Route path="/admin/events" element={<ManageEvents />} />
-                  <Route path="/admin/events/:id" element={<EventEditor />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/staff" element={<Staff />} />
+                <Route path="/team" element={<Team />} />
+                <Route
+                  path="/industry-expertise"
+                  element={<IndustryExpertise />}
+                />
+                <Route path="/events" element={<Events />} />
+                <Route path="/articles" element={<Articles />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/portfolio/:id" element={<PortfolioDetail />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="/admin" element={<Login />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route element={<AdminLayout />}>
+                    <Route path="/admin/dashboard" element={<Dashboard />} />
+                    <Route path="/admin/leads" element={<ManageLeads />} />
+                    <Route path="/admin/blogs" element={<ManageBlogs />} />
+                    <Route path="/admin/blogs/:id" element={<BlogEditor />} />
+                    <Route
+                      path="/admin/articles"
+                      element={<ManageArticles />}
+                    />
+                    <Route
+                      path="/admin/articles/:id"
+                      element={<ArticleEditor />}
+                    />
+                    <Route path="/admin/events" element={<ManageEvents />} />
+                    <Route path="/admin/events/:id" element={<EventEditor />} />
+                  </Route>
                 </Route>
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          <StickyDownloadButton />
-        </BrowserRouter>
-      </AuthProvider>
-    </TooltipProvider>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+            <StickyDownloadButton />
+          </BrowserRouter>
+        </AuthProvider>
+      </TooltipProvider>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 

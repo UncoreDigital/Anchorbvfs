@@ -59,9 +59,15 @@ const BlogEditor = () => {
 
   const formatDateForInput = (dateStr: string) => {
     if (!dateStr) return "";
-    // Ensure we work with YYYY-MM-DD
+    // If it's an ISO string or YYYY-MM-DD
     if (dateStr.includes("T")) {
       return dateStr.split("T")[0];
+    }
+    // If it's DD-MM-YYYY
+    const parts = dateStr.split("-");
+    if (parts.length === 3 && parts[0].length === 2) {
+      const [d, m, y] = parts;
+      return `${y}-${m}-${d}`;
     }
     return dateStr;
   };
@@ -99,6 +105,16 @@ const BlogEditor = () => {
     }
   }, [id, isEditing, navigate, reset]);
 
+  const formatDateForStorage = (dateStr: string | undefined) => {
+    if (!dateStr) return null;
+    const parts = dateStr.split("-");
+    if (parts.length === 3 && parts[2].length === 4) {
+      const [d, m, y] = parts;
+      return `${y}-${m}-${d}`;
+    }
+    return dateStr;
+  };
+
   const onSubmit = async (data: BlogFormValues) => {
     setLoading(true);
     try {
@@ -110,7 +126,7 @@ const BlogEditor = () => {
         category: data.category,
         image_url: data.image_url || null,
         is_featured: data.is_featured,
-        published_at: data.published_at,
+        published_at: formatDateForStorage(data.published_at),
       };
 
       if (isEditing) {
@@ -197,15 +213,22 @@ const BlogEditor = () => {
                 name="published_at"
                 control={control}
                 render={({ field }) => {
-                  // Parse the current value to a Date object for the Calendar
                   let dateValue: Date | undefined;
                   if (field.value) {
-                    // Expect YYYY-MM-DD from form state
-                    const parts = field.value.split("-");
-                    if (parts.length === 3) {
-                      const [y, m, d] = parts.map(Number);
-                      if (y && m && d) {
-                        dateValue = new Date(y, m - 1, d);
+                    if (field.value.includes("-")) {
+                      const parts = field.value.split("-");
+                      if (parts.length === 3) {
+                        const [d, m, y] =
+                          parts[0].length === 4
+                            ? [parts[2], parts[1], parts[0]] // YYYY-MM-DD
+                            : [parts[0], parts[1], parts[2]]; // DD-MM-YYYY
+
+                        // Construct date in local time (months are 0-indexed)
+                        dateValue = new Date(
+                          parseInt(y),
+                          parseInt(m) - 1,
+                          parseInt(d)
+                        );
                       }
                     }
                   }
@@ -233,9 +256,8 @@ const BlogEditor = () => {
                           mode="single"
                           selected={dateValue}
                           onSelect={(date) => {
-                            // Store as YYYY-MM-DD for backend compatibility
                             if (date) {
-                              field.onChange(format(date, "yyyy-MM-dd"));
+                              field.onChange(format(date, "dd-MM-yyyy"));
                             } else {
                               field.onChange("");
                             }
