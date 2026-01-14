@@ -64,7 +64,7 @@ const Articles = () => {
                                             <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
                                                 <span className="flex items-center gap-1">
                                                     <Calendar className="w-4 h-4 text-accent" />
-                                                    {article.date}
+                                                    {article.date.split("T")[0]}
                                                 </span>
                                                 <span className="w-1 h-1 bg-border rounded-full" />
                                                 <span className="text-accent font-medium uppercase text-xs tracking-wider">
