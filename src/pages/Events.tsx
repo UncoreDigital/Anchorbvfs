@@ -20,7 +20,7 @@ const Events = () => {
         .from("events")
         .select("*")
         // Order by created_at desc or handle date sorting manually if date is free text
-        .order("published_at", { ascending: false });
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       return data;
