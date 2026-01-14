@@ -232,12 +232,16 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
   const handleCropFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setImageToCrop(reader.result as string);
-        setCropDialogOpen(true);
-      };
-      reader.readAsDataURL(file);
+      toast({
+        title: "Feature coming soon",
+        description: "Image cropping is not yet implemented.",
+      });
+      // const reader = new FileReader();
+      // reader.onload = () => {
+      //   setImageToCrop(reader.result as string);
+      //   setCropDialogOpen(true);
+      // };
+      // reader.readAsDataURL(file);
     }
     event.target.value = "";
   };
@@ -610,6 +614,20 @@ export function RichTextEditor({ content, onChange }: RichTextEditorProps) {
       <div className="p-6 max-h-[60vh] overflow-y-auto">
         <EditorContent editor={editor} />
       </div>
+      <input
+        type="file"
+        ref={fileInputRef}
+        className="hidden"
+        accept="image/*"
+        onChange={handleFileChange}
+      />
+      <input
+        type="file"
+        ref={cropFileInputRef}
+        className="hidden"
+        accept="image/*"
+        onChange={handleCropFileChange}
+      />
     </div>
   );
 }

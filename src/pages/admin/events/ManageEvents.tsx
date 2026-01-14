@@ -1,152 +1,231 @@
-
-import { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Plus, Edit, Trash2, Search, Calendar, MapPin } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
+import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
+  Plus,
+  Edit,
+  Trash2,
+  Search,
+  Calendar,
+  MapPin,
+  Loader2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const ManageEvents = () => {
-    const [events, setEvents] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+  const queryClient = useQueryClient();
 
-    const fetchEvents = async () => {
-        try {
-            setLoading(true);
-            const { data, error } = await supabase
-                .from('events')
-                .select('*')
-                .order('created_at', { ascending: false });
+  const { data, isLoading } = useQuery({
+    queryKey: ["events", currentPage, searchTerm],
+    queryFn: async () => {
+      let query = supabase
+        .from("events")
+        .select("*", { count: "exact" })
+        .order("created_at", { ascending: false });
 
-            if (error) throw error;
-            setEvents(data || []);
-        } catch (error: any) {
-            toast.error('Error fetching events: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+      if (searchTerm) {
+        query = query.ilike("title", `%${searchTerm}%`);
+      }
 
-    useEffect(() => {
-        fetchEvents();
-    }, []);
+      const from = (currentPage - 1) * itemsPerPage;
+      const to = from + itemsPerPage - 1;
+      query = query.range(from, to);
 
-    const handleDelete = async (id: string) => {
-        if (!confirm('Are you sure you want to delete this event?')) return;
+      const { data, error, count } = await query;
 
-        try {
-            const { error } = await supabase.from('events').delete().eq('id', id);
-            if (error) throw error;
+      if (error) throw error;
+      return { data, count };
+    },
+  });
 
-            setEvents(events.filter(event => event.id !== id));
-            toast.success('Event deleted successfully');
-        } catch (error: any) {
-            toast.error('Error deleting event: ' + error.message);
-        }
-    };
+  const events = data?.data || [];
+  const totalCount = data?.count || 0;
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
 
-    const filteredEvents = events.filter(event =>
-        event.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this event?")) return;
 
-    return (
-        <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-playfair font-bold text-gray-900">Events</h1>
-                    <p className="text-gray-500 text-sm">Manage upcoming and past events</p>
-                </div>
-                <Link to="/admin/events/new">
-                    <Button className="gap-2">
-                        <Plus className="w-4 h-4" />
-                        Create Event
-                    </Button>
-                </Link>
-            </div>
+    try {
+      const { error } = await supabase.from("events").delete().eq("id", id);
+      if (error) throw error;
 
-            <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                <div className="p-4 border-b border-gray-100">
-                    <div className="relative max-w-sm">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                        <Input
-                            placeholder="Search events..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="pl-9"
-                        />
-                    </div>
-                </div>
+      toast.success("Event deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["events"] });
+    } catch (error: any) {
+      toast.error("Error deleting event: " + error.message);
+    }
+  };
 
-                <div className="overflow-x-auto">
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Event</TableHead>
-                                <TableHead>Date & Time</TableHead>
-                                <TableHead>Location</TableHead>
-                                <TableHead className="text-right">Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {loading ? (
-                                <TableRow>
-                                    <TableCell colSpan={4} className="text-center py-8">Loading content...</TableCell>
-                                </TableRow>
-                            ) : filteredEvents.length === 0 ? (
-                                <TableRow>
-                                    <TableCell colSpan={4} className="text-center py-8">No events found.</TableCell>
-                                </TableRow>
-                            ) : (
-                                filteredEvents.map((event) => (
-                                    <TableRow key={event.id}>
-                                        <TableCell className="font-medium max-w-xs truncate" title={event.title}>
-                                            {event.title}
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="flex flex-col text-sm">
-                                                <span className="flex items-center gap-1"><Calendar className="w-3 h-3 text-gray-400" /> {event.date}</span>
-                                                {event.time && <span className="text-gray-500 text-xs pl-4">{event.time}</span>}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell>
-                                            <span className="flex items-center gap-1 text-sm"><MapPin className="w-3 h-3 text-gray-400" /> {event.location}</span>
-                                        </TableCell>
-                                        <TableCell className="text-right">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <Link to={`/admin/events/${event.id}`}>
-                                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-blue-600 hover:text-blue-700 hover:bg-blue-50">
-                                                        <Edit className="w-4 h-4" />
-                                                    </Button>
-                                                </Link>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="icon"
-                                                    className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
-                                                    onClick={() => handleDelete(event.id)}
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </Button>
-                                            </div>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-            </div>
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1); // Reset to first page on search
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-playfair font-bold text-gray-900">
+            Events
+          </h1>
+          <p className="text-gray-500 text-sm">
+            Manage upcoming and past events
+          </p>
         </div>
-    );
+        <Link to="/admin/events/new">
+          <Button className="gap-2">
+            <Plus className="w-4 h-4" />
+            Create Event
+          </Button>
+        </Link>
+      </div>
+
+      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <div className="p-4 border-b border-gray-100">
+          <div className="relative max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <Input
+              placeholder="Search events..."
+              value={searchTerm}
+              onChange={handleSearch}
+              className="pl-9"
+            />
+          </div>
+        </div>
+
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Event</TableHead>
+                <TableHead>Date & Time</TableHead>
+                <TableHead>Location</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={4} className="py-8">
+                    <div className="flex justify-center">
+                      <Loader2 className="w-6 h-6 animate-spin text-primary" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ) : events.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={4} className="text-center py-8">
+                    No events found.
+                  </TableCell>
+                </TableRow>
+              ) : (
+                events.map((event) => (
+                  <TableRow key={event.id}>
+                    <TableCell
+                      className="font-medium max-w-xs truncate"
+                      title={event.title}
+                    >
+                      {event.title}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex flex-col text-sm">
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-gray-400" />{" "}
+                          {event.date}
+                        </span>
+                        {event.time && (
+                          <span className="text-gray-500 text-xs pl-4">
+                            {event.time}
+                          </span>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <span className="flex items-center gap-1 text-sm">
+                        <MapPin className="w-3 h-3 text-gray-400" />{" "}
+                        {event.location}
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        <Link to={`/admin/events/${event.id}`}>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8 text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                        </Link>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
+                          onClick={() => handleDelete(event.id)}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </div>
+
+        {/* Pagination Controls */}
+        {totalPages > 0 && (
+          <div className="flex items-center justify-between px-4 py-4 border-t border-gray-100">
+            <div className="text-sm text-gray-500">
+              Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
+              {Math.min(currentPage * itemsPerPage, totalCount)} of {totalCount}{" "}
+              entries
+            </div>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <span className="text-sm font-medium">
+                Page {currentPage} of {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() =>
+                  setCurrentPage((p) => Math.min(totalPages, p + 1))
+                }
+                disabled={currentPage === totalPages}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default ManageEvents;

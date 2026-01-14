@@ -98,7 +98,7 @@ const BlogPost = () => {
                 <img
                   src={post.image_url}
                   alt={post.title}
-                  className="w-full h-96 object-cover rounded-xl mb-8"
+                  className="w-full h-full object-cover rounded-xl mb-8"
                 />
               )}
 
@@ -107,12 +107,12 @@ const BlogPost = () => {
                   <User className="w-4 h-4" />
                   {post.author}
                 </span>
-                <span className="flex items-center gap-2">
+                {/* <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   {post.published_at
                     ? new Date(post.published_at).toLocaleDateString()
                     : ""}
-                </span>
+                </span> */}
                 <span className="flex items-center gap-2">
                   <Tag className="w-4 h-4" />
                   {post.category}

@@ -18,6 +18,12 @@ const Team = () => {
       bio: "20+ years of experience in business valuation and financial consulting. ABV, CVA, MAFF, EA, MAcc.",
     },
     {
+      name: "Michael A. Dorman",
+      role: "JD, LLM, CVA, CPA/ABV",
+      image: "/assets/logo.png", // Using logo as placeholder
+      bio: "Mr. Dorman is a business valuator, consultant, attorney and a certified public accountant. He concentrates his practice area in the valuation of closely held businesses and professional practices.",
+    },
+    {
       name: "Prashasti Agrawal",
       role: "Senior Financial Analyst",
       image: "/assets/logo.png", // Using logo as placeholder until headshot is provided

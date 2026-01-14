@@ -25,13 +25,13 @@ import {
 
 const blogSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  excerpt: z.string().min(1, "Excerpt is required"),
-  content: z.string().min(1, "Content is required"),
-  author: z.string().min(1, "Author is required"),
-  category: z.string().min(1, "Category is required"),
+  excerpt: z.string().min(1, "Description is required"),
+  content: z.string().optional(),
+  author: z.string().optional(),
+  category: z.string().optional(),
   image_url: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-  is_featured: z.boolean().default(false),
-  published_at: z.string().min(1, "Date is required"),
+  is_featured: z.boolean().default(false).optional(),
+  published_at: z.string().optional(),
 });
 
 type BlogFormValues = z.infer<typeof blogSchema>;
@@ -59,25 +59,9 @@ const BlogEditor = () => {
 
   const formatDateForInput = (dateStr: string) => {
     if (!dateStr) return "";
-    // If it's an ISO string or YYYY-MM-DD
+    // Ensure we work with YYYY-MM-DD
     if (dateStr.includes("T")) {
       return dateStr.split("T")[0];
-    }
-    // If it's DD-MM-YYYY
-    const parts = dateStr.split("-");
-    if (parts.length === 3 && parts[0].length === 2) {
-      const [d, m, y] = parts;
-      return `${y}-${m}-${d}`;
-    }
-    return dateStr;
-  };
-
-  const formatDateForStorage = (dateStr: string) => {
-    if (!dateStr) return "";
-    const parts = dateStr.split("-");
-    if (parts[0].length === 4) {
-      const [y, m, d] = parts;
-      return `${d}-${m}-${y}`;
     }
     return dateStr;
   };
@@ -102,8 +86,8 @@ const BlogEditor = () => {
             title: data.title,
             excerpt: data.excerpt,
             content: data.content,
-            author: data.author,
-            category: data.category,
+            author: data.author || "Admin",
+            category: data.category || "Uncategorized",
             image_url: data.image_url,
             is_featured: data.is_featured,
             published_at: formatDateForInput(data.published_at),
@@ -121,12 +105,12 @@ const BlogEditor = () => {
       const blogData = {
         title: data.title,
         excerpt: data.excerpt,
-        content: data.content,
+        content: data.content || "",
         author: data.author,
         category: data.category,
         image_url: data.image_url || null,
         is_featured: data.is_featured,
-        published_at: formatDateForStorage(data.published_at),
+        published_at: data.published_at,
       };
 
       if (isEditing) {
@@ -216,17 +200,12 @@ const BlogEditor = () => {
                   // Parse the current value to a Date object for the Calendar
                   let dateValue: Date | undefined;
                   if (field.value) {
-                    // Try parsing if it's already YYYY-MM-DD (from default/ISO)
-                    if (field.value.includes("-")) {
-                      const parts = field.value.split("-");
-                      // Check if YYYY-MM-DD or DD-MM-YYYY
-                      if (parts[0].length === 4) {
-                        // YYYY-MM-DD
-                        dateValue = new Date(field.value);
-                      } else if (parts[2].length === 4) {
-                        // DD-MM-YYYY
-                        const [d, m, y] = parts;
-                        dateValue = new Date(`${y}-${m}-${d}`);
+                    // Expect YYYY-MM-DD from form state
+                    const parts = field.value.split("-");
+                    if (parts.length === 3) {
+                      const [y, m, d] = parts.map(Number);
+                      if (y && m && d) {
+                        dateValue = new Date(y, m - 1, d);
                       }
                     }
                   }
@@ -254,9 +233,9 @@ const BlogEditor = () => {
                           mode="single"
                           selected={dateValue}
                           onSelect={(date) => {
-                            // Store as DD-MM-YYYY
+                            // Store as YYYY-MM-DD for backend compatibility
                             if (date) {
-                              field.onChange(format(date, "dd-MM-yyyy"));
+                              field.onChange(format(date, "yyyy-MM-dd"));
                             } else {
                               field.onChange("");
                             }
@@ -322,11 +301,16 @@ const BlogEditor = () => {
           </div>
 
           <div className="flex items-center space-x-2">
-            <Checkbox
-              id="is_featured"
-              onCheckedChange={(checked) =>
-                setValue("is_featured", checked as boolean)
-              }
+            <Controller
+              name="is_featured"
+              control={control}
+              render={({ field }) => (
+                <Checkbox
+                  id="is_featured"
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              )}
             />
             <Label htmlFor="is_featured">Feature this post</Label>
           </div>

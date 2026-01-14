@@ -29,24 +29,16 @@ const Blog = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["blogs", currentPage],
     queryFn: async () => {
-      // First, get the featured post to exclude it from the paginated list if on page 1
-      // OR, we can just fetch all and filter in memory if the total count is small.
-      // But for pagination to be "real", we should use range.
-
       // Strategy:
-      // 1. Fetch featured post separately (or assumes it's the latest one).
-      // 2. Fetch paginated list.
-
-      // Let's assume the "first" post is featured.
-      // If we page, we generally want to keep the featured post static on top?
-      // Or does page 2 just show older posts?
+      // 1. Fetch featured post separately (latest one with is_featured=true).
+      // 2. Fetch paginated list (ordered by created_at).
 
       // Let's fetch the featured post first (latest one with is_featured=true, or just latest)
       const { data: featuredData } = await supabase
         .from("blogs")
         .select("*")
         .eq("is_featured", true)
-        .order("published_at", { ascending: false })
+        .order("created_at", { ascending: false })
         .limit(1);
 
       const featured =
@@ -60,7 +52,7 @@ const Blog = () => {
       let query = supabase
         .from("blogs")
         .select("*", { count: "exact" })
-        .order("published_at", { ascending: false })
+        .order("created_at", { ascending: false })
         .range(from, to);
 
       // If we have a specific featured post, we might want to exclude it?
@@ -139,12 +131,18 @@ const Blog = () => {
             >
               <Link to={`/blog/${featuredPost.id}`} className="group">
                 <div className="grid lg:grid-cols-2 gap-8 items-center bg-muted rounded-2xl overflow-hidden">
-                  <div className="relative overflow-hidden h-full">
-                    <img
-                      src={featuredPost.image_url}
-                      alt={featuredPost.title}
-                      className="w-full h-80 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                  <div className="relative overflow-hidden h-full bg-gray-100 flex items-center justify-center">
+                    {featuredPost.image_url ? (
+                      <img
+                        src={featuredPost.image_url}
+                        alt={featuredPost.title}
+                        className="w-full h-80 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-80 lg:h-96 flex items-center justify-center text-gray-400">
+                        No image available
+                      </div>
+                    )}
                   </div>
                   <div className="p-8">
                     <span className="inline-block bg-accent text-primary px-4 py-1 rounded-full text-sm font-inter font-medium mb-4">
@@ -189,15 +187,19 @@ const Blog = () => {
                   to={`/blog/${post.id}`}
                   className="grid md:grid-cols-3 gap-8 items-start"
                 >
-                  <div className="relative overflow-hidden rounded-xl md:col-span-1 h-56 md:h-64">
-                    <img
-                      src={post.image_url}
-                      alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                  <div className="relative overflow-hidden rounded-xl md:col-span-1 h-56 md:h-64 bg-gray-100 flex items-center justify-center">
+                    {post.image_url ? (
+                      <img
+                        src={post.image_url}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="text-gray-400 text-sm">No image</div>
+                    )}
                     <div className="absolute top-4 left-4">
                       <span className="bg-accent text-primary px-3 py-1 rounded-full text-xs font-inter font-medium">
-                        {post.category}
+                        {post.is_featured ? "Featured" : post.category}
                       </span>
                     </div>
                   </div>

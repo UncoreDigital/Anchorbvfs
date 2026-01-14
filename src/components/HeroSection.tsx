@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 const slides = [
   {
@@ -10,14 +11,15 @@ const slides = [
     subtitle: "Business Valuation Experts",
     title:
       "Certified Business Valuation Services and Merger & Acquisition Consulting",
-    link: "/contact",
+    mobileClassName: "object-[95%_center]",
   },
   {
     image: "/assets/home/hero-owner-v2.png",
     subtitle: "Industry Leadership",
     title:
       "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
-    link: "/industry-expertise",
+    mobileClassName: "object-[80%_center]",
+
   },
 ];
 
@@ -73,7 +75,10 @@ const HeroSection = () => {
           <img
             src={slides[currentSlide].image}
             alt="Slide background"
-            className="w-full h-full object-cover"
+            className={cn(
+              "w-full h-full object-cover",
+              slides[currentSlide].mobileClassName
+            )}
           />
           {/* Enhanced overlay for better text readability on mobile */}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary/60 md:to-primary/40" />
