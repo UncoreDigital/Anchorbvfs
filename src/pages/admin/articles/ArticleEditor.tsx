@@ -79,9 +79,9 @@ const ArticleEditor = () => {
   const formatDateForStorage = (dateStr: string) => {
     if (!dateStr) return "";
     const parts = dateStr.split("-");
-    if (parts[0].length === 4) {
-      const [y, m, d] = parts;
-      return `${d}-${m}-${y}`;
+    if (parts.length === 3 && parts[2].length === 4) {
+      const [d, m, y] = parts;
+      return `${y}-${m}-${d}`;
     }
     return dateStr;
   };
@@ -169,16 +169,6 @@ const ArticleEditor = () => {
       <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 sm:p-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <Label>Cover Image</Label>
-            <Controller
-              name="image_url"
-              control={control}
-              render={({ field }) => (
-                <ImageUpload value={field.value} onChange={field.onChange} />
-              )}
-            />
-          </div>
-          <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input
               id="title"
@@ -222,11 +212,18 @@ const ArticleEditor = () => {
                   if (field.value) {
                     if (field.value.includes("-")) {
                       const parts = field.value.split("-");
-                      if (parts[0].length === 4) {
-                        dateValue = new Date(field.value);
-                      } else if (parts[2].length === 4) {
-                        const [d, m, y] = parts;
-                        dateValue = new Date(`${y}-${m}-${d}`);
+                      if (parts.length === 3) {
+                        const [d, m, y] =
+                          parts[0].length === 4
+                            ? [parts[2], parts[1], parts[0]] // YYYY-MM-DD
+                            : [parts[0], parts[1], parts[2]]; // DD-MM-YYYY
+
+                        // Construct date in local time (months are 0-indexed)
+                        dateValue = new Date(
+                          parseInt(y),
+                          parseInt(m) - 1,
+                          parseInt(d)
+                        );
                       }
                     }
                   }

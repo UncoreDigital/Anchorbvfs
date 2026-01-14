@@ -1,3 +1,5 @@
+import { DeleteDialog } from "@/components/DeleteDialog";
+import { format } from "date-fns";
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -59,8 +61,6 @@ const ManageEvents = () => {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this event?")) return;
-
     try {
       const { error } = await supabase.from("events").delete().eq("id", id);
       if (error) throw error;
@@ -147,7 +147,7 @@ const ManageEvents = () => {
                       <div className="flex flex-col text-sm">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3 text-gray-400" />{" "}
-                          {event.date}
+                          {format(new Date(event.date), "MMM d, yyyy")}
                         </span>
                         {event.time && (
                           <span className="text-gray-500 text-xs pl-4">
@@ -173,14 +173,11 @@ const ManageEvents = () => {
                             <Edit className="w-4 h-4" />
                           </Button>
                         </Link>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
-                          onClick={() => handleDelete(event.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <DeleteDialog
+                          onDelete={() => handleDelete(event.id)}
+                          title="Delete Event"
+                          description="Are you sure you want to delete this event? This action cannot be undone."
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

@@ -1,3 +1,5 @@
+import { DeleteDialog } from "@/components/DeleteDialog";
+import { format } from "date-fns";
 import { useState } from "react";
 import {
   useQuery,
@@ -68,8 +70,6 @@ const ManageArticles = () => {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this item?")) return;
-
     try {
       const { error } = await supabase.from("articles").delete().eq("id", id);
       if (error) throw error;
@@ -164,7 +164,11 @@ const ManageArticles = () => {
                         {item.type}
                       </span>
                     </TableCell>
-                    <TableCell>{item.published_at}</TableCell>
+                    <TableCell>
+                      {item.published_at
+                        ? format(new Date(item.published_at), "MMM d, yyyy")
+                        : "-"}
+                    </TableCell>
                     <TableCell>
                       <a
                         href={item.link}
@@ -186,14 +190,11 @@ const ManageArticles = () => {
                             <Edit className="w-4 h-4" />
                           </Button>
                         </Link>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
-                          onClick={() => handleDelete(item.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <DeleteDialog
+                          onDelete={() => handleDelete(item.id)}
+                          title="Delete Item"
+                          description="Are you sure you want to delete this item? This action cannot be undone."
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

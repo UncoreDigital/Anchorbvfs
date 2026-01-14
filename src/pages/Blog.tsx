@@ -16,6 +16,7 @@ import {
   PaginationPrevious,
   PaginationEllipsis,
 } from "@/components/ui/pagination";
+import { format } from "date-fns";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -161,9 +162,10 @@ const Blog = () => {
                       </span>
                       <span className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        {new Date(
-                          featuredPost.published_at
-                        ).toLocaleDateString()}
+                        {format(
+                          new Date(featuredPost.published_at),
+                          "MMM d, yyyy"
+                        )}
                       </span>
                     </div>
                   </div>

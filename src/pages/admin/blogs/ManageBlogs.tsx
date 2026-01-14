@@ -1,3 +1,4 @@
+import { DeleteDialog } from "@/components/DeleteDialog";
 import { useState } from "react";
 import {
   useQuery,
@@ -65,8 +66,6 @@ const ManageBlogs = () => {
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this blog?")) return;
-
     try {
       const { error } = await supabase.from("blogs").delete().eq("id", id);
       if (error) throw error;
@@ -172,14 +171,11 @@ const ManageBlogs = () => {
                             <Edit className="w-4 h-4" />
                           </Button>
                         </Link>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-8 w-8 text-red-600 hover:text-red-700 hover:bg-red-50"
-                          onClick={() => handleDelete(blog.id)}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <DeleteDialog
+                          onDelete={() => handleDelete(blog.id)}
+                          title="Delete Blog"
+                          description="Are you sure you want to delete this blog post? This action cannot be undone."
+                        />
                       </div>
                     </TableCell>
                   </TableRow>

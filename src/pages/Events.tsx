@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Calendar, MapPin, User, Clock, ExternalLink } from "lucide-react";
@@ -74,7 +75,7 @@ const Events = () => {
                     <div className="bg-accent/10 rounded-lg p-4 text-center min-w-[100px]">
                       <Calendar className="w-6 h-6 text-accent mx-auto mb-2" />
                       <span className="block text-sm font-bold text-primary/80">
-                        {event.date}
+                        {format(new Date(event.date), "MMM d, yyyy")}
                       </span>
                     </div>
                   </div>
