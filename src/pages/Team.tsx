@@ -20,13 +20,19 @@ const Team = () => {
     {
       name: "Michael A. Dorman",
       role: "JD, LLM, CVA, CPA/ABV",
-      image: "/assets/logo.png", // Using logo as placeholder
+      image: "/assets/footer/Logo.png", // Using logo as placeholder
       bio: "Mr. Dorman is a business valuator, consultant, attorney and a certified public accountant. He concentrates his practice area in the valuation of closely held businesses and professional practices.",
+    },
+    {
+      name: "Deborah M. Adasiak",
+      role: "CVA",
+      image: "/assets/footer/Logo.png",
+      bio: "Deborah Adasiak is a business valuator. She holds a CVA, Certified Valuation Analyst, issued by the National Association of Certified Valuators & Analysts. She concentrates her practice area in the valuation of closely held businesses and professional practices, and has been intimately involved with these types of entities for over 20 years.",
     },
     {
       name: "Prashasti Agrawal",
       role: "Senior Financial Analyst",
-      image: "/assets/logo.png", // Using logo as placeholder until headshot is provided
+      image: "/assets/footer/Logo.png", // Using logo as placeholder until headshot is provided
       bio: "Prashasti Agrawal is a Senior Financial Analyst at Anchor. She oversees employee logistics and ensures proper operations.",
     },
   ];
@@ -69,13 +75,19 @@ const Team = () => {
                 transition={{ delay: index * 0.1 }}
                 className="group"
               >
-                <div className="relative overflow-hidden rounded-xl mb-6">
+                <div className="relative overflow-hidden rounded-xl mb-6 h-80 w-full flex items-center justify-center bg-secondary/10">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full h-80 object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    className={
+                      member.image.includes("Logo.png")
+                        ? "w-48 h-auto object-contain"
+                        : "absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    }
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {!member.image.includes("Logo.png") && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  )}
                 </div>
 
                 <div className="text-center">
