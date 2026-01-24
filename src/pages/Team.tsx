@@ -81,7 +81,7 @@ const Team = () => {
                     alt={member.name}
                     className={
                       member.image.includes("Logo.png")
-                        ? "w-48 h-auto object-contain"
+                        ? "w-80 h-auto object-contain"
                         : "absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                     }
                   />

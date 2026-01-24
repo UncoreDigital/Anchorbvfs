@@ -137,7 +137,7 @@ const Header = () => {
     setMobileOpenDropdowns((prev) =>
       prev.includes(name)
         ? prev.filter((item) => item !== name)
-        : [...prev, name]
+        : [...prev, name],
     );
   };
 
@@ -145,7 +145,7 @@ const Header = () => {
     href: string,
     children: React.ReactNode,
     className: string,
-    onClick?: () => void
+    onClick?: () => void,
   ) => {
     const isExternal = href.startsWith("http");
     const isHashLink = href.includes("#");
@@ -191,7 +191,7 @@ const Header = () => {
             <img
               src="/assets/logo.png"
               alt="Anchor Business Valuations Logo"
-              className="h-14 w-auto object-contain"
+              className="h-20 w-auto object-contain"
             />
           </Link>
         </motion.div>
@@ -222,12 +222,12 @@ const Header = () => {
                     />
                   )}
                 </>,
-                `flex items-center gap-1 px-4 py-2 font-inter text-sm font-medium transition-colors ${
+                `flex items-center gap-1 px-4 py-2 font-inter text-base font-medium transition-colors ${
                   isScrolled || !isHomePage
                     ? "text-foreground hover:text-accent"
                     : "text-primary-foreground/90 hover:text-primary-foreground"
                 }`,
-                () => handleNavClick(item.href)
+                () => handleNavClick(item.href),
               )}
 
               {/* Dropdown Menu */}
@@ -413,7 +413,7 @@ const Header = () => {
             </motion.div>
           )}
         </AnimatePresence>,
-        document.body
+        document.body,
       )}
     </header>
   );

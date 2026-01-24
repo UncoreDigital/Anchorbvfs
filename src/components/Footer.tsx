@@ -45,7 +45,7 @@ const Footer = () => {
               <img
                 src="/assets/footer/Logo.png"
                 alt="Anchor Business Valuations"
-                className="h-36 w-auto object-contain bg-white/1 rounded-lg p-1"
+                className="h-48 w-auto object-contain bg-white/1 rounded-lg p-1"
               />
             </a>
             <p className="text-primary-foreground/60 font-inter text-sm leading-relaxed mb-6">
