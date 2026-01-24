@@ -111,6 +111,40 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (location.hash) {
+      const elementId = location.hash.replace("#", "");
+
+      const scrollToElement = () => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          return true;
+        }
+        return false;
+      };
+
+      // Try immediately and then with retries
+      if (!scrollToElement()) {
+        const checkInterval = setInterval(() => {
+          if (scrollToElement()) {
+            clearInterval(checkInterval);
+          }
+        }, 100);
+
+        // Timeout after 2 seconds
+        const timeout = setTimeout(() => clearInterval(checkInterval), 2000);
+        return () => {
+          clearInterval(checkInterval);
+          clearTimeout(timeout);
+        };
+      }
+    } else {
+      // If no hash, scroll to top on route change
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, [location]);
+
   const handleNavClick = (href?: string) => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
@@ -120,14 +154,11 @@ const Header = () => {
       const elementId = href.split("#")[1];
       const element = document.getElementById(elementId);
       if (element) {
-        // Add a small delay to ensure DOM is ready if navigating from another page
+        // If element exists (same page), scroll to it
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
         }, 100);
       }
-    } else {
-      // Scroll to top on navigation
-      window.scrollTo({ top: 0, behavior: "instant" });
     }
   };
 

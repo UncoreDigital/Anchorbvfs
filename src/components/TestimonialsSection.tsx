@@ -172,7 +172,7 @@ const TestimonialsSection = () => {
             </div>
 
             {/* Card */}
-            <div className="bg-muted rounded-3xl p-8 md:p-12 relative min-h-[400px] flex flex-col justify-between">
+            <div className="bg-muted rounded-3xl p-8 md:p-12 relative flex flex-col justify-between">
               <div className="relative z-10">
                 {/* Content */}
                 <motion.div
