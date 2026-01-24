@@ -16,20 +16,7 @@ const PageBanner = ({ title, breadcrumbs }: PageBannerProps) => {
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-navy/90 to-navy/70" />
 
-      <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center gap-8">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="shrink-0"
-        >
-          <img
-            src="/assets/footer/Logo.png"
-            alt="Anchor Business Valuations"
-            className="h-24 md:h-32 w-auto object-contain"
-          />
-        </motion.div>
-
+      <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex flex-col gap-4 text-center md:text-left">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -69,6 +56,18 @@ const PageBanner = ({ title, breadcrumbs }: PageBannerProps) => {
             </ol>
           </motion.nav>
         </div>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="shrink-0"
+        >
+          <img
+            src="/assets/footer/Logo.png"
+            alt="Anchor Business Valuations"
+            className="h-28 md:h-40 w-auto object-contain"
+          />
+        </motion.div>
       </div>
     </section>
   );
