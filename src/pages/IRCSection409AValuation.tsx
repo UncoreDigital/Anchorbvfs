@@ -329,7 +329,7 @@ const IRCSection409AValuation = () => {
                         developed for each comparable transaction, if the data
                         is available. These multiples are then applied to the
                         Company’s corresponding latest 12-month and projected
-                        financial metrics
+                        financial metrics.
                       </li>
                     </ul>
                   </li>

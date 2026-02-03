@@ -175,7 +175,7 @@ const QualityOfEarningsReport = () => {
                       A company’s quality of earnings can be revealed by
                       spotting and removing any irregularities, accounting
                       manipulation, or one-off accounting entries that skew the
-                      numbers.
+                      numbers
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -183,7 +183,7 @@ const QualityOfEarningsReport = () => {
                     <span>
                       Questionable fraudulent activity is often identified
                       through a QOE analysis (i.e., a reported increase in net
-                      income without the corresponding increase in cash flow).
+                      income without the corresponding increase in cash flow)
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -193,7 +193,7 @@ const QualityOfEarningsReport = () => {
                       balance sheet and cash flow statement is a good way to
                       gauge quality of earnings (we often do an “audit check” in
                       conjunction with this work using tracing to related bank
-                      entries).
+                      entries)
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
@@ -202,7 +202,7 @@ const QualityOfEarningsReport = () => {
                       A quality of earnings report is often an invaluable step
                       in the acquisition and/or restructuring process. The
                       expense to obtain this thorough analysis pales in
-                      comparison to the value that it provides.
+                      comparison to the value that it provides
                     </span>
                   </li>
                 </ul>

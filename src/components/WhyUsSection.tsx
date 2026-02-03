@@ -1,43 +1,56 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Building2, Stethoscope, Briefcase, ShoppingBag, Utensils, Gavel } from 'lucide-react';
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import {
+  Building2,
+  Stethoscope,
+  Briefcase,
+  ShoppingBag,
+  Utensils,
+  Gavel,
+} from "lucide-react";
 
 const features = [
   {
     icon: Stethoscope,
-    title: 'Healthcare',
-    description: 'Specialized in Medical Practices, Surgery Centers, Dental, Urgent Care, and Elder Care facilities.',
+    title: "Healthcare",
+    description:
+      "Specialized in Medical Practices, Surgery Centers, Dental, Urgent Care, and Elder Care facilities.",
   },
   {
     icon: Building2,
-    title: 'Construction & Real Estate',
-    description: 'Expertise in Manufacturing, Facilities Services, HVAC, Landscaping, and Trade Contractors.',
+    title: "Construction & Real Estate",
+    description:
+      "Expertise in Manufacturing, Facilities, Services, HVAC, Landscaping, and Trade Contractors.",
   },
   {
     icon: Utensils,
-    title: 'Food & Beverage',
-    description: 'Valuation services for Restaurants, Franchises, Bars, and Concession Services.',
+    title: "Food & Beverage",
+    description:
+      "Valuation services for Restaurants, Franchises, Bars, and Concession Services.",
   },
   {
     icon: ShoppingBag,
-    title: 'Retail & Franchise',
-    description: 'Experience with Apparel, Accessories, Dry Cleaners, and various Retail Franchises.',
+    title: "Retail & Franchise",
+    description:
+      "Experience with Apparel, Accessories, Dry Cleaners, and various Retail Franchises.",
   },
   {
     icon: Briefcase,
-    title: 'Professional Services',
-    description: 'Serving Law Firms, IT/Software Companies, Financial Advisors, and Marketing Agencies.',
+    title: "Professional Services",
+    description:
+      "Serving Law Firms, IT/Software Companies, Financial Advisors, and Marketing Agencies.",
   },
   {
     icon: Gavel,
-    title: 'Legal & Specialized',
-    description: 'Litigation support for Matrimonial matters, Shareholder disputes, and Estate planning.',
+    title: "Legal & Specialized",
+    description:
+      "Litigation support for Matrimonial matters, Shareholder disputes, and Estate planning.",
   },
 ];
 
 const WhyUsSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="why-us" className="section-padding bg-muted">
@@ -72,7 +85,8 @@ const WhyUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate font-inter"
           >
-            Extensive experience across diverse industries with a specialized focus on healthcare.
+            Extensive experience across diverse industries with a specialized
+            focus on healthcare.
           </motion.p>
         </div>
 

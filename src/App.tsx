@@ -13,6 +13,7 @@ import StickyDownloadButton from "./components/StickyDownloadButton";
 
 const Index = lazy(() => import("./pages/Index"));
 const IndustryExpertise = lazy(() => import("./pages/IndustryExpertise"));
+const MergersAcquisitions = lazy(() => import("./pages/MergersAcquisitions"));
 const Events = lazy(() => import("./pages/Events"));
 const Articles = lazy(() => import("./pages/Articles"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -29,27 +30,27 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Individual Service Pages
 const IRCSection409AValuation = lazy(
-  () => import("./pages/IRCSection409AValuation")
+  () => import("./pages/IRCSection409AValuation"),
 );
 const HealthcareValuations = lazy(() => import("./pages/HealthcareValuations"));
 const EstateGiftTaxValuations = lazy(
-  () => import("./pages/EstateGiftTaxValuations")
+  () => import("./pages/EstateGiftTaxValuations"),
 );
 const MatrimonialValuationLitigationSupport = lazy(
-  () => import("./pages/MatrimonialValuationLitigationSupport")
+  () => import("./pages/MatrimonialValuationLitigationSupport"),
 );
 const DamagesLostProfitClaims = lazy(
-  () => import("./pages/DamagesLostProfitClaims")
+  () => import("./pages/DamagesLostProfitClaims"),
 );
 const FairValueMeasurement = lazy(() => import("./pages/FairValueMeasurement"));
 const ShareholderDisputesBusinessDivorce = lazy(
-  () => import("./pages/ShareholderDisputesBusinessDivorce")
+  () => import("./pages/ShareholderDisputesBusinessDivorce"),
 );
 const QualityOfEarningsReport = lazy(
-  () => import("./pages/QualityOfEarningsReport")
+  () => import("./pages/QualityOfEarningsReport"),
 );
 const ValuationsForUnderwritingLendingPurposes = lazy(
-  () => import("./pages/ValuationsForUnderwritingLendingPurposes")
+  () => import("./pages/ValuationsForUnderwritingLendingPurposes"),
 );
 const Login = lazy(() => import("./pages/admin/Login"));
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
@@ -58,10 +59,10 @@ const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const ManageBlogs = lazy(() => import("./pages/admin/blogs/ManageBlogs"));
 const BlogEditor = lazy(() => import("./pages/admin/blogs/BlogEditor"));
 const ManageArticles = lazy(
-  () => import("./pages/admin/articles/ManageArticles")
+  () => import("./pages/admin/articles/ManageArticles"),
 );
 const ArticleEditor = lazy(
-  () => import("./pages/admin/articles/ArticleEditor")
+  () => import("./pages/admin/articles/ArticleEditor"),
 );
 const ManageEvents = lazy(() => import("./pages/admin/events/ManageEvents"));
 const EventEditor = lazy(() => import("./pages/admin/events/EventEditor"));
@@ -87,6 +88,10 @@ const App = () => (
                 <Route
                   path="/services/irc-section-409a-valuation"
                   element={<IRCSection409AValuation />}
+                />
+                <Route
+                  path="/services/mergers-acquisitions"
+                  element={<MergersAcquisitions />}
                 />
                 <Route
                   path="/services/healthcare-valuations"
@@ -130,7 +135,7 @@ const App = () => (
                 />
                 <Route path="/events" element={<Events />} />
                 <Route path="/articles" element={<Articles />} />
-                <Route path="/faq" element={<FAQ />} />
+                <Route path="/faqs" element={<FAQ />} />
                 <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/portfolio/:id" element={<PortfolioDetail />} />
                 <Route path="/blog" element={<Blog />} />

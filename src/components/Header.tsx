@@ -85,7 +85,7 @@ const navItems: NavItem[] = [
       { name: "Events", href: "/events" },
       { name: "Blogs", href: "/blog" },
       { name: "Articles & Podcasts", href: "/articles" },
-      { name: "FAQ", href: "/faq" },
+      { name: "FAQs", href: "/faqs" },
     ],
   },
   { name: "Testimonials", href: "/#testimonials" },

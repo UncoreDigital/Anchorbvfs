@@ -111,7 +111,7 @@ const ShareholderDisputesBusinessDivorce = () => {
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                   <li>
                     Immediately before the effectiveness of the corporate action
-                    to which the shareholder objects.
+                    to which the shareholder objects
                   </li>
                   <li>
                     Using customary and current valuation concepts and
@@ -119,11 +119,11 @@ const ShareholderDisputesBusinessDivorce = () => {
                     context of the transaction requiring appraisal, excluding
                     any appreciation or depreciation in anticipation of the
                     corporate action unless exclusion would be inequitable to
-                    the corporation and its remaining shareholders.
+                    the corporation and its remaining shareholders
                   </li>
                   <li>
                     In most instances, without discounting for lack of
-                    marketability or minority status.
+                    marketability or minority status
                   </li>
                 </ul>
 

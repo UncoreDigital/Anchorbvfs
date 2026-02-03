@@ -137,7 +137,7 @@ const DamagesLostProfitClaims = () => {
                   comprehensive valuation reports that are carefully documented
                   and supported. Our professionals have the knowledge,
                   proficiency, and credibility to effectively communicate their
-                  findings to clients in timely, efficient manner.
+                  findings to clients in a timely efficient manner.
                 </p>
 
                 <div className="mt-12 flex flex-wrap gap-4">

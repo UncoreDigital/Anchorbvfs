@@ -1,78 +1,92 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { TrendingUp, Shield, Target, BarChart3, ArrowUpRight } from 'lucide-react';
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import { Link } from "react-router-dom";
+import {
+  TrendingUp,
+  Shield,
+  Target,
+  BarChart3,
+  ArrowUpRight,
+} from "lucide-react";
 
 const services = [
   {
     icon: BarChart3,
-    number: '01',
-    title: 'IRC Section 409A Valuation',
-    slug: '409a-valuation',
-    description: 'Compliance valuations for stock options and equity-based compensation.',
+    number: "01",
+    title: "IRC Section 409A Valuation",
+    slug: "irc-section-409a-valuation",
+    description:
+      "Compliance valuations for stock options and equity-based compensation.",
   },
   {
     icon: TrendingUp,
-    number: '02',
-    title: 'Business Valuation',
-    slug: 'business-valuation',
-    description: 'Valuations for tax, transaction, litigation, and financial reporting purposes.',
+    number: "02",
+    title: "Business Valuation",
+    slug: "fair-value-measurement",
+    description:
+      "Valuations for tax, transaction, litigation, and financial reporting purposes.",
   },
   {
     icon: Shield,
-    number: '03',
-    title: 'Healthcare Valuations',
-    slug: 'healthcare-valuations',
-    description: 'Specialized valuation services for medical practices and healthcare facilities.',
+    number: "03",
+    title: "Healthcare Valuations",
+    slug: "healthcare-valuations",
+    description:
+      "Specialized valuation services for medical practices and healthcare facilities.",
   },
   {
     icon: Target,
-    number: '04',
-    title: 'Mergers & Acquisitions',
-    slug: 'mergers-acquisitions',
-    description: 'Consulting for buy-side and sell-side transactions to maximize value.',
+    number: "04",
+    title: "Mergers & Acquisitions",
+    slug: "mergers-acquisitions",
+    description:
+      "Consulting for buy-side and sell-side transactions to maximize value.",
   },
   {
     icon: Shield,
-    number: '05',
-    title: 'Litigation Support',
-    slug: 'litigation-support',
-    description: 'Expert witness testimony, marital dissolution, economic damages, and lost profits analysis.',
+    number: "05",
+    title: "Litigation Support",
+    slug: "matrimonial-valuation-litigation-support",
+    description:
+      "Expert witness testimony, marital dissolution, economic damages, and lost profits analysis.",
   },
   {
     icon: BarChart3,
-    number: '06',
-    title: 'Estate & Gift Tax',
-    slug: 'estate-gift-tax',
-    description: 'Valuations for estate planning, gifting, and tax reporting requirements.',
+    number: "06",
+    title: "Estate & Gift Tax",
+    slug: "estate-gift-tax-valuations",
+    description:
+      "Valuations for estate planning, gifting, and tax reporting requirements.",
   },
   {
     icon: Target,
-    number: '07',
-    title: 'Shareholder Disputes',
-    slug: 'shareholder-disputes',
-    description: 'Resolution support for business divorce and shareholder disagreement cases.',
+    number: "07",
+    title: "Shareholder Disputes",
+    slug: "shareholder-disputes-business-divorce",
+    description:
+      "Resolution support for business divorce and shareholder disagreement cases.",
   },
   {
     icon: TrendingUp,
-    number: '08',
-    title: 'Quality of Earnings',
-    slug: 'quality-of-earnings',
-    description: 'Detailed analysis of earnings quality for potential buyers or lenders.',
+    number: "08",
+    title: "Quality of Earnings",
+    slug: "quality-of-earnings-report",
+    description:
+      "Detailed analysis of earnings quality for potential buyers or lenders.",
   },
   {
     icon: BarChart3,
-    number: '09',
-    title: 'Lending Valuations',
-    slug: 'lending-valuations',
-    description: 'Valuations for underwriting and SBA lending purposes.',
+    number: "09",
+    title: "Lending Valuations",
+    slug: "valuations-for-underwriting-lending-purposes",
+    description: "Valuations for underwriting and SBA lending purposes.",
   },
 ];
 
 const ServicesSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section id="services" className="section-padding bg-muted">
@@ -107,7 +121,8 @@ const ServicesSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate font-inter"
           >
-            Comprehensive financial solutions tailored to your unique needs and goals.
+            Comprehensive financial solutions tailored to your unique needs and
+            goals.
           </motion.p>
         </div>
 

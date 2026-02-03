@@ -117,15 +117,13 @@ const MatrimonialValuationLitigationSupport = () => {
                   <li>
                     Preparation and review of legal documents (including
                     affidavits, interrogatories, equitable distribution
-                    worksheets, motion reviews, deposition reviews, etc).
+                    worksheets, motion reviews, deposition reviews, etc)
                   </li>
                   <li>
-                    Income determination (pre, during, and post-settlement).
+                    Income determination (pre, during, and post-settlement)
                   </li>
-                  <li>
-                    Lifestyle analysis (pre, during, and post-settlement).
-                  </li>
-                  <li>Review of opposing expert’s work products.</li>
+                  <li>Lifestyle analysis (pre, during, and post-settlement)</li>
+                  <li>Review of opposing expert’s work products</li>
                 </ul>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
@@ -136,23 +134,23 @@ const MatrimonialValuationLitigationSupport = () => {
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
                       Valuation of controlling and minority interests in closely
-                      held businesses.
+                      held businesses
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
                       Review and/or quantification of personal and entity
-                      goodwill comprised within the subject company.
+                      goodwill comprised within the subject company
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Valuation of employee stock options.</span>
+                    <span>Valuation of employee stock options</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Preparation of expert reports, as necessary.</span>
+                    <span>Preparation of expert reports, as necessary</span>
                   </li>
                 </ul>
 
@@ -165,28 +163,28 @@ const MatrimonialValuationLitigationSupport = () => {
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
                       Preparation of lifestyle analysis to quantify unreported
-                      income.
+                      income
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
                       Preparation of the marital balance sheet to identify
-                      marital vs. separate property.
+                      marital vs. separate property
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
                       Identification of actual income available for child
-                      support and alimony.
+                      support and alimony
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
                       Asset tracing to confirm or refute the existence of
-                      separate property.
+                      separate property
                     </span>
                   </li>
                 </ul>
@@ -198,22 +196,20 @@ const MatrimonialValuationLitigationSupport = () => {
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>
-                      Assist counsel with the deposition of opposing experts.
+                      Assist counsel with the deposition of opposing experts
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Assist with the preparation of trial exhibits.</span>
+                    <span>Assist with the preparation of trial exhibits</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Review the reports prepared by opposing experts.
-                    </span>
+                    <span>Review the reports prepared by opposing experts</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Expert witness testimony, as necessary.</span>
+                    <span>Expert witness testimony, as necessary</span>
                   </li>
                 </ul>
 
