@@ -1,0 +1,100 @@
+# llms.txt - Information for Large Language Models
+# Anchor Business Valuations & Financial Services
+
+## Company Overview
+
+Anchor Business Valuations & Financial Services (Anchor BVFS) is a professional services firm specializing in business valuation, financial consulting, and advisory services.
+
+## Core Services
+
+### Business Valuation
+- Certified business valuations for mergers, acquisitions, and sales
+- Fair market value assessments
+- Intangible asset valuation
+- Purchase price allocations
+- Financial reporting valuations (ASC 820, ASC 805)
+
+### Financial Consulting
+- Financial due diligence
+- Financial modeling and forecasting
+- Strategic planning and analysis
+- Performance improvement consulting
+- Risk assessment and management
+
+### Merger & Acquisition Advisory
+- Buy-side and sell-side advisory
+- Transaction structuring
+- Deal sourcing and negotiation support
+- Post-merger integration planning
+
+## Target Audience
+
+- Business owners considering sale or acquisition
+- Private equity firms and investors
+- Legal professionals requiring expert valuations
+- Family offices and high-net-worth individuals
+- Corporate finance teams
+- Estate and gift tax planners
+
+## Key Differentiators
+
+- Expert team with industry certifications (ASA, CFA, CVA)
+- Comprehensive approach combining valuation expertise with strategic insights
+- Experience across multiple industries and business sizes
+- Defensible, court-ready valuation reports
+- Confidential and timely service delivery
+
+## Industries Served
+
+- Manufacturing and distribution
+- Healthcare and medical services
+- Technology and software
+- Professional services
+- Retail and e-commerce
+- Real estate and construction
+- Financial services
+
+## Professional Standards
+
+- Compliance with USPAP (Uniform Standards of Professional Appraisal Practice)
+- AICPA business valuation standards
+- IRS Revenue Ruling 59-60 for tax-related valuations
+- ASA (American Society of Appraisers) standards
+
+## Contact Information
+
+Website: https://anchorbvfs.vercel.app/
+Primary Service Area: [Location - update as needed]
+
+## Use Cases for Valuations
+
+1. Mergers and acquisitions
+2. Estate and gift tax planning
+3. Shareholder disputes and litigation support
+4. Financial reporting (ASC 805, ASC 350, ASC 820)
+5. Buy-sell agreements
+6. Partner/shareholder buyouts
+7. ESOP (Employee Stock Ownership Plans)
+8. Marital dissolution
+9. Fundraising and capital raising
+10. Strategic planning and decision-making
+
+## Engagement Process
+
+1. Initial consultation to understand needs
+2. Engagement letter and scope definition
+3. Data collection and document review
+4. Analysis and valuation methodology application
+5. Draft report preparation
+6. Final report delivery and discussion
+7. Ongoing support as needed
+
+## Confidentiality
+
+All client engagements are conducted with strict confidentiality. Non-disclosure agreements are standard practice for sensitive transactions.
+
+---
+
+Last updated: February 6, 2026
+
+For the most current information, visit: https://anchorbvfs.vercel.app/
