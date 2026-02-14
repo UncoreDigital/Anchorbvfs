@@ -5,16 +5,6 @@ import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 const testimonials = [
   {
     id: 1,
-    name: "Kimberly Philbin",
-    role: "Founder, Vision 360 Capital Partners",
-    content:
-      "Trisch Garthoeffner is highly knowledgeable and is first to come to mind when I have a client needing business valuation, M&A, or selling consultation services.",
-    rating: 5,
-    image: "KP",
-    imageUrl: "/images/testimonials/image2.jpeg",
-  },
-  {
-    id: 2,
     name: "Tom Cavanagh",
     role: "VP, Shareholder, BCC Advisers",
     content:
@@ -24,22 +14,32 @@ const testimonials = [
     imageUrl: "/images/testimonials/image1.png",
   },
   {
-    id: 3,
-    name: "David North",
-    role: "President, Garage Doors by Roy North",
+    id: 2,
+    name: "Kimberly Philbin",
+    role: "Founder, Vision 360 Capital Partners",
     content:
-      "Our company has engaged Anchor Business Valuations for 5+ consecutive years to complete a valuation of our company. The price was reasonable, and the turnaround time was excellent. I highly recommend hiring Trisch Garthoeffner and her associates!",
+      "Trisch Garthoeffner is highly knowledgeable and is first to come to mind when I have a client needing business valuation, M&A, or selling consultation services.",
     rating: 5,
-    image: "DN",
+    image: "KP",
+    imageUrl: "/images/testimonials/image2.jpeg",
   },
   {
-    id: 4,
+    id: 3,
     name: "Anonymous",
     role: "Divorce Client, Spring 2024",
     content:
       "I really enjoyed working with Trisch and was very impressed with her knowledge, quality of work, and customer service. I will definitely keep Anchor in mind for future needs of myself or friends.",
     rating: 5,
     image: "AN",
+  },
+  {
+    id: 4,
+    name: "Dr. William Mills",
+    role: "Founder, Marshall Medical Center",
+    content:
+      "Trisch was instrumental in the sale of our family’s medical practice all the way from valuation to closing. We could not have done it without her. Her professionalism, knowledge, and positive attitude made the process very easy for us. I highly recommend working with Trisch.",
+    rating: 5,
+    image: "WM",
   },
   {
     id: 5,
@@ -53,15 +53,24 @@ const testimonials = [
   },
   {
     id: 6,
-    name: "Paul Bosley",
-    role: "President/Founder, Business Finance Depot",
+    name: "Business & Asset Protection Attorney",
+    role: "Spring 2024",
     content:
-      "Thanks for completing the valuation. With a lot of considerations, I know this was a complicated and time-consuming review. You did great with what we gave you. I am glad we used your company. Will look forward to use anchor business valuations in the future.",
+      "Thanks for all of your hard work, Trisch. We could not have done without you.",
     rating: 5,
-    image: "PB",
+    image: "BA",
   },
   {
     id: 7,
+    name: "C. Zachary Meyers",
+    role: "President, C. Zachary Meyers, PLLC",
+    content: "Trisch Garthoeffner knows Valuation. Period, full stop.",
+    rating: 5,
+    image: "ZM",
+    imageUrl: "/images/testimonials/image4.jpeg",
+  },
+  {
+    id: 8,
     name: "Larry Amon",
     role: "President, TAB of SW Florida",
     content:
@@ -71,31 +80,22 @@ const testimonials = [
     imageUrl: "/images/testimonials/image5.png",
   },
   {
-    id: 8,
-    name: "C. Zachary Meyers",
-    role: "President, C. Zachary Meyers, PLLC",
-    content: "Trisch Garthoeffner knows Valuation. Period, full stop.",
-    rating: 5,
-    image: "ZM",
-    imageUrl: "/images/testimonials/image4.jpeg",
-  },
-  {
     id: 9,
-    name: "Dr. William Mills",
-    role: "Founder, Marshall Medical Center",
+    name: "Paul Bosley",
+    role: "President/Founder, Business Finance Depot",
     content:
-      "Trisch was instrumental in the sale of our family’s medical practice all the way from valuation to closing. We could not have done it without her. Her professionalism, knowledge, and positive attitude made the process very easy for us. I highly recommend working with Trisch.",
+      "Our company has engaged Anchor Business Valuations for 5+ consecutive years to complete a valuation of our company. The price was reasonable, and the turnaround time was excellent. I highly recommend hiring Trisch Garthoeffner and her associates who are very professional and knowledgeable!",
     rating: 5,
-    image: "WM",
+    imageUrl: "/images/testimonials/image8.png",
   },
   {
     id: 10,
-    name: "Business & Asset Protection Attorney",
-    role: "Spring 2024",
+    name: "David North",
+    role: "President, Garage Doors by Roy North",
     content:
-      "Thanks for all of your hard work, Trisch. We could not have done without you.",
+      "Thanks for completing the valuation. With a lot of considerations, I know this was a complicated and time-consuming review. You did great with what we gave you. I am glad we used your company. Will look forward to use Anchor Business Valuations in the future.",
     rating: 5,
-    image: "BA",
+    imageUrl: "/images/testimonials/image9.png",
   },
 ];
 
@@ -188,15 +188,17 @@ const TestimonialsSection = () => {
 
                   <div className="flex items-center gap-4">
                     {/* Avatar */}
-                    <div className="w-14 h-14 rounded-full bg-gold flex items-center justify-center text-primary font-semibold overflow-hidden">
+                    <div className="w-20 h-20 rounded-full bg-white border border-gold/20 flex items-center justify-center text-primary overflow-hidden shrink-0">
                       {testimonials[currentIndex].imageUrl ? (
                         <img
                           src={testimonials[currentIndex].imageUrl}
                           alt={testimonials[currentIndex].name}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain p-1"
                         />
                       ) : (
-                        testimonials[currentIndex].image
+                        <div className="w-full h-full bg-gold flex items-center justify-center font-semibold">
+                          {testimonials[currentIndex].image}
+                        </div>
                       )}
                     </div>
 
