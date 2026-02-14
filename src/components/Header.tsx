@@ -222,7 +222,7 @@ const Header = () => {
             <img
               src="/assets/logo.png"
               alt="Anchor Business Valuations Logo"
-              className="h-20 w-auto object-contain"
+              className="h-24 w-auto object-contain"
             />
           </Link>
         </motion.div>
@@ -340,9 +340,9 @@ const Header = () => {
                   className="flex items-center gap-2"
                 >
                   <img
-                    src="/assets/logo.png"
+                    src="/assets/logo-bw.png"
                     alt="Anchor Business Valuations Logo"
-                    className="h-10 w-auto object-contain"
+                    className="h-12 w-auto object-contain"
                   />
                 </Link>
                 <button

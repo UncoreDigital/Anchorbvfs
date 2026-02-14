@@ -19,7 +19,6 @@ const slides = [
     title:
       "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
     mobileClassName: "object-[80%_center]",
-
   },
 ];
 
@@ -35,7 +34,7 @@ const HeroSection = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 12000);
     return () => clearInterval(timer);
   }, []);
 
@@ -77,7 +76,7 @@ const HeroSection = () => {
             alt="Slide background"
             className={cn(
               "w-full h-full object-cover",
-              slides[currentSlide].mobileClassName
+              slides[currentSlide].mobileClassName,
             )}
           />
           {/* Enhanced overlay for better text readability on mobile */}

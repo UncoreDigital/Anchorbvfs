@@ -55,7 +55,8 @@ const testimonials = [
     id: 6,
     name: "Paul Bosley",
     role: "President/Founder, Business Finance Depot",
-    content: "Trisch Garthoeffner knows Valuation. Period, full stop.",
+    content:
+      "Thanks for completing the valuation. With a lot of considerations, I know this was a complicated and time-consuming review. You did great with what we gave you. I am glad we used your company. Will look forward to use anchor business valuations in the future.",
     rating: 5,
     image: "PB",
   },
@@ -73,8 +74,7 @@ const testimonials = [
     id: 8,
     name: "C. Zachary Meyers",
     role: "President, C. Zachary Meyers, PLLC",
-    content:
-      "Thanks for completing the valuation. With a lot of considerations, I know this was a complicated and time-consuming review. You did great with what we gave you. I am glad we used your company. Will look forward to use anchor business valuations in the future.",
+    content: "Trisch Garthoeffner knows Valuation. Period, full stop.",
     rating: 5,
     image: "ZM",
     imageUrl: "/images/testimonials/image4.jpeg",
@@ -123,7 +123,7 @@ const TestimonialsSection = () => {
   const prev = () => {
     setIsAutoPlaying(false);
     setCurrentIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 
@@ -217,7 +217,7 @@ const TestimonialsSection = () => {
                             key={i}
                             className="w-5 h-5 fill-gold text-gold"
                           />
-                        )
+                        ),
                       )}
                     </div>
                   </div>
