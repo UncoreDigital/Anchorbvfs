@@ -67,11 +67,11 @@ const IRCSection409AValuation = () => {
                     <span>239.919.3092</span>
                   </a>
                   <a
-                    href="mailto:Info@AnchorBVFS.com"
+                    href="mailto:info@anchorbv.com"
                     className="flex items-center gap-3 text-gold hover:text-gold/80 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span>Info@AnchorBVFS.com</span>
+                    <span>info@anchorbv.com</span>
                   </a>
                 </div>
               </div>
@@ -91,7 +91,7 @@ const IRCSection409AValuation = () => {
                   required experience and expertise to help you with a smooth
                   processing of your 409A valuation. Our team members have
                   performed hundreds of 409A valuations across diverse sectors,
-                  right from pre-revenue staged Companies to the pre-IPO.
+                  right from pre-revenue staged companies to the pre-IPO.
                   Anchor’s entire execution process is subjected to rigorous,
                   multi-time quality checks to ensure the maintenance of the
                   highest quality standards. Emphasis on methodology documents
@@ -116,10 +116,22 @@ const IRCSection409AValuation = () => {
                   Brief Background
                 </h3>
                 <p className="mb-4">
-                  Section 409A was introduced as Internal Revenue Code (“IRC”)
-                  by the Internal Revenue Service (“IRS”) through Section 885 of
-                  the American Jobs Creation Act of 2004 in October 2004 and
-                  took effect on December 31, 2004.
+                  Section 409A was introduced as Internal Revenue Code (IRC) by
+                  the Internal Revenue Service (IRS) through Section 885 of the
+                  American Jobs Creation Act of 2004 in October 2004 and took
+                  effect on and was enforced on December 31, 2004, and fully
+                  effective in 2005 (with further regulations finalized in 2007
+                  – 2008).
+                </p>
+                <p className="mb-4 text-sm text-slate/70">
+                  <a
+                    href="https://www.law.cornell.edu/cfr/text/26/1.409A-6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold hover:underline"
+                  >
+                    Source: https://www.law.cornell.edu/cfr/text/26/1.409A-6
+                  </a>
                 </p>
                 <p className="mb-4">
                   IRC Section 409A was enforced by the IRS in response to the
@@ -161,9 +173,7 @@ const IRCSection409AValuation = () => {
 
                 <ul className="list-disc pl-6 mb-6 space-y-2">
                   <li>
-                    <strong>
-                      Qualified Deferred Compensation Plans(“QDC”)
-                    </strong>{" "}
+                    <strong>Qualified Deferred Compensation Plans (QDC)</strong>{" "}
                     such as 401(K), 457 or 403(b) plans, offer tax advantages to
                     employees by deferring a percentage of their compensation
                     for future savings post retirement, disability, death
@@ -174,7 +184,7 @@ const IRCSection409AValuation = () => {
                   </li>
                   <li>
                     <strong>
-                      Nonqualified Deferred Compensation Plans (“NQDC”)
+                      Nonqualified Deferred Compensation Plans (NQDC)
                     </strong>{" "}
                     carry additional benefits above that of Qualified Deferred
                     Compensation Plans, including non-IRS-defined compensation
@@ -210,11 +220,11 @@ const IRCSection409AValuation = () => {
                   For the companies that fail to abide by the Section 409A
                   rules, additional penalties come in the form of payroll taxes
                   on the plans offered, and a decreased value when/if the
-                  company decides to file an initial public offering (“IPO”).
+                  company decides to file an initial public offering (IPO).
                 </p>
                 <p className="mb-4">
                   As an aside, Section 409A has no effect on the Federal
-                  Insurance Contributions Act (“FICA”) (aka Social Security and
+                  Insurance Contributions Act (FICA) (aka Social Security and
                   Medicare) tax.
                 </p>
 
@@ -239,8 +249,8 @@ const IRCSection409AValuation = () => {
                   to its employees, “equity-based compensation” in the form of
                   stock options, stock appreciation rights, warrants, restricted
                   stocks, restricted stock units, performance stock units, and
-                  other, must first determine the Fair Market Value (“FMV”) of
-                  its stock.
+                  other, must first determine the Fair Market Value (FMV) of its
+                  stock.
                 </p>
                 <p className="mb-4">
                   The date of valuation should be as close to the grant date of
@@ -339,8 +349,8 @@ const IRCSection409AValuation = () => {
                       This approach involves valuing the subject company based
                       on specific benefit streams – Earnings or Cashflows.
                       Commonly used income approach methods in 409A valuations
-                      are the Discounted Cash Flow (“DCF”), and the
-                      Capitalization of Earnings (“COE”) methods.
+                      are the Discounted Cash Flow (DCF), and the Capitalization
+                      of Earnings (COE) methods.
                     </p>
                   </li>
                   <li>
@@ -351,7 +361,7 @@ const IRCSection409AValuation = () => {
                       FMV of balance sheet assets and liabilities (often
                       including non-balance sheet items in the value
                       determination). The principal method used in the asset
-                      approach is the Adjusted Net Asset Value (“NAV”) method.
+                      approach is the Adjusted Net Asset Value (NAV) method.
                       This method is often costly as it necessitates valuations
                       of the individual balance sheet items and, for a going
                       concern business, frequently results in the lowest value

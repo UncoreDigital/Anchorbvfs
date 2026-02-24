@@ -105,7 +105,7 @@ const EventEditor = () => {
               : data.presenters,
             description: data.description,
             link: data.link || "",
-            image_url: data.image_url,
+            image_url: data.image_url || "",
           });
         }
       };
@@ -206,7 +206,7 @@ const EventEditor = () => {
                         dateValue = new Date(
                           parseInt(y),
                           parseInt(m) - 1,
-                          parseInt(d)
+                          parseInt(d),
                         );
                       }
                     }
@@ -219,7 +219,7 @@ const EventEditor = () => {
                           variant={"outline"}
                           className={cn(
                             "w-full pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground",
                           )}
                         >
                           {dateValue ? (
@@ -330,8 +330,8 @@ const EventEditor = () => {
               {loading
                 ? "Saving..."
                 : isEditing
-                ? "Update Event"
-                : "Create Event"}
+                  ? "Update Event"
+                  : "Create Event"}
             </Button>
           </div>
         </form>

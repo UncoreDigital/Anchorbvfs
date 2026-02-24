@@ -31,7 +31,7 @@ const services = [
   {
     name: "Quality of Earnings Report",
     href: "/services/quality-of-earnings-report",
-  }
+  },
 ];
 
 const Footer = () => {
@@ -45,7 +45,7 @@ const Footer = () => {
               <img
                 src="/assets/footer/Logo.png"
                 alt="Anchor Business Valuations"
-                className="h-48 w-auto object-contain bg-white/1 rounded-lg p-1"
+                className="h-64 w-auto object-contain bg-white/1 rounded-lg p-1"
               />
             </a>
             <p className="text-primary-foreground/60 font-inter text-sm leading-relaxed mb-6">
@@ -124,25 +124,35 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <span className="text-primary-foreground/60 font-inter text-sm max-w-[200px]">
-                  365 Fifth Avenue, Naples, FL 34102, United States
+                  South (HQ) – 365 Fifth Avenue S, Naples, FL 34102
+                  <br />
+                  Northeast (Satellite) – Frederick, MD 21701
                 </span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-gold flex-shrink-0" />
-                <a
-                  href="tel:+12399193092"
-                  className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
-                >
-                  239.919.3092
-                </a>
+              <li className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                <span className="flex flex-col gap-1">
+                  <a
+                    href="tel:+12399193092"
+                    className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
+                  >
+                    O: (239) 919-3092
+                  </a>
+                  <a
+                    href="tel:+13126329144"
+                    className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
+                  >
+                    C: (312) 632-9144
+                  </a>
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-gold flex-shrink-0" />
                 <a
-                  href="mailto:Info@AnchorBVFS.com"
+                  href="mailto:info@anchorbv.com"
                   className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
                 >
-                  Info@AnchorBVFS.com
+                  info@anchorbv.com
                 </a>
               </li>
             </ul>

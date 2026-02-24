@@ -94,7 +94,7 @@ const BlogEditor = () => {
             content: data.content,
             author: data.author || "Admin",
             category: data.category || "Uncategorized",
-            image_url: data.image_url,
+            image_url: data.image_url || "",
             is_featured: data.is_featured,
             published_at: formatDateForInput(data.published_at),
           });
@@ -227,7 +227,7 @@ const BlogEditor = () => {
                         dateValue = new Date(
                           parseInt(y),
                           parseInt(m) - 1,
-                          parseInt(d)
+                          parseInt(d),
                         );
                       }
                     }
@@ -240,7 +240,7 @@ const BlogEditor = () => {
                           variant={"outline"}
                           className={cn(
                             "w-full pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground",
                           )}
                         >
                           {dateValue ? (
@@ -347,8 +347,8 @@ const BlogEditor = () => {
               {loading
                 ? "Saving..."
                 : isEditing
-                ? "Update Blog"
-                : "Create Blog"}
+                  ? "Update Blog"
+                  : "Create Blog"}
             </Button>
           </div>
         </form>

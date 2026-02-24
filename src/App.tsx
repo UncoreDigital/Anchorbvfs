@@ -22,8 +22,6 @@ const Staff = lazy(() => import("./pages/Staff"));
 const Team = lazy(() => import("./pages/Team"));
 
 const FAQ = lazy(() => import("./pages/FAQ"));
-const Portfolio = lazy(() => import("./pages/Portfolio"));
-const PortfolioDetail = lazy(() => import("./pages/PortfolioDetail"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -136,8 +134,6 @@ const App = () => (
                 <Route path="/events" element={<Events />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/faqs" element={<FAQ />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/portfolio/:id" element={<PortfolioDetail />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

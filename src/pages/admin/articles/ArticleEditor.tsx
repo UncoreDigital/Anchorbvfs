@@ -106,8 +106,8 @@ const ArticleEditor = () => {
             title: data.title,
             type: data.type,
             published_at: formatDateForInput(data.published_at),
-            link: data.link,
-            image_url: data.image_url,
+            link: data.link || "",
+            image_url: data.image_url || "",
           });
         }
       };
@@ -222,7 +222,7 @@ const ArticleEditor = () => {
                         dateValue = new Date(
                           parseInt(y),
                           parseInt(m) - 1,
-                          parseInt(d)
+                          parseInt(d),
                         );
                       }
                     }
@@ -235,7 +235,7 @@ const ArticleEditor = () => {
                           variant={"outline"}
                           className={cn(
                             "w-full pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
+                            !field.value && "text-muted-foreground",
                           )}
                         >
                           {dateValue ? (

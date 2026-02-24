@@ -20,6 +20,19 @@ const slides = [
       "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
     mobileClassName: "object-[80%_center]",
   },
+  // {
+  //   image: "/assets/trisch.jpg",
+  //   subtitle: "IRS Testimony",
+  //   title:
+  //     "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
+  //   mobileClassName: "object-[50%_center]",
+  // },
+  // {
+  //   image: "/assets/anchor-ma-logo.png",
+  //   subtitle: "Press Release",
+  //   title: "Creative Tile Press Release",
+  //   mobileClassName: "object-[50%_center]",
+  // },
 ];
 
 const HeroSection = () => {
@@ -31,12 +44,12 @@ const HeroSection = () => {
     path: string;
   } | null>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 12000);
-    return () => clearInterval(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % slides.length);
+  //   }, 12000);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () =>

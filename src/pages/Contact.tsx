@@ -11,13 +11,16 @@ const contactInfo = [
     icon: MapPin,
     number: "01",
     title: "Our Address",
-    details: ["365 Fifth Avenue", "Naples, FL 34102, United States"],
+    details: [
+      "South (HQ) – 365 Fifth Avenue S, Naples, FL 34102",
+      "Northeast (Satellite) – Frederick, MD 21701",
+    ],
   },
   {
     icon: Phone,
     number: "02",
     title: "Contact",
-    details: ["(239) 919-3092", "Info@AnchorBVFS.com"],
+    details: ["O: (239) 919-3092", "C: (312) 632-9144", "info@anchorbv.com"],
   },
   {
     icon: Clock,

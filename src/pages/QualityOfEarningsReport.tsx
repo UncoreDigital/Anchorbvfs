@@ -67,11 +67,11 @@ const QualityOfEarningsReport = () => {
                     <span>239.919.3092</span>
                   </a>
                   <a
-                    href="mailto:Info@AnchorBVFS.com"
+                    href="mailto:info@anchorbv.com"
                     className="flex items-center gap-3 text-gold hover:text-gold/80 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span>Info@AnchorBVFS.com</span>
+                    <span>info@anchorbv.com</span>
                   </a>
                 </div>
               </div>
@@ -95,7 +95,7 @@ const QualityOfEarningsReport = () => {
                 </div>
 
                 <p className="mb-4">
-                  A company’s quality of earnings (“QOE”) can be determined a
+                  A company’s quality of earnings (QOE) can be determined a
                   number of ways, but ultimately it is obtained through analysis
                   of actual operating cash flow. Often this analysis leads to
                   sales, and profit margins differ from internal financial

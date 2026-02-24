@@ -75,11 +75,11 @@ const EstateGiftTaxValuations = () => {
                     <span>239.919.3092</span>
                   </a>
                   <a
-                    href="mailto:Info@AnchorBVFS.com"
+                    href="mailto:info@anchorbv.com"
                     className="flex items-center gap-3 text-gold hover:text-gold/80 transition-colors"
                   >
                     <Mail className="w-5 h-5" />
-                    <span>Info@AnchorBVFS.com</span>
+                    <span>info@anchorbv.com</span>
                   </a>
                 </div>
               </div>
