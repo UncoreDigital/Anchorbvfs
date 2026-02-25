@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Phone, Mail } from "lucide-react";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
@@ -111,7 +111,12 @@ const ValuationsForUnderwritingLendingPurposes = () => {
                   will often “lend” the buyer of the business a small percentage
                   and structure it as a “seller’s note”. On many occasions we
                   have worked with both parties (buyer and seller) in obtaining
-                  a value based upon future cash flows post-acquisition.
+                  a value based upon future cash flows post-acquisition.{" "}
+                  <strong>
+                    Note that for SBA financing, specifically SBA 7(a) loans
+                    &gt; $250,000, a certified independent valuation is
+                    required.
+                  </strong>
                 </p>
 
                 <p className="mb-4">

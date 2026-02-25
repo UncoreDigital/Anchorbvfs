@@ -214,6 +214,65 @@ const MatrimonialValuationLitigationSupport = () => {
                 </ul>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
+                  Expert Standards and Goodwill Valuation
+                </h3>
+                <p className="mb-4">
+                  In litigation, expert testimony admissibility is often
+                  governed by the strict standards of <strong>Daubert</strong>{" "}
+                  or <strong>Frye</strong>, making defensible valuation
+                  methodologies essential. A critical component of these
+                  valuations is how goodwill treatment differs by state, since
+                  marital goodwill is jurisdiction-dependent.
+                </p>
+
+                <h4 className="text-lg font-bold text-navy mb-2">
+                  Two Types of Goodwill in Divorce Cases
+                </h4>
+                <p className="mb-4">
+                  Goodwill is one of the most contentious components in divorce
+                  valuations. Most valuation disputes revolve around
+                  distinguishing these two:
+                </p>
+                <ul className="list-disc pl-6 mb-4 space-y-2">
+                  <li>
+                    <strong>Enterprise Goodwill:</strong> Derived from the
+                    business itself, transferable, and generally considered
+                    marital property.
+                  </li>
+                  <li>
+                    <strong>Personal Goodwill:</strong> Tied to the owner’s
+                    reputation, skill, or personal relationships, not
+                    transferable, and often considered non-marital.
+                  </li>
+                </ul>
+
+                <h4 className="text-lg font-bold text-navy mb-2">
+                  State-by-State Variation
+                </h4>
+                <p className="mb-4">
+                  States differ dramatically in whether personal goodwill is
+                  considered marital property:
+                </p>
+                <ul className="list-disc pl-6 mb-8 space-y-2">
+                  <li>
+                    <strong>States that Exclude Personal Goodwill:</strong>{" "}
+                    Florida, Ohio, Texas, Virginia, North Carolina. These states
+                    view personal goodwill as tied to the individual and thus
+                    not divisible. Valuators must separate enterprise (marital)
+                    from personal (non-marital) goodwill.
+                  </li>
+                  <li>
+                    <strong>States that Include Personal Goodwill:</strong>{" "}
+                    Colorado, Indiana, New Mexico. Some states treat all
+                    goodwill—enterprise and personal—as marital property when it
+                    is marketable or enhances business value. Experts must be
+                    careful when quantifying professional practices, using
+                    excess earnings methods, or attributing future earnings to
+                    goodwill.
+                  </li>
+                </ul>
+
+                <h3 className="text-xl font-bold text-navy mb-4">
                   Collaborative/Cooperative and Neutral Expert Services
                 </h3>
                 <p className="mb-4">

@@ -131,6 +131,28 @@ const DamagesLostProfitClaims = () => {
                   ))}
                 </ul>
 
+                <h3 className="text-xl font-bold text-navy mb-4">
+                  Recognized Lost Profit Calculation Models
+                </h3>
+                <ul className="space-y-2 mb-8">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Before and after method</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Yardstick method</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Sales projection method</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Market model method (from AICPA and BVR guides)</span>
+                  </li>
+                </ul>
+
                 <p className="mb-6">
                   At Anchor Business Valuations & Financial Services, LLC, our
                   wide breadth of experience and expertise enables us to offer

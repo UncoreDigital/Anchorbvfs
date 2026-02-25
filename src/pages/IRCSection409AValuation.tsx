@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Phone, Mail } from "lucide-react";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
@@ -94,9 +94,12 @@ const IRCSection409AValuation = () => {
                   right from pre-revenue staged companies to the pre-IPO.
                   Anchor’s entire execution process is subjected to rigorous,
                   multi-time quality checks to ensure the maintenance of the
-                  highest quality standards. Emphasis on methodology documents
-                  and auditability ensures that the projects delivered are
-                  highly consistent and within a defined time frame.
+                  highest quality standards, including compliance with{" "}
+                  <strong>USPAP</strong>, <strong>AICPA SSVS No. 1</strong>, and{" "}
+                  <strong>NACVA Professional Standards</strong>. Emphasis on
+                  methodology documents and auditability ensures that the
+                  projects delivered are highly consistent and within a defined
+                  time frame.
                 </p>
 
                 <div className="my-8 rounded-2xl overflow-hidden">
@@ -116,12 +119,13 @@ const IRCSection409AValuation = () => {
                   Brief Background
                 </h3>
                 <p className="mb-4">
-                  Section 409A was introduced as Internal Revenue Code (IRC) by
-                  the Internal Revenue Service (IRS) through Section 885 of the
-                  American Jobs Creation Act of 2004 in October 2004 and took
-                  effect on and was enforced on December 31, 2004, and fully
-                  effective in 2005 (with further regulations finalized in 2007
-                  – 2008).
+                  “Section 409A was enacted in 2004. It applies to amounts
+                  deferred in tax years beginning after Dec 31, 2004 (i.e., 2005
+                  and onward), with special rules for earlier amounts that were
+                  materially modified after Oct 3, 2004. The final regulations
+                  were issued in April 2007 and generally apply from Jan 1,
+                  2008, with IRS transition relief for plan document amendments
+                  through Dec 31, 2008.”
                 </p>
                 <p className="mb-4 text-sm text-slate/70">
                   <a

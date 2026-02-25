@@ -106,7 +106,9 @@ const EstateGiftTaxValuations = () => {
                   Business interests must be valued when transferred as a gift
                   or reported for estate tax purposes. The IRS mandates that
                   businesses be valued based upon a “fair market value” standard
-                  of value.
+                  of value, specifically citing{" "}
+                  <strong>IRC §2031 (Estate tax value)</strong> and{" "}
+                  <strong>IRC §2512 (Gift tax value)</strong>.
                 </p>
 
                 <p className="mb-4">

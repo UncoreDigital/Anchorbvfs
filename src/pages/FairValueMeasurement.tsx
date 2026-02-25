@@ -132,6 +132,14 @@ const FairValueMeasurement = () => {
                   generally accepted accounting principles (GAAP) and tax
                   regulations:
                 </p>
+                <div className="bg-muted/30 p-4 rounded-xl text-sm italic border-l-4 border-gold mb-6">
+                  <p>
+                    <strong>Definition:</strong> Fair value = "the price that
+                    would be received to sell an asset or paid to transfer a
+                    liability in an orderly transaction between market
+                    participants." [ifrs.org]
+                  </p>
+                </div>
                 <ul className="space-y-2 mb-6">
                   {standards.map((standard, index) => (
                     <li key={index} className="flex items-start gap-3">
@@ -139,6 +147,28 @@ const FairValueMeasurement = () => {
                       <span>{standard}</span>
                     </li>
                   ))}
+                </ul>
+
+                <h3 className="text-xl font-bold text-navy mb-4">
+                  Common Intangible Asset Valuations
+                </h3>
+                <ul className="space-y-2 mb-8">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Customer relationships</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Trade names</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Technology</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Noncompetes</span>
+                  </li>
                 </ul>
 
                 <div className="mt-12 flex flex-wrap gap-4">

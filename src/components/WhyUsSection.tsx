@@ -53,7 +53,10 @@ const WhyUsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="why-us" className="section-padding bg-muted">
+    <section
+      id="why-us"
+      className="pt-10 md:pt-14 lg:pt-16 pb-20 md:pb-28 lg:pb-32 bg-muted"
+    >
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">

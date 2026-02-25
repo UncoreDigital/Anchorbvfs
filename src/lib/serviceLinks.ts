@@ -35,4 +35,8 @@ export const serviceLinks = [
     slug: "valuations-for-underwriting-lending-purposes",
     title: "Valuations for Underwriting/Lending Purposes",
   },
+  {
+    slug: "buy-side-transactional-valuations",
+    title: "Buy-Side Transactional Valuations",
+  },
 ];

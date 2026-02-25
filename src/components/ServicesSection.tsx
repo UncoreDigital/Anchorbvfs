@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -82,6 +81,14 @@ const services = [
     slug: "valuations-for-underwriting-lending-purposes",
     description: "Valuations for underwriting and SBA lending purposes.",
   },
+  {
+    icon: TrendingUp,
+    number: "10",
+    title: "Buy-Side Transactional Valuations",
+    slug: "buy-side-transactional-valuations",
+    description:
+      "Independent, data-driven buy-side valuations for strategic acquisitions.",
+  },
 ];
 
 const ServicesSection = () => {
@@ -89,7 +96,10 @@ const ServicesSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="section-padding bg-muted">
+    <section
+      id="services"
+      className="pt-20 md:pt-28 lg:pt-32 pb-10 md:pb-14 lg:pb-16 bg-muted"
+    >
       <div className="container-wide">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -127,14 +137,16 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group bg-card rounded-2xl p-8 card-hover shadow-elegant cursor-pointer"
+              className={`group bg-card rounded-2xl p-8 card-hover shadow-elegant cursor-pointer flex flex-col ${
+                index === 8 ? "lg:col-start-2" : ""
+              }`}
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="w-14 h-14 rounded-xl bg-muted flex items-center justify-center group-hover:bg-gold transition-colors duration-300">

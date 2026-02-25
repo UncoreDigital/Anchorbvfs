@@ -70,6 +70,10 @@ const navItems: NavItem[] = [
         name: "Valuations for Underwriting/Lending Purposes",
         href: "/services/valuations-for-underwriting-lending-purposes",
       },
+      {
+        name: "Buy-Side Transactional Valuations",
+        href: "/services/buy-side-transactional-valuations",
+      },
     ],
   },
   {
@@ -101,7 +105,6 @@ const Header = () => {
   useBodyScrollLock(isMobileMenuOpen);
 
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -206,122 +209,172 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || !isHomePage
-          ? "bg-background/95 backdrop-blur-md shadow-elegant py-3"
-          : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-elegant"
+          : "bg-white shadow-sm"
       }`}
     >
-      <div className="container-wide flex items-center justify-between">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-        >
-          <Link to="/" className="flex items-center gap-2">
-            <img
-              src="/assets/logo.png"
-              alt="Anchor Business Valuations Logo"
-              className="h-24 w-auto object-contain"
-            />
-          </Link>
-        </motion.div>
+      {/* Top Brown Bar */}
+      <div
+        className={`w-full bg-[#523828] transition-all duration-300 overflow-hidden ${
+          isScrolled ? "h-0" : "h-2 md:h-3"
+        }`}
+      />
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {navItems.map((item, index) => (
+      <div className="container-wide flex flex-col">
+        {/* Expandable Top Section */}
+        <AnimatePresence>
+          {!isScrolled && (
             <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-              className="relative"
-              onMouseEnter={() =>
-                item.hasDropdown && setActiveDropdown(item.name)
-              }
-              onMouseLeave={() => setActiveDropdown(null)}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0, transition: { duration: 0.2 } }}
+              className="order-2 lg:order-1 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8 overflow-hidden pt-4 pb-2"
             >
-              {renderNavLink(
-                item.href,
-                <>
-                  {item.name}
-                  {item.hasDropdown && (
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        activeDropdown === item.name ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
-                </>,
-                `flex items-center gap-1 px-4 py-2 font-inter text-base font-medium transition-colors ${
-                  isScrolled || !isHomePage
-                    ? "text-foreground hover:text-accent"
-                    : "text-primary-foreground/90 hover:text-primary-foreground"
-                }`,
-                () => handleNavClick(item.href),
-              )}
-
-              {/* Dropdown Menu */}
-              <AnimatePresence>
-                {item.hasDropdown && activeDropdown === item.name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-0 mt-0 min-w-[200px] bg-background border border-border rounded-md shadow-xl overflow-hidden z-50"
-                  >
-                    <div className="py-2">
-                      {item.dropdownItems?.map((dropItem) => (
-                        <Link
-                          key={dropItem.name}
-                          to={dropItem.href}
-                          onClick={() => handleNavClick(dropItem.href)}
-                          className="block px-5 py-3 text-sm text-foreground hover:bg-muted hover:text-accent transition-colors font-inter"
-                        >
-                          {dropItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <Link to="/" className="shrink-0 hidden md:block">
+                <motion.img
+                  layoutId="main-logo"
+                  src="/assets/logo.png"
+                  alt="Anchor Business Valuations Logo"
+                  className="h-16 md:h-24 lg:h-28 w-auto object-contain cursor-pointer"
+                />
+              </Link>
+              <motion.h1
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
+                exit={{ opacity: 0 }}
+                className="font-playfair font-bold text-navy max-w-xl text-center md:text-left leading-snug text-base sm:text-lg md:text-xl lg:text-2xl pt-2 pb-4 md:py-0"
+              >
+                Certified Business Valuation Services and{" "}
+                <br className="hidden md:block" /> Merger & Acquisition
+                Consulting
+              </motion.h1>
             </motion.div>
-          ))}
-        </nav>
-
-        {/* Right Side Actions */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="hidden lg:flex items-center gap-4"
-        >
-          <Link to="/contact">
-            <Button variant="cta" size="lg">
-              Get In Touch
-              <ArrowUpRight className="w-4 h-4 ml-2" />
-            </Button>
-          </Link>
-        </motion.div>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`lg:hidden p-2 -mr-2 ${
-            isScrolled || !isHomePage
-              ? "text-primary"
-              : "text-primary-foreground"
-          }`}
-        >
-          {isMobileMenuOpen ? (
-            <X className="w-7 h-7" />
-          ) : (
-            <Menu className="w-7 h-7" />
           )}
-        </button>
+        </AnimatePresence>
+
+        {/* Main Nav Bar */}
+        <div
+          className={`order-1 lg:order-2 flex items-center justify-between w-full transition-all duration-300 ${isScrolled ? "py-3" : "py-2"}`}
+        >
+          {/* Mobile Top Logo & Desktop Scrolled Logo Place */}
+          <div className="w-[160px] md:w-[160px] lg:w-48 flex items-center h-14 md:h-16 lg:h-20">
+            {/* Mobile Logo: Always visible on mobile, hidden on desktop */}
+            <Link to="/" className="shrink-0 block md:hidden">
+              <img
+                src="/assets/logo.png"
+                alt="Anchor Business Valuations Logo"
+                className="h-14 w-auto object-contain"
+              />
+            </Link>
+
+            {/* Desktop Scrolled Logo: Only visible when scrolled on desktop */}
+            <AnimatePresence>
+              {isScrolled && (
+                <Link to="/" className="shrink-0 hidden md:block">
+                  <motion.img
+                    layoutId="main-logo"
+                    src="/assets/logo.png"
+                    alt="Anchor Business Valuations Logo"
+                    className="h-12 md:h-16 lg:h-20 w-auto object-contain"
+                  />
+                </Link>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center justify-center gap-1">
+            {navItems.map((item, index) => (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="relative"
+                onMouseEnter={() =>
+                  item.hasDropdown && setActiveDropdown(item.name)
+                }
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                {renderNavLink(
+                  item.href,
+                  <>
+                    {item.name}
+                    {item.hasDropdown && (
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          activeDropdown === item.name ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </>,
+                  "flex items-center gap-1 px-4 py-2 font-inter text-base font-medium transition-colors text-foreground hover:text-accent",
+                  () => handleNavClick(item.href),
+                )}
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {item.hasDropdown && activeDropdown === item.name && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full left-0 mt-0 min-w-[200px] bg-background border border-border rounded-md shadow-xl overflow-hidden z-50"
+                    >
+                      <div className="py-2">
+                        {item.dropdownItems?.map((dropItem) => (
+                          <Link
+                            key={dropItem.name}
+                            to={dropItem.href}
+                            onClick={() => handleNavClick(dropItem.href)}
+                            className="block px-5 py-3 text-sm text-foreground hover:bg-muted hover:text-accent transition-colors font-inter"
+                          >
+                            {dropItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </nav>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center justify-end w-[120px] md:w-48 lg:w-56 gap-4">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="hidden lg:flex items-center"
+            >
+              <Link to="/contact">
+                <Button variant="cta" size="lg">
+                  Get In Touch
+                  <ArrowUpRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            </motion.div>
+
+            {/* Mobile Menu Toggle */}
+            <div className="flex lg:hidden justify-end flex-1 items-center">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 -mr-2 text-primary hover:bg-muted/50 rounded-md transition-colors"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-7 h-7" />
+                ) : (
+                  <Menu className="w-7 h-7" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
       {/* Mobile Menu */}
       {createPortal(
         <AnimatePresence>

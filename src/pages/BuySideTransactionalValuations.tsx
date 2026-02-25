@@ -7,9 +7,9 @@ import PageBanner from "@/components/PageBanner";
 import { Button } from "@/components/ui/button";
 import { serviceLinks } from "@/lib/serviceLinks";
 
-const QualityOfEarningsReport = () => {
-  const currentSlug = "quality-of-earnings-report";
-  const title = "Quality of Earnings Report";
+const BuySideTransactionalValuations = () => {
+  const currentSlug = "buy-side-transactional-valuations";
+  const title = "Buy-Side Transactional Valuations";
 
   return (
     <div className="min-h-screen bg-background">
@@ -88,170 +88,150 @@ const QualityOfEarningsReport = () => {
                 {/* Featured Image */}
                 <div className="rounded-2xl overflow-hidden mb-8">
                   <img
-                    src="/assets/services_content/quality-of-earnings-report/quality-img.jpg"
+                    src="/assets/services_content/buy-side-transactional-valuations/buyside-img.png"
                     alt={title}
                     className="w-full h-[400px] object-cover"
                   />
                 </div>
 
                 <p className="mb-4">
-                  A company’s quality of earnings (QOE) can be determined a
-                  number of ways, but ultimately it is obtained through analysis
-                  of actual operating cash flow. Often this analysis leads to
-                  sales, and profit margins differ from internal financial
-                  statements and/or company tax returns. A key part of this is
-                  clarifying the difference between{" "}
-                  <strong>“Adjusted EBITDA”</strong> and{" "}
-                  <strong>“Reported EBITDA”</strong>—a common practice in QOE
-                  reports that helps both buyers and sellers understand true
-                  operational performance.
+                  Acquiring a business is one of the most significant decisions
+                  an investor or company can make—yet many buyers enter
+                  transactions without a clear understanding of what the target
+                  is truly worth. At Anchor Business Valuations & Financial
+                  Services, we provide independent, data-driven buy-side
+                  valuations that empower you to negotiate effectively, avoid
+                  overpaying, and invest with confidence.
                 </p>
-
-                <p className="mb-4">
-                  To arrive at a true representation of operating sales and
-                  related expenses, we begin analysis with a high-level, key
-                  management and accounting staff interview in order to get a
-                  sense of day-to-day financial entry logistics, checks and
-                  balances in place, and leadership style overall.
-                </p>
-
-                <p className="mb-4">
-                  In general, earnings that are calculated conservatively are
-                  considered more reliable than those calculated by aggressive
-                  tax mitigating accounting policies. Quality of earnings can be
-                  obscured by accounting practices that hide poor sales or
-                  increased business risk.
-                </p>
-
-                <p className="mb-4">
-                  If a company adheres to generally accepted accounting
-                  principles (GAAP) and/or has audited financial records, it is
-                  likely that the quality of earnings is better presented and of
-                  higher quality when compared to a company that does not as
-                  stringently adhere to accounting principles.
+                <p className="mb-6">
+                  Whether you're evaluating your first acquisition or expanding
+                  an existing portfolio, our expertise helps you uncover the
+                  real economic value behind the numbers.
                 </p>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  Understanding Quality of Earnings
+                  Why Buyers Need a Dedicated Buy-Side Valuation
                 </h3>
                 <p className="mb-4">
-                  Some companies manipulate earnings downward to reduce the
-                  taxes they owe. Others find ways to artificially inflate
-                  earnings to make them look better to analysts and investors.
-                  Unveiling the true net income of a company narrows the gap
-                  between various manipulation techniques and operating
-                  profitability.
+                  Traditional financial statements rarely tell the full story. A
+                  proper buy-side valuation identifies:
                 </p>
-                <p className="mb-4">
-                  Companies that manipulate their earnings are said to have poor
-                  or low earnings quality and those that do not manipulate their
-                  earnings have a higher quality of earnings. However, many
-                  companies with high earnings quality will still adjust their
-                  financial information to minimize their tax burden.
-                  Identifying this type of manipulation is a key aspect to the
-                  work completed in a QOE report. One way in which the numbers
-                  are presently through a QOE analysis is through the
-                  identification of nonrecurring, non-operating, and/or
-                  discretionary sales and/or expenses.
-                </p>
-
-                <h3 className="text-xl font-bold text-navy mb-4">
-                  Earnings Manipulation
-                </h3>
-                <p className="mb-4">
-                  As previously noted, there are many ways to gauge the quality
-                  of earnings. We often start at the top of the income statement
-                  and work our way down. As an example, companies that report a
-                  high growth in sales, may also show a corresponding growth in
-                  credit sales. Investors are wary of sales that are due only to
-                  lose credit terms. Or perhaps the subject company has taken on
-                  additional debt to repurchase shares and in doing so the
-                  company shares appear to be undervalued, when share value is
-                  falsely inflated.
-                </p>
-
-                <h3 className="text-xl font-bold text-navy mb-4">
-                  QOE Value Drivers:
-                </h3>
-                <ul className="space-y-4 mb-6">
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      A company’s quality of earnings can be revealed by
-                      spotting and removing any irregularities, accounting
-                      manipulation, or one-off accounting entries that skew the
-                      numbers
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Questionable fraudulent activity is often identified
-                      through a QOE analysis (i.e., a reported increase in net
-                      income without the corresponding increase in cash flow)
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Tracking activity from the income statement through to the
-                      balance sheet and cash flow statement is a good way to
-                      gauge quality of earnings (we often do an “audit check” in
-                      conjunction with this work using tracing to related bank
-                      entries)
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      A quality of earnings report is often an invaluable step
-                      in the acquisition and/or restructuring process. The
-                      expense to obtain this thorough analysis pales in
-                      comparison to the value that it provides
-                    </span>
-                  </li>
-                </ul>
-
-                <h3 className="text-xl font-bold text-navy mb-4">
-                  Typical EBITDA Adjustments
-                </h3>
                 <ul className="space-y-2 mb-6">
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Related-party transactions</span>
+                    <span>
+                      True earning power (normalized cash flow vs. reported
+                      income)
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>One-time legal expenses</span>
+                    <span>Hidden risks that impact deal value</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Extraordinary revenue events</span>
+                    <span>Sustainability of revenues & margins</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Owner compensation normalization</span>
+                    <span>
+                      Quality of customer relationships and key employee
+                      reliance
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Working capital requirements post-acquisition</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Fair value range for negotiation</span>
+                  </li>
+                </ul>
+                <p className="mb-6">
+                  This gives you a strategic advantage—especially when a
+                  seller’s valuation is biased, inflated, or based on
+                  assumptions that don’t hold up under scrutiny.
+                </p>
+
+                <h3 className="text-xl font-bold text-navy mb-4">
+                  Who We Serve
+                </h3>
+                <p className="mb-4">
+                  Our buy-side valuation services are ideal for:
+                </p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>
+                      Private buyers acquiring their first or second business
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>
+                      Private equity groups evaluating new portfolio companies
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Strategic buyers expanding through acquisition</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Search-fund entrepreneurs</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>
+                      Lenders requiring an independent assessment supporting
+                      loan decisions
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Family offices and high-net-worth investors</span>
                   </li>
                 </ul>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  QOE Value in M&A Context
+                  Why Clients Choose Us
                 </h3>
-                <p className="mb-4">
-                  External sources emphasize QOE as essential for:
+                <p className="mb-4 font-semibold italic text-navy">
+                  Independent. Meticulous. Acquisition-Focused.
                 </p>
-                <ul className="space-y-4 mb-6">
+                <p className="mb-4">Buyers choose Anchor because:</p>
+                <ul className="space-y-2 mb-8">
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Validating sustainability of earnings</span>
+                    <span>We specialize in transaction-driven valuations</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Supporting valuation multiples</span>
+                    <span>
+                      Our work is independent, unbiased, and defensible
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Identifying working capital issues</span>
+                    <span>
+                      We understand how much buyers rely on accurate
+                      forward-looking value, not just historicals
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>
+                      We provide clear communication and a collaborative process
+                      with your deal team, CPA, lender, and attorney
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>
+                      Our turnaround times support real-world transactional
+                      deadlines
+                    </span>
                   </li>
                 </ul>
 
@@ -283,4 +263,4 @@ const QualityOfEarningsReport = () => {
   );
 };
 
-export default QualityOfEarningsReport;
+export default BuySideTransactionalValuations;

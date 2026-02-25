@@ -1,5 +1,5 @@
 import PdfLeadFormModal from "./PdfLeadFormModal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
@@ -11,14 +11,16 @@ const slides = [
     subtitle: "Business Valuation Experts",
     title:
       "Certified Business Valuation Services and Merger & Acquisition Consulting",
-    mobileClassName: "object-[95%_center]",
+    mobileClassName:
+      "object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
   },
   {
     image: "/assets/home/hero-owner-v2.png",
     subtitle: "Industry Leadership",
     title:
       "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
-    mobileClassName: "object-[80%_center]",
+    mobileClassName:
+      "object-[65%_15%] md:object-[center_15%] lg:object-[center_20%]",
   },
   // {
   //   image: "/assets/trisch.jpg",
@@ -44,13 +46,6 @@ const HeroSection = () => {
     path: string;
   } | null>(null);
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  //   }, 12000);
-  //   return () => clearInterval(timer);
-  // }, []);
-
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () =>
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -67,7 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[100dvh] flex items-center overflow-hidden pt-20"
+      className="relative min-h-[100dvh] flex items-center overflow-hidden pt-40 md:pt-32 lg:pt-24"
     >
       <PdfLeadFormModal
         isOpen={isModalOpen}
@@ -93,7 +88,7 @@ const HeroSection = () => {
             )}
           />
           {/* Enhanced overlay for better text readability on mobile */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/85 to-primary/60 md:to-primary/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/75 to-primary/50 md:via-primary/60 md:to-transparent" />
         </motion.div>
       </AnimatePresence>
 
@@ -187,7 +182,7 @@ const HeroSection = () => {
         <div className="flex items-center gap-3 mb-4">
           {slides.map((_, index) => (
             <button
-              key={index}
+              key={`slide-nav-${index}`}
               onClick={() => setCurrentSlide(index)}
               className={`rounded-full transition-all duration-300 ${
                 index === currentSlide

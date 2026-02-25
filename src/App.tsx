@@ -50,6 +50,9 @@ const QualityOfEarningsReport = lazy(
 const ValuationsForUnderwritingLendingPurposes = lazy(
   () => import("./pages/ValuationsForUnderwritingLendingPurposes"),
 );
+const BuySideTransactionalValuations = lazy(
+  () => import("./pages/BuySideTransactionalValuations"),
+);
 const Login = lazy(() => import("./pages/admin/Login"));
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
 // const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute")); // Using context-based one now
@@ -122,6 +125,10 @@ const App = () => (
                 <Route
                   path="/services/valuations-for-underwriting-lending-purposes"
                   element={<ValuationsForUnderwritingLendingPurposes />}
+                />
+                <Route
+                  path="/services/buy-side-transactional-valuations"
+                  element={<BuySideTransactionalValuations />}
                 />
 
                 <Route path="/about" element={<About />} />
