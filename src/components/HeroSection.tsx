@@ -7,20 +7,20 @@ import { cn } from "@/lib/utils";
 
 const slides = [
   {
+    image: "/assets/home/hero-owner-v2.png",
+    subtitle: "Industry Leadership",
+    title:
+    "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
+    mobileClassName:
+    "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
+  },
+  {
     image: "/assets/home/hero01.png",
     subtitle: "Business Valuation Experts",
     title:
       "Certified Business Valuation Services and Merger & Acquisition Consulting",
     mobileClassName:
       "object-cover object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
-  },
-  {
-    image: "/assets/home/hero-owner-v2.png",
-    subtitle: "Industry Leadership",
-    title:
-      "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
-    mobileClassName:
-      "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
   },
   // {
   //   image: "/assets/trisch.jpg",

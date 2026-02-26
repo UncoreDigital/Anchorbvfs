@@ -245,7 +245,7 @@ const Header = () => {
             >
               <Link to="/" className="shrink-0 hidden md:block">
                 <img
-                  src="/assets/logo.png"
+                  src="/assets/logo-top.png"
                   alt="Anchor Business Valuations Logo"
                   className="h-28 md:h-16 lg:h-28 w-auto object-contain cursor-pointer"
                 />
