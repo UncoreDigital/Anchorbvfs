@@ -118,19 +118,25 @@ const Header = () => {
     if (location.hash) {
       const elementId = location.hash.replace("#", "");
 
-      const scrollToElement = () => {
+      const scrollToElement = (delay: number = 0) => {
         const element = document.getElementById(elementId);
         if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth" });
+          }, delay);
           return true;
         }
         return false;
       };
 
-      // Try immediately and then with retries
-      if (!scrollToElement()) {
+      // Try immediately
+      if (scrollToElement(100)) {
+        // Run a second scroll after header collapse animation finishes
+        scrollToElement(400);
+      } else {
         const checkInterval = setInterval(() => {
-          if (scrollToElement()) {
+          if (scrollToElement(100)) {
+            scrollToElement(400);
             clearInterval(checkInterval);
           }
         }, 100);
@@ -157,10 +163,15 @@ const Header = () => {
       const elementId = href.split("#")[1];
       const element = document.getElementById(elementId);
       if (element) {
-        // If element exists (same page), scroll to it
+        // First scroll attempt
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        }, 5);
+
+        // Second scroll attempt after the header collapsing animation completes
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 200);
       }
     }
   };
@@ -230,21 +241,20 @@ const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0, transition: { duration: 0.2 } }}
-              className="order-2 lg:order-1 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8 overflow-hidden pt-4 pb-2"
+              className="order-2 md:order-1 flex flex-col md:flex-row items-center justify-center gap-3 lg:gap-6 overflow-hidden pt-2 md:pt-3 pb-0"
             >
               <Link to="/" className="shrink-0 hidden md:block">
-                <motion.img
-                  layoutId="main-logo"
+                <img
                   src="/assets/logo.png"
                   alt="Anchor Business Valuations Logo"
-                  className="h-16 md:h-24 lg:h-28 w-auto object-contain cursor-pointer"
+                  className="h-28 md:h-16 lg:h-28 w-auto object-contain cursor-pointer"
                 />
               </Link>
               <motion.h1
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
                 exit={{ opacity: 0 }}
-                className="font-playfair font-bold text-navy max-w-xl text-center md:text-left leading-snug text-base sm:text-lg md:text-xl lg:text-2xl pt-2 pb-4 md:py-0"
+                className="font-playfair font-bold text-navy text-center md:text-left leading-tight text-[11px] sm:text-[13px] md:text-xl lg:text-2xl whitespace-nowrap md:whitespace-normal pt-1 pb-0 md:py-0 tracking-tight md:tracking-normal"
               >
                 Certified Business Valuation Services and{" "}
                 <br className="hidden md:block" /> Merger & Acquisition
@@ -256,32 +266,17 @@ const Header = () => {
 
         {/* Main Nav Bar */}
         <div
-          className={`order-1 lg:order-2 flex items-center justify-between w-full transition-all duration-300 ${isScrolled ? "py-3" : "py-2"}`}
+          className={`order-1 md:order-2 flex items-center justify-between w-full transition-all duration-300 ${isScrolled ? "py-0" : "pt-1 pb-0 md:pb-2"}`}
         >
-          {/* Mobile Top Logo & Desktop Scrolled Logo Place */}
-          <div className="w-[160px] md:w-[160px] lg:w-48 flex items-center h-14 md:h-16 lg:h-20">
-            {/* Mobile Logo: Always visible on mobile, hidden on desktop */}
-            <Link to="/" className="shrink-0 block md:hidden">
+          {/* Mobile Top Logo & Desktop Navbar Logo */}
+          <div className="w-[160px] md:w-[150px] lg:w-48 flex items-center h-16 md:h-16 lg:h-20">
+            <Link to="/" className="shrink-0 block">
               <img
                 src="/assets/logo.png"
                 alt="Anchor Business Valuations Logo"
-                className="h-14 w-auto object-contain"
+                className="h-16 sm:h-16 md:h-12 lg:h-16 w-auto object-contain cursor-pointer"
               />
             </Link>
-
-            {/* Desktop Scrolled Logo: Only visible when scrolled on desktop */}
-            <AnimatePresence>
-              {isScrolled && (
-                <Link to="/" className="shrink-0 hidden md:block">
-                  <motion.img
-                    layoutId="main-logo"
-                    src="/assets/logo.png"
-                    alt="Anchor Business Valuations Logo"
-                    className="h-12 md:h-16 lg:h-20 w-auto object-contain"
-                  />
-                </Link>
-              )}
-            </AnimatePresence>
           </div>
 
           {/* Desktop Navigation */}
@@ -310,7 +305,7 @@ const Header = () => {
                       />
                     )}
                   </>,
-                  "flex items-center gap-1 px-4 py-2 font-inter text-base font-medium transition-colors text-foreground hover:text-accent",
+                  "flex items-center gap-1 px-2 lg:px-3 py-2 font-inter text-sm lg:text-base font-medium transition-colors text-foreground hover:text-accent whitespace-nowrap shrink-0",
                   () => handleNavClick(item.href),
                 )}
 
@@ -384,7 +379,7 @@ const Header = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-0 z-50 bg-background flex flex-col lg:hidden overflow-y-auto"
+              className="fixed inset-0 z-[100] bg-white flex flex-col lg:hidden overflow-y-auto"
             >
               <div className="w-full px-4 sm:px-6 py-5 flex items-center justify-between border-b border-border">
                 <Link

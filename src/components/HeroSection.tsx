@@ -12,7 +12,7 @@ const slides = [
     title:
       "Certified Business Valuation Services and Merger & Acquisition Consulting",
     mobileClassName:
-      "object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
+      "object-cover object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
   },
   {
     image: "/assets/home/hero-owner-v2.png",
@@ -20,7 +20,7 @@ const slides = [
     title:
       "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
     mobileClassName:
-      "object-[65%_15%] md:object-[center_15%] lg:object-[center_20%]",
+      "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
   },
   // {
   //   image: "/assets/trisch.jpg",
@@ -62,7 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[100dvh] flex items-center overflow-hidden pt-40 md:pt-32 lg:pt-24"
+      className="relative min-h-[calc(100vh-160px)] md:min-h-[calc(100vh-190px)] lg:min-h-[calc(100vh-200px)] flex items-center overflow-hidden mt-[160px] md:mt-[190px] lg:mt-[200px]"
     >
       <PdfLeadFormModal
         isOpen={isModalOpen}
@@ -83,7 +83,7 @@ const HeroSection = () => {
             src={slides[currentSlide].image}
             alt="Slide background"
             className={cn(
-              "w-full h-full object-cover",
+              "w-full h-full object-cover transition-transform duration-700",
               slides[currentSlide].mobileClassName,
             )}
           />
@@ -182,7 +182,7 @@ const HeroSection = () => {
         <div className="flex items-center gap-3 mb-4">
           {slides.map((_, index) => (
             <button
-              key={`slide-nav-${index}`}
+              key={`dot-${index}`}
               onClick={() => setCurrentSlide(index)}
               className={`rounded-full transition-all duration-300 ${
                 index === currentSlide
