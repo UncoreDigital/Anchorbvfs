@@ -10,9 +10,9 @@ const slides = [
     image: "/assets/home/hero-owner-v2.png",
     subtitle: "Industry Leadership",
     title:
-    "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
+      "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
     mobileClassName:
-    "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
+      "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
   },
   {
     image: "/assets/home/hero01.png",
@@ -62,7 +62,7 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[calc(100vh-160px)] md:min-h-[calc(100vh-190px)] lg:min-h-[calc(100vh-200px)] flex items-center overflow-hidden mt-[160px] md:mt-[190px] lg:mt-[200px]"
+      className="relative min-h-[calc(100vh-105px)] md:min-h-[calc(100vh-190px)] lg:min-h-[calc(100vh-200px)] flex items-center overflow-hidden mt-[105px] md:mt-[190px] lg:mt-[200px]"
     >
       <PdfLeadFormModal
         isOpen={isModalOpen}
