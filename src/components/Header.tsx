@@ -226,13 +226,6 @@ const Header = () => {
           : "bg-white shadow-sm"
       }`}
     >
-      {/* Top Brown Bar */}
-      <div
-        className={`w-full bg-[#523828] transition-all duration-300 overflow-hidden ${
-          isScrolled ? "h-0" : "h-2 md:h-3"
-        }`}
-      />
-
       <div className="container-wide flex flex-col">
         {/* Expandable Top Section */}
         <AnimatePresence>
@@ -274,7 +267,11 @@ const Header = () => {
               <img
                 src="/assets/logo.png"
                 alt="Anchor Business Valuations Logo"
-                className="h-16 sm:h-16 md:h-12 lg:h-16 w-auto object-contain cursor-pointer"
+                className={`h-16 sm:h-16 md:h-12 lg:h-16 w-auto object-contain cursor-pointer transition-all duration-500 origin-left ${
+                  !isScrolled
+                    ? "md:opacity-0 md:-translate-y-4 md:pointer-events-none"
+                    : "md:opacity-100 md:translate-y-0"
+                }`}
               />
             </Link>
           </div>
