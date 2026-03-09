@@ -258,7 +258,7 @@ const Header = () => {
 
         {/* Main Nav Bar */}
         <div
-          className={`order-1 md:order-2 flex items-center justify-between w-full transition-all duration-300 ${isScrolled ? "py-0" : "pt-1 pb-0 md:pb-2"}`}
+          className={`order-1 md:order-2 flex items-center justify-between w-full transition-all duration-300 ${isScrolled ? "py-0" : "pb-0 md:pb-0"}`}
         >
           {/* Mobile Top Logo & Desktop Navbar Logo */}
           <div className="w-[160px] md:w-[150px] lg:w-48 flex items-center h-16 md:h-16 lg:h-20">

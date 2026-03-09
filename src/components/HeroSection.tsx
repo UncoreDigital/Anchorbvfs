@@ -19,6 +19,7 @@ const slides = [
     subtitle: "IRS Testimony",
     title:
       "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
+    imageClassName: "object-top",
     mobileClassName: "object-[50%_center]",
     downloadAsset: {
       label: "IRS Testimony",
@@ -30,6 +31,7 @@ const slides = [
     image: "/assets/anchor-ma-logo.png",
     subtitle: "Press Release",
     title: "Vilas Partners Acquisition of Creative Tile Concepts",
+    imageClassName: "object-contain p-12 md:p-24 bg-white",
     mobileClassName: "object-[50%_center]",
     downloadAsset: {
       label: "Press Release",
@@ -93,7 +95,8 @@ const HeroSection = () => {
             src={slides[currentSlide].image}
             alt="Slide background"
             className={cn(
-              "w-full h-full object-cover transition-transform duration-700",
+              "w-full h-full transition-transform duration-700",
+              (slides[currentSlide] as any).imageClassName || "object-cover",
               slides[currentSlide].mobileClassName,
             )}
           />
@@ -121,11 +124,10 @@ const HeroSection = () => {
               <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary-foreground leading-tight mb-8 drop-shadow-sm break-words max-w-full">
                 {slides[currentSlide].title}
               </h2>
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-4">
                 <Button
                   variant="gold"
-                  size="sm"
-                  className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
+                  className="h-auto py-3 px-6 rounded-full text-xs font-semibold uppercase tracking-wider shadow-lg hover:shadow-gold/20 transition-all"
                   onClick={() =>
                     handleDownloadClick({
                       label: "Domestic Standards",
@@ -134,16 +136,17 @@ const HeroSection = () => {
                     })
                   }
                 >
-                  <div className="flex flex-col items-center">
-                    <span>BV Standards Comparison Chart</span>
-                    <span>(Domestic) FREE DOWNLOAD</span>
+                  <div className="flex flex-col items-center leading-tight">
+                    <span className="text-[10px] opacity-80 mb-0.5">
+                      BV Standards (Domestic)
+                    </span>
+                    <span>FREE DOWNLOAD</span>
                   </div>
                 </Button>
 
                 <Button
                   variant="gold"
-                  size="sm"
-                  className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
+                  className="h-auto py-3 px-6 rounded-full text-xs font-semibold uppercase tracking-wider shadow-lg hover:shadow-gold/20 transition-all"
                   onClick={() =>
                     handleDownloadClick({
                       label: "International Standards",
@@ -153,23 +156,26 @@ const HeroSection = () => {
                     })
                   }
                 >
-                  <div className="flex flex-col items-center">
-                    <span>BV Standards Comparison Chart</span>
-                    <span>(International) FREE DOWNLOAD</span>
+                  <div className="flex flex-col items-center leading-tight">
+                    <span className="text-[10px] opacity-80 mb-0.5">
+                      BV Standards (Intl)
+                    </span>
+                    <span>FREE DOWNLOAD</span>
                   </div>
                 </Button>
 
                 {slides[currentSlide].downloadAsset && (
                   <Button
                     variant="gold"
-                    size="sm"
-                    className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
+                    className="h-auto py-3 px-6 rounded-full text-xs font-semibold uppercase tracking-wider shadow-lg hover:shadow-gold/20 transition-all"
                     onClick={() =>
                       handleDownloadClick(slides[currentSlide].downloadAsset)
                     }
                   >
-                    <div className="flex flex-col items-center">
-                      <span>{slides[currentSlide].downloadAsset.label}</span>
+                    <div className="flex flex-col items-center leading-tight">
+                      <span className="text-[10px] opacity-80 mb-0.5">
+                        {slides[currentSlide].downloadAsset.label}
+                      </span>
                       <span>FREE DOWNLOAD</span>
                     </div>
                   </Button>
