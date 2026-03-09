@@ -7,14 +7,6 @@ import { cn } from "@/lib/utils";
 
 const slides = [
   {
-    image: "/assets/home/hero-owner-v2.png",
-    subtitle: "Industry Leadership",
-    title:
-      "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
-    mobileClassName:
-      "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
-  },
-  {
     image: "/assets/home/hero01.png",
     subtitle: "Business Valuation Experts",
     title:
@@ -22,19 +14,37 @@ const slides = [
     mobileClassName:
       "object-cover object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
   },
-  // {
-  //   image: "/assets/trisch.jpg",
-  //   subtitle: "IRS Testimony",
-  //   title:
-  //     "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
-  //   mobileClassName: "object-[50%_center]",
-  // },
-  // {
-  //   image: "/assets/anchor-ma-logo.png",
-  //   subtitle: "Press Release",
-  //   title: "Creative Tile Press Release",
-  //   mobileClassName: "object-[50%_center]",
-  // },
+  {
+    image: "/assets/irs-testimony.jpg",
+    subtitle: "IRS Testimony",
+    title:
+      "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
+    mobileClassName: "object-[50%_center]",
+    downloadAsset: {
+      label: "IRS Testimony",
+      filename: "IRS_Dept_of_Treasury_Testimony_03062025.docx",
+      path: "/assets/irs-testimony-wording.docx",
+    },
+  },
+  {
+    image: "/assets/anchor-ma-logo.png",
+    subtitle: "Press Release",
+    title: "Vilas Partners Acquisition of Creative Tile Concepts",
+    mobileClassName: "object-[50%_center]",
+    downloadAsset: {
+      label: "Press Release",
+      filename: "Creative-Tile-Concepts-Acquisition-Press-Release.pdf",
+      path: "/assets/creative-tile-press-release.pdf",
+    },
+  },
+  {
+    image: "/assets/home/hero-owner-v2.png",
+    subtitle: "Industry Leadership",
+    title:
+      "Trisch Garthoeffner Nominated as Chairman of the NACVA Standards Board",
+    mobileClassName:
+      "object-cover object-[65%_15%] md:object-[75%_20%] lg:object-[80%_20%]",
+  },
 ];
 
 const HeroSection = () => {
@@ -148,6 +158,22 @@ const HeroSection = () => {
                     <span>(International) FREE DOWNLOAD</span>
                   </div>
                 </Button>
+
+                {slides[currentSlide].downloadAsset && (
+                  <Button
+                    variant="gold"
+                    size="sm"
+                    className="h-auto py-2 xl:h-auto text-[10px] xl:text-xs px-2 xl:px-4 leading-tight text-center"
+                    onClick={() =>
+                      handleDownloadClick(slides[currentSlide].downloadAsset)
+                    }
+                  >
+                    <div className="flex flex-col items-center">
+                      <span>{slides[currentSlide].downloadAsset.label}</span>
+                      <span>FREE DOWNLOAD</span>
+                    </div>
+                  </Button>
+                )}
               </div>
             </motion.div>
           </div>
@@ -180,9 +206,9 @@ const HeroSection = () => {
       >
         {/* Dots Navigation */}
         <div className="flex items-center gap-3 mb-4">
-          {slides.map((_, index) => (
+          {slides.map((slide, index) => (
             <button
-              key={`dot-${index}`}
+              key={`${slide.subtitle}-${index}`}
               onClick={() => setCurrentSlide(index)}
               className={`rounded-full transition-all duration-300 ${
                 index === currentSlide

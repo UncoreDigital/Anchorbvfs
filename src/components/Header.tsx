@@ -24,9 +24,8 @@ const navItems: NavItem[] = [
     href: "/#about",
     hasDropdown: true,
     dropdownItems: [
-      { name: "Meet The Owner", href: "/about" },
-      { name: "Team Member", href: "/team" },
-      { name: "Staff", href: "/staff" },
+      { name: "Meet the Founder", href: "/about" },
+      { name: "Meet the Team", href: "/staff" },
     ],
   },
   {

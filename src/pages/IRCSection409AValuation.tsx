@@ -87,11 +87,11 @@ const IRCSection409AValuation = () => {
               >
                 {/* Intro */}
                 <p className="mb-6">
-                  Anchor Business Valuation, LLC has over a decade of the
-                  required experience and expertise to help you with a smooth
-                  processing of your 409A valuation. Our team members have
-                  performed hundreds of 409A valuations across diverse sectors,
-                  right from pre-revenue staged companies to the pre-IPO.
+                  Anchor Business Valuations & Financial Services, LLC has over
+                  a decade of the required experience and expertise to help you
+                  with a smooth processing of your 409A valuation. Our team
+                  members have performed hundreds of 409A valuations across
+                  diverse sectors, from pre-revenue staged companies to pre-IPO.
                   Anchor’s entire execution process is subjected to rigorous,
                   multi-time quality checks to ensure the maintenance of the
                   highest quality standards, including compliance with{" "}
@@ -119,13 +119,11 @@ const IRCSection409AValuation = () => {
                   Brief Background
                 </h3>
                 <p className="mb-4">
-                  “Section 409A was enacted in 2004. It applies to amounts
-                  deferred in tax years beginning after Dec 31, 2004 (i.e., 2005
-                  and onward), with special rules for earlier amounts that were
-                  materially modified after Oct 3, 2004. The final regulations
-                  were issued in April 2007 and generally apply from Jan 1,
-                  2008, with IRS transition relief for plan document amendments
-                  through Dec 31, 2008.”
+                  Section 409A was introduced as Internal Revenue Code (IRC) by
+                  the Internal Revenue Service (IRS) through Section 885 of the
+                  American Jobs Creation Act of 2004 in October 2004 and was
+                  enforced on December 31, 2004, and fully effective in 2005
+                  (with further regulations finalized in 2007 – 2008).
                 </p>
                 <p className="mb-4 text-sm text-slate/70">
                   <a
@@ -205,12 +203,11 @@ const IRCSection409AValuation = () => {
                   Compliance Scope and Penalties
                 </h3>
                 <p className="mb-4">
-                  As noted above, IRC Section 409A applies to compensation
-                  deferred under a “Nonqualified Deferred Compensation Plan”.
-                  The IRS regulates the treatment of NQDS plans for federal
-                  income tax purposes. All companies that enter a NQDC
-                  arrangement with their employees must follow specific rules
-                  outlined under IRC Section 409A.
+                  IRC Section 409A applies to compensation deferred under a
+                  Nonqualified Deferred Compensation Plan. The IRS regulates the
+                  treatment of NQDS plans for federal income tax purposes. All
+                  companies that enter a NQDC arrangement with their employees
+                  must follow specific rules outlined under IRC Section 409A.
                 </p>
                 <p className="mb-4">
                   Failure to comply with these rules carries heavy penalties for
