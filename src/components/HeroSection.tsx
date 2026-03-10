@@ -15,12 +15,12 @@ const slides = [
       "object-cover object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
   },
   {
-    image: "/assets/irs-testimony.jpg",
+    image: "/assets/irs-testimony-cropped.png",
     subtitle: "IRS Testimony",
     title:
       "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
-    imageClassName: "object-top",
-    mobileClassName: "object-[50%_center]",
+    imageClassName: "object-cover object-center",
+    mobileClassName: "object-center",
     downloadAsset: {
       label: "IRS Testimony",
       filename: "IRS_Dept_of_Treasury_Testimony_03062025.docx",
@@ -31,8 +31,9 @@ const slides = [
     image: "/assets/anchor-ma-logo.png",
     subtitle: "Press Release",
     title: "Vilas Partners Acquisition of Creative Tile Concepts",
-    imageClassName: "object-contain p-12 md:p-24 bg-white",
-    mobileClassName: "object-[50%_center]",
+    imageClassName:
+      "object-contain object-right p-12 md:pr-24 lg:pr-32 bg-white",
+    mobileClassName: "object-right",
     downloadAsset: {
       label: "Press Release",
       filename: "Creative-Tile-Concepts-Acquisition-Press-Release.pdf",
