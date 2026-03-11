@@ -20,7 +20,7 @@ const slides = [
     title:
       "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
     imageClassName: "object-cover object-center",
-    mobileClassName: "object-center",
+    mobileClassName: "object-right",
     downloadAsset: {
       label: "IRS Testimony",
       filename: "IRS_Dept_of_Treasury_Testimony_03062025.docx",
