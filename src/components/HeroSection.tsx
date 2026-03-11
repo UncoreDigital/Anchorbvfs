@@ -15,7 +15,7 @@ const slides = [
       "object-cover object-[70%_center] md:object-[80%_center] lg:object-[85%_center]",
   },
   {
-    image: "/assets/irs-testimony-cropped.png",
+    image: "/assets/irs-testimony-final.png",
     subtitle: "IRS Testimony",
     title:
       "Trisch Garthoeffner at the Podium - IRS Department of Treasury Testimony",
