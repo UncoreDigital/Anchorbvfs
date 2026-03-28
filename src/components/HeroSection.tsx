@@ -1,6 +1,6 @@
 import PdfLeadFormModal from "./PdfLeadFormModal";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
@@ -83,28 +83,30 @@ const HeroSection = () => {
         selectedAsset={selectedAsset}
       />
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentSlide}
-          className="absolute inset-0 z-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <img
-            src={slides[currentSlide].image}
-            alt="Slide background"
-            className={cn(
-              "w-full h-full transition-transform duration-700",
-              (slides[currentSlide] as any).imageClassName || "object-cover",
-              slides[currentSlide].mobileClassName,
-            )}
-          />
-          {/* Enhanced overlay for better text readability on mobile */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/75 to-primary/50 md:via-primary/60 md:to-transparent" />
-        </motion.div>
-      </AnimatePresence>
+      <div className="absolute inset-0 z-0">
+        {slides.map((slide, index) => (
+          <motion.div
+            key={index}
+            className="absolute inset-0 z-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: currentSlide === index ? 1 : 0 }}
+            transition={{ duration: 1 }}
+          >
+            <img
+              src={slide.image}
+              alt="Slide background"
+              loading={index === 0 ? "eager" : "lazy"}
+              className={cn(
+                "w-full h-full transition-transform duration-700",
+                (slide as any).imageClassName || "object-cover",
+                slide.mobileClassName,
+              )}
+            />
+            {/* Enhanced overlay for better text readability on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/75 to-primary/50 md:via-primary/60 md:to-transparent" />
+          </motion.div>
+        ))}
+      </div>
 
       <div className="container-wide relative z-10 py-12 lg:py-24">
         <div className="grid lg:grid-cols-12 gap-12 items-center">
