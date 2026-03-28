@@ -20,7 +20,7 @@ const contactInfo = [
     icon: Phone,
     number: "02",
     title: "Contact",
-    details: ["O: (239) 919-3092", "C: (312) 632-9144", "info@anchorbv.com"],
+    details: ["FL: (239) 919-6092", "MD: (312) 632-9144", "info@anchorbv.com"],
   },
   {
     icon: Clock,

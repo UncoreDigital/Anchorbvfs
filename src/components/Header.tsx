@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUpRight, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
@@ -25,7 +25,8 @@ const navItems: NavItem[] = [
     hasDropdown: true,
     dropdownItems: [
       { name: "Meet the Founder", href: "/about" },
-      { name: "Meet the Team", href: "/staff" },
+      { name: "Meet the Team", href: "/team" },
+      { name: "Meet the Staff", href: "/staff" },
     ],
   },
   {
@@ -233,7 +234,7 @@ const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0, transition: { duration: 0.2 } }}
-              className="order-2 md:order-1 flex flex-col md:flex-row items-center justify-center gap-3 lg:gap-6 overflow-hidden pt-2 md:pt-3 pb-0"
+              className="order-2 md:order-1 flex flex-col md:flex-row items-center justify-between gap-3 lg:gap-6 overflow-hidden pt-2 md:pt-3 pb-0"
             >
               <Link to="/" className="shrink-0 hidden md:block">
                 <img
@@ -252,6 +253,48 @@ const Header = () => {
                 <br className="hidden md:block" /> Merger & Acquisition
                 Consulting
               </motion.h1>
+
+              {/* Two-Location Phone Bar */}
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0, transition: { delay: 0.15 } }}
+                exit={{ opacity: 0 }}
+                className="hidden md:flex items-center gap-4 shrink-0"
+              >
+                {/* Florida Office */}
+                <a
+                  href="tel:+12399196092"
+                  className="flex items-center gap-2 group hover:text-accent transition-colors"
+                >
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] font-inter font-semibold uppercase tracking-widest text-muted-foreground group-hover:text-accent transition-colors leading-none mb-0.5">
+                      <MapPin className="inline w-2.5 h-2.5 mr-0.5" />Florida
+                    </span>
+                    <span className="flex items-center gap-1 text-sm font-inter font-semibold text-primary group-hover:text-accent transition-colors">
+                      <Phone className="w-3.5 h-3.5" />
+                      (239) 919-6092
+                    </span>
+                  </div>
+                </a>
+
+                <div className="w-px h-8 bg-border" />
+
+                {/* Maryland Office */}
+                <a
+                  href="tel:+13126329144"
+                  className="flex items-center gap-2 group hover:text-accent transition-colors"
+                >
+                  <div className="flex flex-col items-center">
+                    <span className="text-[10px] font-inter font-semibold uppercase tracking-widest text-muted-foreground group-hover:text-accent transition-colors leading-none mb-0.5">
+                      <MapPin className="inline w-2.5 h-2.5 mr-0.5" />Maryland
+                    </span>
+                    <span className="flex items-center gap-1 text-sm font-inter font-semibold text-primary group-hover:text-accent transition-colors">
+                      <Phone className="w-3.5 h-3.5" />
+                      (312) 632-9144
+                    </span>
+                  </div>
+                </a>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
