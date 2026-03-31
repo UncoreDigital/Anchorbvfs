@@ -12,15 +12,16 @@ const contactInfo = [
     number: "01",
     title: "Our Address",
     details: [
-      "South (HQ) – 365 Fifth Avenue S, Naples, FL 34102",
-      "Northeast (Satellite) – Frederick, MD 21701",
+      "HQ/Main Office: 365 Fifth Avenue South, Suite 200, Naples, FL 34102",
+      "Satellite Office: 12 W Church St, Frederick, MD 21701",
+      "Midwest Office: Chicago, IL"
     ],
   },
   {
     icon: Phone,
     number: "02",
     title: "Contact",
-    details: ["FL: (239) 919-6092", "MD: (312) 632-9144", "info@anchorbv.com"],
+    details: ["FL: (239) 919-6092", "IL: (312) 632-9144", "info@anchorbv.com"],
   },
   {
     icon: Clock,

@@ -123,11 +123,20 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
-                <span className="text-primary-foreground/60 font-inter text-sm max-w-[200px]">
-                  South (HQ) – 365 Fifth Avenue S, Naples, FL 34102
-                  <br />
-                  Northeast (Satellite) – Frederick, MD 21701
-                </span>
+                <div className="text-primary-foreground/60 font-inter text-sm max-w-[300px] flex flex-col gap-3">
+                  <p>
+                    <strong>HQ/Main Office:</strong><br />
+                    365 Fifth Avenue South, Suite 200, Naples, FL 34102
+                  </p>
+                  <p>
+                    <strong>Satellite Office:</strong><br />
+                    12 W Church St, Frederick, MD 21701
+                  </p>
+                  <p>
+                    <strong>Midwest Office:</strong><br />
+                    Chicago, IL
+                  </p>
+                </div>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
@@ -142,7 +151,7 @@ const Footer = () => {
                     href="tel:+13126329144"
                     className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
                   >
-                    MD: (312) 632-9144
+                    IL: (312) 632-9144
                   </a>
                 </span>
               </li>

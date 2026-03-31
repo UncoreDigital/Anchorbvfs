@@ -279,14 +279,14 @@ const Header = () => {
 
                 <div className="w-px h-8 bg-border" />
 
-                {/* Maryland Office */}
+                {/* Chicago Office */}
                 <a
                   href="tel:+13126329144"
                   className="flex items-center gap-2 group hover:text-accent transition-colors"
                 >
                   <div className="flex flex-col items-center">
                     <span className="text-[10px] font-inter font-semibold uppercase tracking-widest text-muted-foreground group-hover:text-accent transition-colors leading-none mb-0.5">
-                      <MapPin className="inline w-2.5 h-2.5 mr-0.5" />Maryland
+                      <MapPin className="inline w-2.5 h-2.5 mr-0.5" />Chicago
                     </span>
                     <span className="flex items-center gap-1 text-sm font-inter font-semibold text-primary group-hover:text-accent transition-colors">
                       <Phone className="w-3.5 h-3.5" />
