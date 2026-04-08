@@ -74,6 +74,10 @@ const navItems: NavItem[] = [
         name: "Buy-Side Transactional Valuations",
         href: "/services/buy-side-transactional-valuations",
       },
+      {
+        name: "Valuation of Profits Interests & Tax Elections",
+        href: "/services/valuation-of-profits-interests-and-tax-elections",
+      },
     ],
   },
   {
@@ -263,7 +267,7 @@ const Header = () => {
               >
                 {/* Florida Office */}
                 <a
-                  href="tel:+12399196092"
+                  href="tel:+12399193092"
                   className="flex items-center gap-2 group hover:text-accent transition-colors"
                 >
                   <div className="flex flex-col items-center">
@@ -272,7 +276,7 @@ const Header = () => {
                     </span>
                     <span className="flex items-center gap-1 text-sm font-inter font-semibold text-primary group-hover:text-accent transition-colors">
                       <Phone className="w-3.5 h-3.5" />
-                      (239) 919-6092
+                      (239) 919-3092
                     </span>
                   </div>
                 </a>
@@ -304,12 +308,12 @@ const Header = () => {
           className={`order-1 md:order-2 flex items-center justify-between w-full transition-all duration-300 ${isScrolled ? "py-0" : "pb-0 md:pb-0"}`}
         >
           {/* Mobile Top Logo & Desktop Navbar Logo */}
-          <div className="w-[160px] md:w-[150px] lg:w-48 flex items-center h-16 md:h-16 lg:h-20">
+          <div className="w-[180px] md:w-[180px] lg:w-56 flex items-center h-20 md:h-20 lg:h-24 lg:ml-2">
             <Link to="/" className="shrink-0 block">
               <img
                 src="/assets/logo.png"
                 alt="Anchor Business Valuations Logo"
-                className={`h-16 sm:h-16 md:h-12 lg:h-16 w-auto object-contain cursor-pointer transition-all duration-500 origin-left ${
+                className={`h-20 sm:h-20 md:h-16 lg:h-24 w-auto object-contain cursor-pointer transition-all duration-500 origin-left ${
                   !isScrolled
                     ? "md:opacity-0 md:-translate-y-4 md:pointer-events-none"
                     : "md:opacity-100 md:translate-y-0"
@@ -356,7 +360,7 @@ const Header = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-full left-0 mt-0 min-w-[200px] bg-background border border-border rounded-md shadow-xl overflow-hidden z-50"
+                      className="absolute top-full left-0 mt-0 min-w-[200px] bg-background border border-border rounded-md shadow-xl overflow-y-auto overflow-x-hidden max-h-[75vh] z-50 theme-scrollbar"
                     >
                       <div className="py-2">
                         {item.dropdownItems?.map((dropItem) => (
@@ -429,7 +433,7 @@ const Header = () => {
                   <img
                     src="/assets/logo-bw.png"
                     alt="Anchor Business Valuations Logo"
-                    className="h-12 w-auto object-contain"
+                    className="h-16 w-auto object-contain"
                   />
                 </Link>
                 <button

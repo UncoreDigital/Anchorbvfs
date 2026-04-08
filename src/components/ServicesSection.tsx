@@ -89,6 +89,14 @@ const services = [
     description:
       "Independent, data-driven buy-side valuations for strategic acquisitions.",
   },
+  {
+    icon: BarChart3,
+    number: "11",
+    title: "Valuation of Profits Interests & Tax Elections",
+    slug: "valuation-of-profits-interests-and-tax-elections",
+    description:
+      "Specialized valuation services for profits interests under Rev. Proc. 93-27 and 83(b) elections.",
+  },
 ];
 
 const ServicesSection = () => {
@@ -137,42 +145,44 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {services.map((service, index) => (
-            <motion.div
+            <Link
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className={`group bg-card rounded-2xl p-8 card-hover shadow-elegant cursor-pointer flex flex-col ${
-                index === 8 ? "lg:col-start-2" : ""
-              }`}
+              to={`/services/${service.slug}`}
+              className="group bg-card rounded-2xl p-8 card-hover shadow-elegant cursor-pointer flex flex-col"
             >
-              <div className="flex items-start justify-between mb-6">
-                <div className="w-14 h-14 rounded-xl bg-muted flex items-center justify-center group-hover:bg-gold transition-colors duration-300">
-                  <service.icon className="w-7 h-7 text-gold group-hover:text-primary transition-colors duration-300" />
-                </div>
-                <span className="font-playfair text-4xl font-bold text-muted-foreground/20">
-                  {service.number}
-                </span>
-              </div>
-
-              <h3 className="font-playfair text-xl font-semibold text-primary mb-3 group-hover:text-gold transition-colors duration-300">
-                {service.title}
-              </h3>
-
-              <p className="text-slate font-inter text-sm leading-relaxed mb-6">
-                {service.description}
-              </p>
-
-              <Link
-                to={`/services/${service.slug}`}
-                className="inline-flex items-center gap-2 text-gold font-medium text-sm group/link"
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="flex flex-col h-full"
               >
-                Read More
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
-              </Link>
-            </motion.div>
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-muted flex items-center justify-center group-hover:bg-gold transition-colors duration-300">
+                    <service.icon className="w-7 h-7 text-gold group-hover:text-primary transition-colors duration-300" />
+                  </div>
+                  <span className="font-playfair text-4xl font-bold text-muted-foreground/20">
+                    {service.number}
+                  </span>
+                </div>
+
+                <h3 className="font-playfair text-xl font-semibold text-primary mb-3 group-hover:text-gold transition-colors duration-300">
+                  {service.title}
+                </h3>
+
+                <p className="text-slate font-inter text-sm leading-relaxed mb-6 flex-grow">
+                  {service.description}
+                </p>
+
+                <span
+                  className="inline-flex items-center gap-2 text-gold font-medium text-sm group/link mt-auto"
+                >
+                  Read More
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </span>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>

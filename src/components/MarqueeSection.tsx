@@ -1,12 +1,22 @@
 import { motion } from "framer-motion";
 
 const MarqueeSection = () => {
-  const images = [
-    "/assets/MarqueeSection/mq1.png",
-    "/assets/MarqueeSection/mq2.png",
-    "/assets/MarqueeSection/mq3.png",
-    "/assets/MarqueeSection/mq4.png",
-    "/assets/MarqueeSection/ea-logo.jpeg",
+  const items = [
+    { src: "/assets/MarqueeSection/mq1.png" },
+    { src: "/assets/MarqueeSection/mq2.png" },
+    { src: "/assets/MarqueeSection/mq3.png" },
+    { src: "/assets/MarqueeSection/mq4.png" },
+    { src: "/assets/MarqueeSection/ea-logo.jpeg" },
+    {
+      src: "/assets/irs-testimony-cropped.jpg",
+      href: "/assets/irs-testimony-wording.docx",
+      download: true
+    },
+    {
+      src: "/assets/anchor-ma-logo.png",
+      href: "/assets/creative-tile-press-release.pdf",
+      target: "_blank"
+    }
   ];
 
   return (
@@ -22,13 +32,23 @@ const MarqueeSection = () => {
           }}
         >
           {/* Duplicate the content multiple times to ensure smooth scrolling */}
-          {[...images, ...images, ...images, ...images].map((src, index) => (
-            <div key={index} className="flex-shrink-0">
-              <img
-                src={src}
-                alt={`Partner ${index}`}
-                className="h-24 w-auto object-contain"
-              />
+          {[...items, ...items, ...items, ...items].map((item, index) => (
+            <div key={`${item.src}-${index}`} className="flex-shrink-0">
+              {item.href ? (
+                <a href={item.href} target={item.target} download={item.download} rel={item.target === "_blank" ? "noopener noreferrer" : undefined}>
+                  <img
+                    src={item.src}
+                    alt={`Partner ${index}`}
+                    className="h-24 w-auto object-contain cursor-pointer"
+                  />
+                </a>
+              ) : (
+                <img
+                  src={item.src}
+                  alt={`Partner ${index}`}
+                  className="h-24 w-auto object-contain"
+                />
+              )}
             </div>
           ))}
         </motion.div>

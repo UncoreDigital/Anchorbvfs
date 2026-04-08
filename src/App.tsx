@@ -21,7 +21,7 @@ const About = lazy(() => import("./pages/About"));
 const Staff = lazy(() => import("./pages/Staff"));
 const Team = lazy(() => import("./pages/Team"));
 
-const FAQ = lazy(() => import("./pages/FAQ"));
+const Faq = lazy(() => import("./pages/FAQ"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -53,9 +53,11 @@ const ValuationsForUnderwritingLendingPurposes = lazy(
 const BuySideTransactionalValuations = lazy(
   () => import("./pages/BuySideTransactionalValuations"),
 );
+const ValuationOfProfitsInterestsAndTaxElections = lazy(
+  () => import("./pages/ValuationOfProfitsInterestsAndTaxElections"),
+);
 const Login = lazy(() => import("./pages/admin/Login"));
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
-// const ProtectedRoute = lazy(() => import("./components/admin/ProtectedRoute")); // Using context-based one now
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const ManageBlogs = lazy(() => import("./pages/admin/blogs/ManageBlogs"));
 const BlogEditor = lazy(() => import("./pages/admin/blogs/BlogEditor"));
@@ -130,6 +132,10 @@ const App = () => (
                   path="/services/buy-side-transactional-valuations"
                   element={<BuySideTransactionalValuations />}
                 />
+                <Route
+                  path="/services/valuation-of-profits-interests-and-tax-elections"
+                  element={<ValuationOfProfitsInterestsAndTaxElections />}
+                />
 
                 <Route path="/about" element={<About />} />
                 <Route path="/staff" element={<Staff />} />
@@ -140,7 +146,7 @@ const App = () => (
                 />
                 <Route path="/events" element={<Events />} />
                 <Route path="/articles" element={<Articles />} />
-                <Route path="/faqs" element={<FAQ />} />
+                <Route path="/faqs" element={<Faq />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

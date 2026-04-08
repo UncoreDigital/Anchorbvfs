@@ -39,4 +39,8 @@ export const serviceLinks = [
     slug: "buy-side-transactional-valuations",
     title: "Buy-Side Transactional Valuations",
   },
+  {
+    slug: "valuation-of-profits-interests-and-tax-elections",
+    title: "Valuation of Profits Interests & Tax Elections",
+  },
 ];

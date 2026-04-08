@@ -21,14 +21,14 @@ const AboutAnchorSection = () => {
               <p className="mb-4">
                 Anchor Business Valuations & Financial Services, LLC is a
                 business valuation, litigation support, financial reporting, and
-                Merger & Acquisition transaction consulting firm. Anchor assists
+                Merger & Acquisition transaction consulting firm<sup>1</sup>. Anchor assists
                 their clients through a broad capacity of services spanning from
                 the determination of the value of a business to consultation on
                 the financial implications and due diligence process of the
-                sale, acquisition or investment in a company.
+                sale, acquisition or investment in a company<sup>1</sup>.
               </p>
-              <p>
-                We adhere to valuation professional organizational standards
+              <p className="text-sm text-muted-foreground/80">
+                <sup>1</sup> We adhere to valuation professional organizational standards
                 such as USPAP, AICPA SSVS No. 1, and NACVA Professional
                 Standards.
               </p>

@@ -272,6 +272,25 @@ const MatrimonialValuationLitigationSupport = () => {
                   </li>
                 </ul>
 
+                <figure className="mb-8">
+                  <img
+                    src="/assets/services_content/matrimonial-valuation-litigation-support/image1.png"
+                    alt="Map showing state-by-state variation on goodwill treatment"
+                    className="w-full max-w-2xl mx-auto h-auto shadow-md rounded-lg border border-border"
+                  />
+                  <figcaption className="mt-4 text-sm text-slate/70 text-center">
+                    Image Source:{" "}
+                    <a
+                      href="https://www.bvresources.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gold hover:underline"
+                    >
+                      https://www.bvresources.com/
+                    </a>
+                  </figcaption>
+                </figure>
+
                 <h3 className="text-xl font-bold text-navy mb-4">
                   Collaborative/Cooperative and Neutral Expert Services
                 </h3>

@@ -7,17 +7,9 @@ import PageBanner from "@/components/PageBanner";
 import { Button } from "@/components/ui/button";
 import { serviceLinks } from "@/lib/serviceLinks";
 
-const FairValueMeasurement = () => {
-  const currentSlug = "fair-value-measurement";
-  const title = "Fair Value Measurement";
-
-  const standards = [
-    "FASB ASC Topic 805 / IFRS 3R, Business Combinations",
-    "FASB ASC Topic 820 / IFRS 13, Fair Value Measurements",
-    "FASB ASC Topic 350 / Impairment: Goodwill and Other",
-    "FASB ASC Topic 360 / Impairment or Disposal of Long-Lived Assets",
-    "FASB ASC Topic 718 [FAS 123(R)]",
-  ];
+const ValuationOfProfitsInterestsAndTaxElections = () => {
+  const currentSlug = "valuation-of-profits-interests-and-tax-elections";
+  const title = "Valuation of Profits Interests and Tax Elections";
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,90 +85,86 @@ const FairValueMeasurement = () => {
                 transition={{ duration: 0.6 }}
                 className="prose prose-lg max-w-none text-slate"
               >
-                {/* Featured Image */}
+                {/* Featured Image - Using placeholder */}
                 <div className="rounded-2xl overflow-hidden mb-8">
                   <img
-                    src="/assets/services_content/fair-value-measurement/fairvalue-img.jpg"
+                    src="/assets/services_content/buy-side-transactional-valuations/buyside-img.png"
                     alt={title}
                     className="w-full h-[400px] object-cover"
                   />
                 </div>
 
+                <h3 className="text-xl font-bold text-navy mb-4">
+                  Profits Interests under Rev. Proc. 93-27
+                </h3>
                 <p className="mb-4">
-                  Often financial and tax reporting circumstances require
-                  qualified, independent valuation reports/analysis. For
-                  example, when a company plans to have an initial public
-                  offering, issues stock options, or transfers or sells equity
-                  interests, a valuation is required for financial reporting
-                  purposes.
+                  Profits interests are a unique class of equity in partnerships (Form 1065 entities) that allow recipients to share in future appreciation without immediate tax consequences. Under Revenue Procedure 93-27, the grant of a profits interest is generally not taxable at issuance, provided it is not a capital interest and does not represent a predictable stream of income.
+                </p>
+                <p className="mb-6">
+                  This safe harbor applies only to partnerships and LLCs taxed as partnerships. It does not extend to corporations filing Form 1120 or 1120S.
                 </p>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  Fair Value Measurement for Business Combinations (Purchase
-                  Price Allocation)
+                  83(b) Election at Receipt
                 </h3>
                 <p className="mb-4">
-                  Financial reporting rules regarding the recognition and
-                  measurement of acquired assets and liabilities require skill,
-                  expertise, and experience for interpretation and application.
-                  ABV offers services for purchase price allocations for
-                  financial reporting and/or tax reporting purposes.
+                  Recipients of profits interests may file an 83(b) election within 30 days of receipt. This election:
                 </p>
-
-                <h3 className="text-xl font-bold text-navy mb-4">
-                  Reporting Requirements
-                </h3>
-                <p className="mb-4">
-                  Financial reporting for business combinations requires a
-                  purchase price allocation in accordance with the following
-                  generally accepted accounting principles (GAAP) and tax
-                  regulations:
-                </p>
-                <div className="bg-muted/30 p-4 rounded-xl text-sm italic border-l-4 border-gold mb-6">
-                  <p>
-                    <strong>Definition:</strong> Fair value = "the price that
-                    would be received to sell an asset or paid to transfer a
-                    liability in an orderly transaction between market
-                    participants." [
-                    <a
-                      href="https://www.ifrs.org"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gold hover:underline font-semibold"
-                    >
-                      ifrs.org
-                    </a>
-                    ]
-                  </p>
-                </div>
-                <ul className="space-y-2 mb-6">
-                  {standards.map((standard, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                      <span>{standard}</span>
-                    </li>
-                  ))}
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Locks in zero ordinary income recognition at grant (since liquidation value is zero).</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Ensures that future appreciation is taxed at capital gains rates rather than ordinary income.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span>Provides long-term tax efficiency for holders as the interest vests and appreciates.</span>
+                  </li>
                 </ul>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  Common Intangible Asset Valuations
+                  Vesting and Derivative-Like Features
                 </h3>
-                <ul className="space-y-2 mb-8">
+                <p className="mb-4">
+                  Profits interests often include vesting schedules or payout triggers that resemble call options or derivative securities. This structure requires specialized valuation techniques:
+                </p>
+                <ul className="space-y-4 mb-8">
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Customer relationships</span>
+                    <span>Option Pricing Model (OPM) or Black-Scholes framework to capture contingent value.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Trade names</span>
+                    <span>Inputs such as volatility, risk-free rate, expected term, and strike price.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Technology</span>
+                    <span>Adjustments for discounts related to lack of marketability (DLOM), minority interest, and vesting risk.</span>
+                  </li>
+                </ul>
+
+                <h3 className="text-xl font-bold text-navy mb-4">
+                  Valuation Methodology
+                </h3>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Waterfall Analysis</strong> – Map distribution priorities and thresholds.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Noncompetes</span>
+                    <span><strong>Option Modeling</strong> – Treat profits interest as a contingent claim on residual equity.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Discount Application</strong> – Apply DLOM, minority, and contingency discounts.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Reporting</strong> – Deliver valuation that withstands IRS and investor scrutiny.</span>
                   </li>
                 </ul>
 
@@ -208,4 +196,4 @@ const FairValueMeasurement = () => {
   );
 };
 
-export default FairValueMeasurement;
+export default ValuationOfProfitsInterestsAndTaxElections;

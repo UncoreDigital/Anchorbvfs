@@ -254,4 +254,22 @@
   .bg-gold {
     background-color: hsl(var(--gold));
   }
+
+  .theme-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--gold) / 0.5);
+    border-radius: 10px;
+  }
+  
+  .theme-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--gold));
+  }
 }

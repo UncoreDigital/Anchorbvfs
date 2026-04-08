@@ -119,21 +119,11 @@ const IRCSection409AValuation = () => {
                   Brief Background
                 </h3>
                 <p className="mb-4">
-                  Section 409A was introduced as Internal Revenue Code (IRC) by
-                  the Internal Revenue Service (IRS) through Section 885 of the
-                  American Jobs Creation Act of 2004 in October 2004 and was
-                  enforced on December 31, 2004, and fully effective in 2005
-                  (with further regulations finalized in 2007 – 2008).
-                </p>
-                <p className="mb-4 text-sm text-slate/70">
-                  <a
-                    href="https://www.law.cornell.edu/cfr/text/26/1.409A-6"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gold hover:underline"
-                  >
-                    Source: https://www.law.cornell.edu/cfr/text/26/1.409A-6
-                  </a>
+                  Section 409A was enacted in 2004. It applies to amounts deferred in tax years beginning
+                  after Dec 31, 2004 (i.e., 2005 and onward), with special rules for earlier amounts that
+                  were materially modified after Oct 3, 2004. The final regulations were issued in April
+                  2007 and generally apply from Jan 1, 2008, with IRS transition relief for plan document
+                  amendments through Dec 31, 2008<sup>1</sup>.
                 </p>
                 <p className="mb-4">
                   IRC Section 409A was enforced by the IRS in response to the
@@ -442,6 +432,18 @@ const IRCSection409AValuation = () => {
                     whichever is greater.
                   </li>
                 </ul>
+
+                <p className="mt-8 pt-6 border-t border-slate/20 text-sm text-slate/70">
+                  <sup>1</sup> Source:{" "}
+                  <a
+                    href="https://www.law.cornell.edu/cfr/text/26/1.409A-6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gold hover:underline"
+                  >
+                    https://www.law.cornell.edu/cfr/text/26/1.409A-6
+                  </a>
+                </p>
 
                 <div className="mt-12 flex flex-wrap gap-4">
                   <Link to="/contact">

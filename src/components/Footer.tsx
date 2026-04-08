@@ -45,7 +45,7 @@ const Footer = () => {
               <img
                 src="/assets/footer/Logo.png"
                 alt="Anchor Business Valuations"
-                className="h-64 w-auto object-contain bg-white/1 rounded-lg p-1"
+                className="h-96 w-auto object-contain bg-white/1 rounded-lg p-1"
               />
             </a>
             <p className="text-primary-foreground/60 font-inter text-sm leading-relaxed mb-6">
@@ -63,9 +63,9 @@ const Footer = () => {
                   Icon: Instagram,
                   href: "https://www.instagram.com/anchor_business_valuations/",
                 },
-              ].map(({ Icon, href }, index) => (
+              ].map(({ Icon, href }) => (
                 <a
-                  key={index}
+                  key={href}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -125,11 +125,11 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <div className="text-primary-foreground/60 font-inter text-sm max-w-[300px] flex flex-col gap-3">
                   <p>
-                    <strong>HQ/Main Office:</strong><br />
+                    <strong>South (HQ):</strong><br />
                     365 Fifth Avenue South, Suite 200, Naples, FL 34102
                   </p>
                   <p>
-                    <strong>Satellite Office:</strong><br />
+                    <strong>Northeast (Satellite):</strong><br />
                     12 W Church St, Frederick, MD 21701
                   </p>
                   <p>
@@ -142,16 +142,16 @@ const Footer = () => {
                 <Phone className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                 <span className="flex flex-col gap-1">
                   <a
-                    href="tel:+12399196092"
+                    href="tel:+12399193092"
                     className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
                   >
-                    FL: (239) 919-6092
+                    O: (239) 919-3092
                   </a>
                   <a
                     href="tel:+13126329144"
                     className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
                   >
-                    IL: (312) 632-9144
+                    C: (312) 632-9144
                   </a>
                 </span>
               </li>

@@ -255,6 +255,38 @@ const QualityOfEarningsReport = () => {
                   </li>
                 </ul>
 
+                <h3 className="text-xl font-bold text-navy mb-4">
+                  Proof of Cash Process
+                </h3>
+                <h4 className="text-lg font-bold text-navy mb-2">
+                  Why Proof of Cash Matters
+                </h4>
+                <p className="mb-4">
+                  When evaluating the financial health of a business, reported earnings alone don’t tell the full story. The Proof of Cash process bridges the gap between accounting records and actual cash activity, ensuring that revenues and expenses are not just paper entries but are supported by real cash flows.
+                </p>
+                
+                <h4 className="text-lg font-bold text-navy mb-2">
+                  We apply a structured methodology:
+                </h4>
+                <ul className="space-y-4 mb-6">
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Bank Reconciliation</strong> – Match monthly bank statements with general ledger entries.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Cash Flow Mapping</strong> – Track deposits against revenue streams and withdrawals against expense categories.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Variance Analysis</strong> – Investigate unexplained differences between reported earnings and cash activity.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
+                    <span><strong>Reporting</strong> – Deliver a clear summary that supports valuation or compliance needs.</span>
+                  </li>
+                </ul>
+
                 <div className="mt-12 flex flex-wrap gap-4">
                   <Link to="/contact">
                     <Button className="btn-cta">
