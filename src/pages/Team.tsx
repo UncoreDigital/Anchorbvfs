@@ -24,16 +24,16 @@ const Team = () => {
       bio: "Mr. Dorman is a business valuator, consultant, attorney and a certified public accountant. He concentrates his practice area in the valuation of closely held businesses and professional practices.",
     },
     {
-      name: "Deborah M. Adasiak",
-      role: "CVA",
-      image: "/assets/footer/Logo.png",
-      bio: "Deborah Adasiak is a business valuator. She holds a CVA, Certified Valuation Analyst, issued by the National Association of Certified Valuators & Analysts. She concentrates her practice area in the valuation of closely held businesses and professional practices, and has been intimately involved with these types of entities for over 20 years.",
-    },
-    {
       name: "Prashasti Agrawal",
       role: "Senior Financial Analyst",
       image: "/assets/footer/Logo.png", // Using logo as placeholder until headshot is provided
       bio: "Prashasti Agrawal is a Senior Financial Analyst at Anchor. She oversees employee logistics and ensures proper operations.",
+    },
+    {
+      name: "Deborah M. Adasiak",
+      role: "CVA",
+      image: "/assets/footer/Logo.png",
+      bio: "Deborah Adasiak is a business valuator. She holds a CVA, Certified Valuation Analyst, issued by the National Association of Certified Valuators & Analysts. She concentrates her practice area in the valuation of closely held businesses and professional practices, and has been intimately involved with these types of entities for over 20 years.",
     },
     {
       name: "Grayce",
