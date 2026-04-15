@@ -18,7 +18,6 @@ const Events = lazy(() => import("./pages/Events"));
 const Articles = lazy(() => import("./pages/Articles"));
 const Contact = lazy(() => import("./pages/Contact"));
 const About = lazy(() => import("./pages/About"));
-const Staff = lazy(() => import("./pages/Staff"));
 const Team = lazy(() => import("./pages/Team"));
 
 const Faq = lazy(() => import("./pages/FAQ"));
@@ -138,7 +137,6 @@ const App = () => (
                 />
 
                 <Route path="/about" element={<About />} />
-                <Route path="/staff" element={<Staff />} />
                 <Route path="/team" element={<Team />} />
                 <Route
                   path="/industry-expertise"

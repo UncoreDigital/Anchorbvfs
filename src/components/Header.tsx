@@ -26,7 +26,6 @@ const navItems: NavItem[] = [
     dropdownItems: [
       { name: "Meet the Founder", href: "/about" },
       { name: "Meet the Team", href: "/team" },
-      { name: "Meet the Staff", href: "/staff" },
     ],
   },
   {
