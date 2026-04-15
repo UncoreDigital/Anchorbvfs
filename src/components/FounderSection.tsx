@@ -108,7 +108,7 @@ const FounderSection = () => {
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
-              <Link to="/staff">
+              <Link to="/team">
                 <Button variant="outline" size="lg">
                   Meet the Team
                   <ArrowRight className="w-4 h-4 ml-2" />

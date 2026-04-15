@@ -258,8 +258,8 @@ const EventEditor = () => {
               <Label htmlFor="time">Time</Label>
               <Input
                 id="time"
+                type="time"
                 {...register("time")}
-                placeholder="e.g. 11 a.m. – 1 p.m. EST"
               />
               {errors.time && (
                 <p className="text-red-500 text-sm">{errors.time.message}</p>

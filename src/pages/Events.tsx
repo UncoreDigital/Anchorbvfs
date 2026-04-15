@@ -18,6 +18,7 @@ import { supabase } from "@/integrations/supabase/client";
 import DOMPurify from "dompurify";
 import { MetaTags } from "@/components/MetaTags";
 import LoadingScreen from "@/components/LoadingScreen";
+import { formatEventTime } from "@/lib/utils";
 
 const Events = () => {
   useEffect(() => {
@@ -100,7 +101,7 @@ const Events = () => {
                       {event.time && (
                         <div className="flex items-center gap-1.5">
                           <Clock className="w-4 h-4 text-accent" />
-                          <span>{event.time}</span>
+                          <span>{formatEventTime(event.time)}</span>
                         </div>
                       )}
                       <div className="flex items-center gap-1.5">

@@ -34,7 +34,7 @@ const AboutAnchorSection = () => {
               </p>
             </div>
 
-            <Link to="/staff">
+            <Link to="/team">
               <Button
                 variant="default"
                 size="lg"

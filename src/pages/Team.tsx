@@ -26,7 +26,7 @@ const Team = () => {
     {
       name: "Prashasti Agrawal",
       role: "Senior Financial Analyst",
-      image: "/assets/footer/Logo.png", // Using logo as placeholder until headshot is provided
+      image: "/assets/headhsot.jpg",
       bio: "Prashasti Agrawal is a Senior Financial Analyst at Anchor. She oversees employee logistics and ensures proper operations.",
     },
     {
@@ -36,9 +36,9 @@ const Team = () => {
       bio: "Deborah Adasiak is a business valuator. She holds a CVA, Certified Valuation Analyst, issued by the National Association of Certified Valuators & Analysts. She concentrates her practice area in the valuation of closely held businesses and professional practices, and has been intimately involved with these types of entities for over 20 years.",
     },
     {
-      name: "Grayce",
+      name: "Grayce Garthoeffner",
       role: "Junior Analyst",
-      image: "/assets/footer/Logo.png", // Using logo as placeholder
+      image: "/assets/Grayce%20Garthoeffner_Headshot_2026.png", // Using logo as placeholder
       bio: "Grayce is a Junior Analyst who supports valuation engagements through detailed research and comparative data analysis. She ensures the clarity and accuracy of valuation reports and contributes to the firm's thought leadership. She has worked with Anchor for three years and is currently pursuing a Bachelor of Science in Environment and Sustainability at Cornell University.",
     },
   ];

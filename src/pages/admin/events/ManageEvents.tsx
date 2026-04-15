@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatEventTime } from "@/lib/utils";
 
 const ManageEvents = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -155,7 +156,7 @@ const ManageEvents = () => {
                         </span>
                         {event.time && (
                           <span className="text-gray-500 text-xs pl-4">
-                            {event.time}
+                            {formatEventTime(event.time)}
                           </span>
                         )}
                       </div>
@@ -234,7 +235,7 @@ const ManageEvents = () => {
                   </div>
                   {event.time && (
                     <div className="flex items-center gap-2 ml-5 text-xs">
-                      {event.time}
+                      {formatEventTime(event.time)}
                     </div>
                   )}
                   <div className="flex items-center gap-2">
