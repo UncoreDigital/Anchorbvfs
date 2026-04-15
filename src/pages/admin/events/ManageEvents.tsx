@@ -152,11 +152,11 @@ const ManageEvents = () => {
                       <div className="flex flex-col text-sm">
                         <span className="flex items-center gap-1">
                           <Calendar className="w-3 h-3 text-gray-400" />{" "}
-                          {format(new Date(event.date), "MMM d, yyyy")}
+                          {event.date ? format(new Date(event.date), "MMM d, yyyy") : "TBD"}
                         </span>
                         {event.time && (
                           <span className="text-gray-500 text-xs pl-4">
-                            {formatEventTime(event.time)}
+                            {formatEventTime(event.time, event.end_time, event.timezone)}
                           </span>
                         )}
                       </div>
@@ -231,11 +231,11 @@ const ManageEvents = () => {
                 <div className="text-sm text-gray-500 space-y-1">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-3 h-3" />
-                    {format(new Date(event.date), "MMM d, yyyy")}
+                    {event.date ? format(new Date(event.date), "MMM d, yyyy") : "TBD"}
                   </div>
                   {event.time && (
                     <div className="flex items-center gap-2 ml-5 text-xs">
-                      {formatEventTime(event.time)}
+                      {formatEventTime(event.time, event.end_time, event.timezone)}
                     </div>
                   )}
                   <div className="flex items-center gap-2">

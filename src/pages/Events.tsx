@@ -86,7 +86,9 @@ const Events = () => {
                     <div className="bg-accent/10 rounded-lg p-4 text-center min-w-[100px]">
                       <Calendar className="w-6 h-6 text-accent mx-auto mb-2" />
                       <span className="block text-sm font-bold text-primary/80">
-                        {format(new Date(event.date), "MMM d, yyyy")}
+                        {event.date && !isNaN(new Date(event.date).getTime())
+                          ? format(new Date(event.date), "MMM d, yyyy")
+                          : "TBD"}
                       </span>
                     </div>
                   </div>
@@ -101,7 +103,7 @@ const Events = () => {
                       {event.time && (
                         <div className="flex items-center gap-1.5">
                           <Clock className="w-4 h-4 text-accent" />
-                          <span>{formatEventTime(event.time)}</span>
+                          <span>{formatEventTime(event.time, event.end_time, event.timezone)}</span>
                         </div>
                       )}
                       <div className="flex items-center gap-1.5">

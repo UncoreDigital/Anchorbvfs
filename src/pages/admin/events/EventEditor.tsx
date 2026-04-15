@@ -26,6 +26,8 @@ const eventSchema = z.object({
   title: z.string().min(1, "Title is required"),
   date: z.string().min(1, "Date is required"),
   time: z.string().optional().or(z.literal("")),
+  end_time: z.string().optional().or(z.literal("")),
+  timezone: z.string().optional().or(z.literal("")),
   location: z.string().min(1, "Location is required"),
   presenters: z.string().min(1, "Presenters are required"),
   description: z.string().min(1, "Description is required"),
@@ -99,6 +101,8 @@ const EventEditor = () => {
             title: data.title,
             date: formatDateForInput(data.date),
             time: data.time || "",
+            end_time: data.end_time || "",
+            timezone: data.timezone || "EST",
             location: data.location,
             presenters: Array.isArray(data.presenters)
               ? data.presenters.join(", ")
@@ -126,6 +130,8 @@ const EventEditor = () => {
       title: data.title,
       date: formatDateForStorage(data.date),
       time: data.time || null,
+      end_time: data.end_time || null,
+      timezone: data.timezone || "EST",
       location: data.location,
       presenters: presentersArray,
       description: data.description,
@@ -255,7 +261,7 @@ const EventEditor = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="time">Time</Label>
+              <Label htmlFor="time">Start Time</Label>
               <Input
                 id="time"
                 type="time"
@@ -263,6 +269,30 @@ const EventEditor = () => {
               />
               {errors.time && (
                 <p className="text-red-500 text-sm">{errors.time.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="end_time">End Time (Optional)</Label>
+              <Input
+                id="end_time"
+                type="time"
+                {...register("end_time")}
+              />
+              {errors.end_time && (
+                <p className="text-red-500 text-sm">{errors.end_time.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="timezone">Timezone</Label>
+              <Input
+                id="timezone"
+                placeholder="EST, MST, etc."
+                {...register("timezone")}
+              />
+              {errors.timezone && (
+                <p className="text-red-500 text-sm">{errors.timezone.message}</p>
               )}
             </div>
           </div>

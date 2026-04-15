@@ -83,8 +83,10 @@ export interface Database {
           id: string;
           created_at: string;
           title: string;
-          date: string;
+          date: string | null;
           time: string | null;
+          end_time: string | null;
+          timezone: string;
           location: string;
           presenters: string[];
           description: string;
@@ -97,6 +99,8 @@ export interface Database {
           title: string;
           date: string;
           time?: string | null;
+          end_time?: string | null;
+          timezone?: string;
           location: string;
           presenters: string[];
           description: string;
@@ -109,6 +113,8 @@ export interface Database {
           title?: string;
           date?: string;
           time?: string | null;
+          end_time?: string | null;
+          timezone?: string;
           location?: string;
           presenters?: string[];
           description?: string;
