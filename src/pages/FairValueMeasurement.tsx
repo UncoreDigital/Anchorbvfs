@@ -134,7 +134,7 @@ const FairValueMeasurement = () => {
                 </p>
                 <div className="bg-muted/30 p-4 rounded-xl text-sm italic border-l-4 border-gold mb-6">
                   <p>
-                    <strong>Definition:</strong> Fair value = "the price that
+                    <strong>Fair Value Definition (ASC 820 / IFRS 13):</strong> Fair value = "the price that
                     would be received to sell an asset or paid to transfer a
                     liability in an orderly transaction between market
                     participants." [

@@ -131,10 +131,19 @@ const DamagesLostProfitClaims = () => {
                   ))}
                 </ul>
 
+                <p className="mb-4">
+                  Loss of profit methodologies generally revolve around comparing
+                  expected earnings with actual results, using structured
+                  approaches like before-and-after analysis, yardstick (benchmark)
+                  methods, and projection-based models. The choice of methodology
+                  depends on the context—litigation, insurance claims, or
+                  valuation—and the quality of available data.
+                </p>
+
                 <h3 className="text-xl font-bold text-navy mb-4">
                   Recognized Lost Profit Calculation Models
                 </h3>
-                <ul className="space-y-2 mb-8">
+                <ul className="space-y-2 mb-2">
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
                     <span>Before and after method</span>
@@ -149,9 +158,12 @@ const DamagesLostProfitClaims = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Market model method (from AICPA and BVR guides)</span>
+                    <span>Market model method</span>
                   </li>
                 </ul>
+                <p className="text-sm text-slate/70 italic mb-8 pl-8">
+                  (from AICPA and BVR guides)
+                </p>
 
                 <p className="mb-6">
                   At Anchor Business Valuations & Financial Services, LLC, our

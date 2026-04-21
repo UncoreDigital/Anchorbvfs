@@ -126,7 +126,7 @@ const IRCSection409AValuation = () => {
                   amendments through Dec 31, 2008<sup>1</sup>.
                 </p>
                 <p className="mb-4">
-                  IRC Section 409A was enforced by the IRS in response to the
+                  Section 409A was enacted in response to the
                   2001 scandal by the Enron Corporation that involved several
                   compensation related accounting frauds. Amongst Enron’s
                   fraudulent activity, was the grant of large stock options
@@ -137,8 +137,8 @@ const IRCSection409AValuation = () => {
                   at all-time highs. These actions protected select individual
                   interests while the remaining Enron employees lost a
                   significant portion of their retirement savings. As a result
-                  of Enron’s nefarious actions, the IRS on January 1, 2005,
-                  added Section 409A to the IRC and changed a number of rules
+                  of Enron’s nefarious actions, Section 409A was
+                  added to the IRC and changed a number of rules
                   governing deferred compensation plans, including the
                   regulations related to a company’s executives’ ability to
                   choose when to receive such deferred compensation.

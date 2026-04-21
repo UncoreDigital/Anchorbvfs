@@ -105,19 +105,22 @@ const ValuationsForUnderwritingLendingPurposes = () => {
                   client feels comfortable borrowing.
                 </p>
 
-                <p className="mb-4">
+                <p className="mb-6">
                   Frequently, small business acquisitions will require other
                   lending sources outside of an SBA. For example, the seller
                   will often “lend” the buyer of the business a small percentage
                   and structure it as a “seller’s note”. On many occasions we
                   have worked with both parties (buyer and seller) in obtaining
-                  a value based upon future cash flows post-acquisition.{" "}
-                  <strong>
-                    Note that for SBA financing, specifically SBA 7(a) loans
-                    &gt; $250,000, a certified independent valuation is
-                    required.
-                  </strong>
+                  a value based upon future cash flows post-acquisition.
                 </p>
+
+                <div className="bg-muted/30 p-4 rounded-xl text-sm border-l-4 border-gold mb-6">
+                  <p>
+                    <strong>SBA Valuation Requirement:</strong> When utilizing SBA
+                    financing, specifically for <strong>SBA 7(a) loans &gt; $250,000</strong>,
+                    the Small Business Administration requires a certified independent third-party valuation.
+                  </p>
+                </div>
 
                 <p className="mb-4">
                   Anchor is often the liaison between the client and the lender

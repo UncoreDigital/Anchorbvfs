@@ -37,11 +37,10 @@ const BuySideTransactionalValuations = () => {
                     <li key={s.slug}>
                       <Link
                         to={`/services/${s.slug}`}
-                        className={`flex items-center justify-between p-4 rounded-xl transition-all duration-300 ${
-                          s.slug === currentSlug
+                        className={`flex items-center justify-between p-4 rounded-xl transition-all duration-300 ${s.slug === currentSlug
                             ? "bg-gold text-navy font-semibold"
                             : "bg-white hover:bg-gold/10 text-slate hover:text-navy"
-                        }`}
+                          }`}
                       >
                         <span>{s.title}</span>
                         <ArrowRight className="w-4 h-4" />
@@ -153,87 +152,6 @@ const BuySideTransactionalValuations = () => {
                   seller’s valuation is biased, inflated, or based on
                   assumptions that don’t hold up under scrutiny.
                 </p>
-
-                <h3 className="text-xl font-bold text-navy mb-4">
-                  Who We Serve
-                </h3>
-                <p className="mb-4">
-                  Our buy-side valuation services are ideal for:
-                </p>
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Private buyers acquiring their first or second business
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Private equity groups evaluating new portfolio companies
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Strategic buyers expanding through acquisition</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Search-fund entrepreneurs</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Lenders requiring an independent assessment supporting
-                      loan decisions
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Family offices and high-net-worth investors</span>
-                  </li>
-                </ul>
-
-                <h3 className="text-xl font-bold text-navy mb-4">
-                  Why Clients Choose Us
-                </h3>
-                <p className="mb-4 font-semibold italic text-navy">
-                  Independent. Meticulous. Acquisition-Focused.
-                </p>
-                <p className="mb-4">Buyers choose Anchor because:</p>
-                <ul className="space-y-2 mb-8">
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>We specialize in transaction-driven valuations</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Our work is independent, unbiased, and defensible
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      We understand how much buyers rely on accurate
-                      forward-looking value, not just historicals
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      We provide clear communication and a collaborative process
-                      with your deal team, CPA, lender, and attorney
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>
-                      Our turnaround times support real-world transactional
-                      deadlines
-                    </span>
-                  </li>
-                </ul>
 
                 <div className="mt-12 flex flex-wrap gap-4">
                   <Link to="/contact">
