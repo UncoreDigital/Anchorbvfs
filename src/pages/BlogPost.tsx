@@ -13,6 +13,7 @@ import {
   Linkedin,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -100,20 +101,22 @@ const BlogPost = () => {
               )}
 
               <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground font-inter mb-8">
+                {post.author && post.author.toLowerCase() !== "admin" && (
+                  <span className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    {post.author}
+                  </span>
+                )}
                 <span className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  {post.author}
-                </span>
-                {/* <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  {post.published_at
-                    ? new Date(post.published_at).toLocaleDateString()
-                    : ""}
-                </span> */}
-                <span className="flex items-center gap-2">
-                  <Tag className="w-4 h-4" />
-                  {post.category}
+                  {format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}
                 </span>
+                {post.category && post.category.toLowerCase() !== "uncategorized" && (
+                  <span className="flex items-center gap-2">
+                    <Tag className="w-4 h-4" />
+                    {post.category}
+                  </span>
+                )}
               </div>
 
               <div

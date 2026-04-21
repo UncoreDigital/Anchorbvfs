@@ -141,7 +141,7 @@ const Blog = () => {
                       <img
                         src={featuredPost.image_url}
                         alt={featuredPost.title}
-                        className="w-full h-80 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-80 lg:h-96 object-contain transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="w-full h-80 lg:h-96 flex items-center justify-center text-gray-400">
@@ -160,14 +160,16 @@ const Blog = () => {
                       {featuredPost.excerpt}
                     </p>
                     <div className="flex items-center gap-6 text-sm text-muted-foreground font-inter">
-                      <span className="flex items-center gap-2">
-                        <User className="w-4 h-4" />
-                        {featuredPost.author || "Admin"}
-                      </span>
+                      {featuredPost.author && featuredPost.author.toLowerCase() !== "admin" && (
+                        <span className="flex items-center gap-2">
+                          <User className="w-4 h-4" />
+                          {featuredPost.author}
+                        </span>
+                      )}
                       <span className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         {format(
-                          new Date(featuredPost.published_at),
+                          new Date(featuredPost.published_at || featuredPost.created_at),
                           "MMM d, yyyy"
                         )}
                       </span>
@@ -198,27 +200,35 @@ const Blog = () => {
                       <img
                         src={post.image_url}
                         alt={post.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : (
                       <div className="text-gray-400 text-sm">No image</div>
                     )}
                     <div className="absolute top-4 left-4">
-                      <span className="bg-accent text-primary px-3 py-1 rounded-full text-xs font-inter font-medium">
-                        {post.is_featured ? "Featured" : post.category}
-                      </span>
+                      {post.is_featured ? (
+                        <span className="bg-accent text-primary px-3 py-1 rounded-full text-xs font-inter font-medium">
+                          Featured
+                        </span>
+                      ) : post.category && post.category.toLowerCase() !== "uncategorized" ? (
+                        <span className="bg-accent text-primary px-3 py-1 rounded-full text-xs font-inter font-medium">
+                          {post.category}
+                        </span>
+                      ) : null}
                     </div>
                   </div>
 
                   <div className="md:col-span-2 flex flex-col justify-center h-full">
                     <div className="flex items-center gap-4 text-sm text-muted-foreground font-inter mb-3">
-                      <span className="flex items-center gap-1">
-                        <User className="w-3 h-3" />
-                        {post.author || "Admin"}
-                      </span>
+                      {post.author && post.author.toLowerCase() !== "admin" && (
+                        <span className="flex items-center gap-1">
+                          <User className="w-3 h-3" />
+                          {post.author}
+                        </span>
+                      )}
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3 h-3" />
-                        {new Date(post.published_at).toLocaleDateString()}
+                        {format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}
                       </span>
                     </div>
 
