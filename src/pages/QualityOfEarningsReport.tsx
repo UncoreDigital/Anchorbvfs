@@ -271,19 +271,19 @@ const QualityOfEarningsReport = () => {
                 <ul className="space-y-4 mb-6">
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span><strong>Bank Reconciliation</strong> – Match monthly bank statements with general ledger entries.</span>
+                    <span><strong>Bank Reconciliation</strong> – Match monthly bank statements with general ledger entries</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span><strong>Cash Flow Mapping</strong> – Track deposits against revenue streams and withdrawals against expense categories.</span>
+                    <span><strong>Cash Flow Mapping</strong> – Track deposits against revenue streams and withdrawals against expense categories</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span><strong>Variance Analysis</strong> – Investigate unexplained differences between reported earnings and cash activity.</span>
+                    <span><strong>Variance Analysis</strong> – Investigate unexplained differences between reported earnings and cash activity</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span><strong>Reporting</strong> – Deliver a clear summary that supports valuation or compliance needs.</span>
+                    <span><strong>Reporting</strong> – Deliver a clear summary that supports valuation or compliance needs</span>
                   </li>
                 </ul>
 

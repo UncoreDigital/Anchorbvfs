@@ -237,12 +237,12 @@ const MatrimonialValuationLitigationSupport = () => {
                   <li>
                     <strong>Enterprise Goodwill:</strong> Derived from the
                     business itself, transferable, and generally considered
-                    marital property.
+                    marital property
                   </li>
                   <li>
                     <strong>Personal Goodwill:</strong> Tied to the owner’s
                     reputation, skill, or personal relationships, not
-                    transferable, and often considered non-marital.
+                    transferable, and often considered non-marital
                   </li>
                 </ul>
 
@@ -259,7 +259,7 @@ const MatrimonialValuationLitigationSupport = () => {
                     Florida, Ohio, Texas, Virginia, North Carolina. These states
                     view personal goodwill as tied to the individual and thus
                     not divisible. Valuators must separate enterprise (marital)
-                    from personal (non-marital) goodwill.
+                    from personal (non-marital) goodwill
                   </li>
                   <li>
                     <strong>States that Include Personal Goodwill:</strong>{" "}
@@ -268,7 +268,7 @@ const MatrimonialValuationLitigationSupport = () => {
                     is marketable or enhances business value. Experts must be
                     careful when quantifying professional practices, using
                     excess earnings methods, or attributing future earnings to
-                    goodwill.
+                    goodwill
                   </li>
                 </ul>
 
