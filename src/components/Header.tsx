@@ -271,7 +271,7 @@ const Header = () => {
                 >
                   <div className="flex flex-col items-center">
                     <span className="text-[10px] font-inter font-semibold uppercase tracking-widest text-muted-foreground group-hover:text-accent transition-colors leading-none mb-0.5">
-                      <MapPin className="inline w-2.5 h-2.5 mr-0.5" />Florida
+                      Office
                     </span>
                     <span className="flex items-center gap-1 text-sm font-inter font-semibold text-primary group-hover:text-accent transition-colors">
                       <Phone className="w-3.5 h-3.5" />
@@ -289,7 +289,7 @@ const Header = () => {
                 >
                   <div className="flex flex-col items-center">
                     <span className="text-[10px] font-inter font-semibold uppercase tracking-widest text-muted-foreground group-hover:text-accent transition-colors leading-none mb-0.5">
-                      <MapPin className="inline w-2.5 h-2.5 mr-0.5" />Chicago
+                      Cell
                     </span>
                     <span className="flex items-center gap-1 text-sm font-inter font-semibold text-primary group-hover:text-accent transition-colors">
                       <Phone className="w-3.5 h-3.5" />

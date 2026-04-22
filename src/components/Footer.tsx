@@ -125,16 +125,12 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                 <div className="text-primary-foreground/60 font-inter text-sm max-w-[300px] flex flex-col gap-3">
                   <p>
-                    <strong>South (HQ):</strong><br />
+                    <strong>Naples:</strong><br />
                     365 Fifth Avenue South, Suite 200, Naples, FL 34102
                   </p>
                   <p>
-                    <strong>Northeast (Satellite):</strong><br />
+                    <strong>Maryland:</strong><br />
                     12 W Church St, Frederick, MD 21701
-                  </p>
-                  <p>
-                    <strong>Midwest Office:</strong><br />
-                    Chicago, IL
                   </p>
                 </div>
               </li>
@@ -145,13 +141,13 @@ const Footer = () => {
                     href="tel:+12399193092"
                     className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
                   >
-                    O: (239) 919-3092
+                    Office: (239) 919-3092
                   </a>
                   <a
                     href="tel:+13126329144"
                     className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors"
                   >
-                    C: (312) 632-9144
+                    Cell: (312) 632-9144
                   </a>
                 </span>
               </li>
