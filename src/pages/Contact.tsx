@@ -12,21 +12,28 @@ const contactInfo = [
     number: "01",
     title: "Our Address",
     details: [
-      "Naples – 365 Fifth Avenue South, Suite 200, Naples, FL 34102",
-      "Maryland – 12 W Church St, Frederick, MD 21701",
+      { label: "Naples – 365 Fifth Avenue South, Suite 200, Naples, FL 34102" },
+      { label: "Maryland – 12 W Church St, Frederick, MD 21701" },
     ],
   },
   {
     icon: Phone,
     number: "02",
     title: "Contact",
-    details: ["Office: (239) 919-3092", "Cell: (312) 632-9144", "info@anchorbv.com"],
+    details: [
+      { label: "Office: (239) 919-3092", href: "tel:+12399193092" },
+      { label: "Cell: (312) 632-9144", href: "tel:+13126329144" },
+      { label: "info@anchorbv.com", href: "mailto:info@anchorbv.com" },
+    ],
   },
   {
     icon: Clock,
     number: "03",
     title: "Opening Hours",
-    details: ["Monday - Friday: 8AM - 5PM", "Weekend: Closed"],
+    details: [
+      { label: "Monday - Friday: 8AM - 5PM" },
+      { label: "Weekend: Closed" },
+    ],
   },
 ];
 
@@ -70,9 +77,15 @@ const Contact = () => {
                   </h3>
                   <div className="space-y-2">
                     {info.details.map((detail, i) => (
-                      <p key={i} className="text-slate text-sm">
-                        {detail}
-                      </p>
+                      <div key={i} className="text-slate text-sm">
+                        {detail.href ? (
+                          <a href={detail.href} className="hover:text-gold transition-colors block">
+                            {detail.label}
+                          </a>
+                        ) : (
+                          <p>{detail.label}</p>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>

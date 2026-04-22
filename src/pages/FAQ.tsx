@@ -37,7 +37,7 @@ const FAQ = () => {
     },
     {
       question:
-        'What is a "certified" valuation analyst and “accredited” in business Valuations?',
+        'What is a "certified" valuation analyst and valuation analyst "accredited" in business valuations?',
       answer:
         "The National Association of Certified Valuators and Analysts (NACVA) is one of the most well respected and known business valuation associations. NACVA’s CVA designation is the only valuation credential accredited by the National Commission for Certifying Agencies. The Accredited in Business Valuation (ABV®) credential is granted exclusively by the AICPA to CPAs and qualified valuation professionals who demonstrate considerable expertise in valuation.",
     },

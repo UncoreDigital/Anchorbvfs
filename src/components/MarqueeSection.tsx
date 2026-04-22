@@ -6,17 +6,7 @@ const MarqueeSection = () => {
     { src: "/assets/MarqueeSection/mq2.png" },
     { src: "/assets/MarqueeSection/mq3.png" },
     { src: "/assets/MarqueeSection/mq4.png" },
-    { src: "/assets/MarqueeSection/ea-logo.jpeg" },
-    {
-      src: "/assets/irs-testimony-cropped.jpg",
-      href: "/assets/irs-testimony-wording.docx",
-      download: true
-    },
-    {
-      src: "/assets/anchor-ma-logo.png",
-      href: "/assets/creative-tile-press-release.pdf",
-      target: "_blank"
-    }
+    { src: "/assets/MarqueeSection/ea-logo.jpeg" }
   ];
 
   return (

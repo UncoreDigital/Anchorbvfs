@@ -88,8 +88,7 @@ const WhyUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-slate font-inter"
           >
-            Extensive experience across diverse industries with a specialized
-            focus on healthcare.
+            Extensive experience across diverse industries.
           </motion.p>
         </div>
 

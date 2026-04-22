@@ -130,7 +130,7 @@ const Footer = () => {
                   </p>
                   <p>
                     <strong>Maryland:</strong><br />
-                    12 W Church St, Frederick, MD 21701
+                    12 W Church St, <br />Frederick, MD 21701
                   </p>
                 </div>
               </li>

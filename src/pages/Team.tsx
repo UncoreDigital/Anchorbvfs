@@ -17,7 +17,7 @@ const Team = () => {
     },
     {
       icon: Map,
-      text: "Our experts have nationwide expertise.",
+      text: "Experts have nationwide & international expertise.",
     },
     {
       icon: Landmark,
@@ -25,7 +25,7 @@ const Team = () => {
     },
     {
       icon: Scale,
-      text: "Collaboratively trained to work as neutral expert with both parties in marital dissolution matters (settle outside of litigation).",
+      text: "Collaboratively trained to work as neutral expert with both parties.",
     },
     {
       icon: DollarSign,
@@ -52,14 +52,14 @@ const Team = () => {
       name: "Prashasti Agrawal",
       role: "Senior Financial Analyst",
       image: "/assets/headhsot.jpg",
-      bio: "Prashasti is integral to the financial analysis and research application for the initial stages of modeling. Her diverse background and level of expertise in valuation modeling is a key value driver for Anchor's clients and the Anchor staff as a whole.",
+      bio: "Prashasti is integral to the financial analysis and research application for the initial stages of modeling. Her diverse background and level of expertise in valuation modeling is a key value driver for Anchor's clients.",
       pdf: "/assets/bios/Professional Qualifications of Prashasti Agrawal.pdf",
     },
     {
       name: "Deborah M. Adasiak",
       role: "CVA",
       image: "/assets/footer/Logo.png",
-      bio: "Deborah Adasiak is a business valuator. She holds a CVA, Certified Valuation Analyst, issued by the National Association of Certified Valuators & Analysts. She concentrates her practice area in the valuation of closely held businesses and professional practices, and has been intimately involved with these types of entities for over 20 years.",
+      bio: "Deborah Adasiak is a business valuator. She holds a CVA, Certified Valuation Analyst, issued by the National Association of Certified Valuators & Analysts. She concentrates on the valuation of closely held businesses and professional practices, and has been intimately involved with these types of entities for 20+ years.",
       pdf: "/assets/bios/Deborah Bio 2026.pdf",
     },
     {
@@ -104,22 +104,19 @@ const Team = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-0 ${
-                    index % 2 === 0 ? "md:flex-row-reverse" : ""
-                  }`}
+                  className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-0 ${index % 2 === 0 ? "md:flex-row-reverse" : ""
+                    }`}
                 >
                   {/* Content Side (Text) */}
                   <div
-                    className={`w-full md:w-1/2 flex ${
-                      index % 2 === 0
-                        ? "md:justify-start md:pl-16"
-                        : "md:justify-end md:pr-16"
-                    }`}
+                    className={`w-full md:w-1/2 flex ${index % 2 === 0
+                      ? "md:justify-start md:pl-16"
+                      : "md:justify-end md:pr-16"
+                      }`}
                   >
                     <div
-                      className={`text-center ${
-                        index % 2 === 0 ? "md:text-left" : "md:text-right"
-                      }`}
+                      className={`text-center ${index % 2 === 0 ? "md:text-left" : "md:text-right"
+                        }`}
                     >
                       <p className="font-inter text-lg text-muted-foreground leading-relaxed">
                         {item.text}
@@ -132,9 +129,8 @@ const Team = () => {
 
                   {/* Icon Side */}
                   <div
-                    className={`w-full md:w-1/2 flex justify-center ${
-                      index % 2 === 0 ? "md:pr-16" : "md:pl-16"
-                    }`}
+                    className={`w-full md:w-1/2 flex justify-center ${index % 2 === 0 ? "md:pr-16" : "md:pl-16"
+                      }`}
                   >
                     <div className="w-32 h-32 rounded-full border border-border bg-background flex items-center justify-center shadow-lg relative z-10 group hover:border-accent hover:shadow-elegant transition-all duration-500">
                       <item.icon className="w-12 h-12 text-primary group-hover:text-accent transition-colors duration-500 stroke-[1.5]" />
@@ -160,7 +156,7 @@ const Team = () => {
             <p className="text-muted-foreground font-inter max-w-2xl mx-auto">
               Our team consists of certified valuation experts and financial analysis
               consulting professionals with expertise in a wide variety of
-              specialties and sectors. We have nationwide and international experience in all services offered, including, buy/sell-side transactional representation and analysis. Combined with our many years in litigation, Anchor is a one-stop practice for all direct and indirect valuation engagements. Our main objective is to serve the
+              specialties and sectors. With nationwide and international experience in all services offered, including, buy/sell-side transactional representation and analysis. Combined with our many years in litigation, Anchor is a one-stop practice for all direct and indirect valuation engagements. Main objective is to serve the
               client in the most hands-on, cost-effective, personalized manner.
             </p>
           </div>
@@ -238,7 +234,7 @@ const Team = () => {
               href="/contact"
               className="inline-flex items-center gap-2 bg-accent text-primary px-8 py-4 rounded-lg font-inter font-semibold hover:bg-accent/90 transition-colors"
             >
-              View Open Positions
+              Get In Touch
             </a>
           </motion.div>
         </div>
