@@ -165,7 +165,7 @@ const ShareholderDisputesBusinessDivorce = () => {
                   disputes among shareholders, including the terms of a
                   buy-sell, operating agreement, or involving transactions
                   between new or departing shareholders or partners. These
-                  matters are directed by contractual agreements or other
+                  matters are often directed by contractual agreements or other
                   governing corporate documents between the owners of a
                   business.
                 </p>

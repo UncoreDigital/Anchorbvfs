@@ -27,35 +27,31 @@ const MergersAcquisitions = () => {
     "Fairness opinions",
   ];
 
-  // Placeholder data for Deal Closings (Tombstones)
+  // Real Deal Closings (Tombstones)
   const closings = [
     {
       type: "Sell-Side Advisor",
-      company: "Healthcare Tech Solutions",
-      action: "Acquired by",
-      buyer: "Global Medical Systems",
-      sector: "Healthcare Technology",
-    },
-    {
-      type: "Valuation Services",
-      company: "Regional Logistics Corp",
-      action: "Merger with",
-      buyer: "National Transport Group",
-      sector: "Logistics & Transportation",
-    },
-    {
-      type: "Buy-Side Advisor",
       company: "Private Equity Group",
       action: "Investment in",
-      buyer: "Manufacturing Innovators",
-      sector: "Industrial Manufacturing",
+      buyer: "Creative Tile Solutions",
     },
     {
-      type: "Transaction Advisory",
-      company: "Software Dev Inc.",
-      action: "Strategic Partnership with",
-      buyer: "Enterprise Cloud Sol.",
-      sector: "SaaS / Technology",
+      type: "Sell-Side Advisor",
+      company: "Private Strategic Buyer",
+      action: "Investment in",
+      buyer: "Lykins Signtek",
+    },
+    {
+      type: "Sell-Side Advisor",
+      company: "Private Equity Group",
+      action: "Investment in",
+      buyer: "Floorcrafters, LLC",
+    },
+    {
+      type: "Sell-Side Advisor",
+      company: "Private Strategic Buyer",
+      action: "Investment in",
+      buyer: "Medical Concierge Practice",
     },
   ];
 

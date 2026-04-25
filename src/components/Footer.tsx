@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+﻿import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
 
 const quickLinks = [
   { name: "Home", href: "/" },

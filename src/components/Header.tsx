@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, ArrowUpRight, Phone, MapPin } from "lucide-react";
@@ -34,48 +34,48 @@ const navItems: NavItem[] = [
     hasDropdown: true,
     dropdownItems: [
       {
-        name: "IRC Section 409A Valuation",
-        href: "/services/irc-section-409a-valuation",
-      },
-      {
-        name: "Healthcare Valuations",
-        href: "/services/healthcare-valuations",
-      },
-      {
-        name: "Estate & Gift Tax Valuations",
-        href: "/services/estate-gift-tax-valuations",
-      },
-      {
-        name: "Matrimonial Valuation & Litigation Support",
-        href: "/services/matrimonial-valuation-litigation-support",
+        name: "Buy-Side Transactional Valuations",
+        href: "/services/buy-side-transactional-valuations",
       },
       {
         name: "Damages & Lost Profit Claims",
         href: "/services/damages-lost-profit-claims",
       },
       {
+        name: "Estate & Gift Tax Valuations",
+        href: "/services/estate-gift-tax-valuations",
+      },
+      {
         name: "Fair Value Measurement",
         href: "/services/fair-value-measurement",
       },
       {
-        name: "Shareholder Disputes (“Business Divorce”)",
-        href: "/services/shareholder-disputes-business-divorce",
+        name: "Healthcare Valuations",
+        href: "/services/healthcare-valuations",
+      },
+      {
+        name: "IRC Section 409A Valuation",
+        href: "/services/irc-section-409a-valuation",
+      },
+      {
+        name: "Matrimonial Valuation & Litigation Support",
+        href: "/services/matrimonial-valuation-litigation-support",
       },
       {
         name: "Quality of Earnings Report",
         href: "/services/quality-of-earnings-report",
       },
       {
-        name: "Valuations for Underwriting/Lending Purposes",
-        href: "/services/valuations-for-underwriting-lending-purposes",
-      },
-      {
-        name: "Buy-Side Transactional Valuations",
-        href: "/services/buy-side-transactional-valuations",
+        name: "Shareholder Disputes (“Business Divorce”)",
+        href: "/services/shareholder-disputes-business-divorce",
       },
       {
         name: "Valuation of Profits Interests & Tax Elections",
         href: "/services/valuation-of-profits-interests-and-tax-elections",
+      },
+      {
+        name: "Valuations for Underwriting/Lending Purposes",
+        href: "/services/valuations-for-underwriting-lending-purposes",
       },
     ],
   },

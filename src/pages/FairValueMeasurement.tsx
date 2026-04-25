@@ -12,11 +12,11 @@ const FairValueMeasurement = () => {
   const title = "Fair Value Measurement";
 
   const standards = [
-    "FASB ASC Topic 805 / IFRS 3R, Business Combinations",
-    "FASB ASC Topic 820 / IFRS 13, Fair Value Measurements",
-    "FASB ASC Topic 350 / Impairment: Goodwill and Other",
-    "FASB ASC Topic 360 / Impairment or Disposal of Long-Lived Assets",
-    "FASB ASC Topic 718 [FAS 123(R)]",
+    "FASB ASC Topic 805 / IFRS 3 – Business Combinations",
+    "FASB ASC Topic 820 / IFRS 13 – Fair Value Measurement",
+    "FASB ASC Topic 350 – Goodwill and Other Intangible Assets",
+    "FASB ASC Topic 360 – Impairment or Disposal of Long-Lived Assets",
+    "FASB ASC Topic 718 – Stock Compensation",
   ];
 
   return (
@@ -103,50 +103,37 @@ const FairValueMeasurement = () => {
                 </div>
 
                 <p className="mb-4">
-                  Often financial and tax reporting circumstances require
-                  qualified, independent valuation reports/analysis. For
-                  example, when a company plans to have an initial public
-                  offering, issues stock options, or transfers or sells equity
-                  interests, a valuation is required for financial reporting
-                  purposes.
+                  Financial and tax reporting often require <strong>independent, supportable valuation analyses</strong>. Valuations are commonly needed when a company:
+                </p>
+                <ul className="list-disc pl-6 mb-6 space-y-2">
+                  <li>Plans an initial public offering</li>
+                  <li>Issues stock-based compensation</li>
+                  <li>Transfers or sells equity interests</li>
+                  <li>Completes a merger or acquisition</li>
+                </ul>
+                <p className="mb-6">
+                  In these situations, valuation conclusions must comply with applicable accounting and tax standards.
                 </p>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  Fair Value Measurement for Business Combinations (Purchase
-                  Price Allocation)
+                  Fair Value Measurement for Business Combinations (Purchase Price Allocation)
                 </h3>
                 <p className="mb-4">
-                  Financial reporting rules regarding the recognition and
-                  measurement of acquired assets and liabilities require skill,
-                  expertise, and experience for interpretation and application.
-                  ABV offers services for purchase price allocations for
-                  financial reporting and/or tax reporting purposes.
+                  Financial reporting for acquisitions requires the identification and measurement of acquired assets and assumed liabilities at <strong>fair value</strong>. This process—commonly referred to as a <strong>purchase price allocation (PPA)</strong>—requires specialized knowledge and professional judgment.
+                </p>
+                <p className="mb-6">
+                  <strong>Anchor Business Valuations</strong> provides independent valuation services to support purchase price allocations for financial reporting and tax purposes.
                 </p>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  Reporting Requirements
+                  Applicable Reporting Guidance
                 </h3>
                 <p className="mb-4">
-                  Financial reporting for business combinations requires a
-                  purchase price allocation in accordance with the following
-                  generally accepted accounting principles (GAAP) and tax
-                  regulations:
+                  Purchase price allocations are performed in accordance with relevant accounting standards, including:
                 </p>
                 <div className="bg-muted/30 p-4 rounded-xl text-sm italic border-l-4 border-gold mb-6">
                   <p>
-                    <strong>Fair Value Definition (ASC 820 / IFRS 13):</strong> Fair value = "the price that
-                    would be received to sell an asset or paid to transfer a
-                    liability in an orderly transaction between market
-                    participants." [
-                    <a
-                      href="https://www.ifrs.org"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gold hover:underline font-semibold"
-                    >
-                      ifrs.org
-                    </a>
-                    ]
+                    <strong>Fair Value Definition (ASC 820 / IFRS 13):</strong> &ldquo;The price that would be received to sell an asset or paid to transfer a liability in an orderly transaction between market participants at the measurement date.&rdquo;
                   </p>
                 </div>
                 <ul className="space-y-2 mb-6">
@@ -159,8 +146,9 @@ const FairValueMeasurement = () => {
                 </ul>
 
                 <h3 className="text-xl font-bold text-navy mb-4">
-                  Common Intangible Asset Valuations
+                  Common Intangible Assets Valued
                 </h3>
+                <p className="mb-4">In connection with business combinations, commonly identified intangible assets include:</p>
                 <ul className="space-y-2 mb-8">
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
@@ -168,15 +156,15 @@ const FairValueMeasurement = () => {
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Trade names</span>
+                    <span>Trade names and trademarks</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Technology</span>
+                    <span>Developed technology</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                    <span>Noncompetes</span>
+                    <span>Non-compete agreements</span>
                   </li>
                 </ul>
 

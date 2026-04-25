@@ -62,6 +62,38 @@ const Articles = () => {
       <section className="section-padding bg-background">
         <div className="container-wide">
           <div className="max-w-4xl mx-auto">
+
+            {/* QuickRead Banner */}
+            <div className="mb-10 bg-navy rounded-2xl p-8 text-white">
+              <h3 className="text-xl font-playfair font-bold text-gold mb-3">
+                Anchor Publications on QuickRead
+              </h3>
+              <p className="text-white/80 font-inter mb-4">
+                For examples of Anchor publications, click the following link and search herein{" "}
+                <span className="text-gold font-semibold">"Garthoeffner"</span>.{" "}
+                Trisch is a long-time, regular contributor to the QuickRead valuation publication.
+              </p>
+              <a
+                href="https://quickreadbuzz.com/?s=garthoeffner"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-gold text-navy font-semibold px-6 py-3 rounded-lg hover:bg-gold/90 transition-colors"
+              >
+                Visit QuickRead
+                <ExternalLink className="w-4 h-4" />
+              </a>
+              <p className="text-white/60 text-sm mt-4 italic">
+                Search here via keyword "Garthoeffner" for examples of recent articles written by Anchor's founder.
+              </p>
+            </div>
+
+            {/* Archived Articles Notice */}
+            <div className="mb-8 border-2 border-border rounded-xl p-5 bg-muted/20 text-center">
+              <p className="font-inter font-semibold text-primary text-base">
+                For examples of archived articles please see below
+              </p>
+            </div>
+
             <div className="grid gap-6">
               {articles.map((article, index) => (
                 <motion.div
