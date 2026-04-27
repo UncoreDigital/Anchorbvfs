@@ -1,4 +1,5 @@
-﻿import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const quickLinks = [
   { name: "Home", href: "/" },
@@ -7,47 +8,35 @@ const quickLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
-const services = [
-  {
-    name: "IRC Section 409A Valuation",
-    href: "/services/irc-section-409a-valuation",
-  },
-  {
-    name: "Healthcare Valuations",
-    href: "/services/healthcare-valuations",
-  },
-  {
-    name: "Estate & Gift Tax Valuations",
-    href: "/services/estate-gift-tax-valuations",
-  },
-  {
-    name: "Damages & Lost Profit Claims",
-    href: "/services/damages-lost-profit-claims",
-  },
-  {
-    name: "Fair Value Measurement",
-    href: "/services/fair-value-measurement",
-  },
-  {
-    name: "Quality of Earnings Report",
-    href: "/services/quality-of-earnings-report",
-  },
-];
 
 const Footer = () => {
+  const handleNavClick = (href: string) => {
+    if (href.includes("#")) {
+      const elementId = href.split("#")[1];
+      const element = document.getElementById(elementId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 10);
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  };
+
   return (
     <footer id="contact" className="bg-primary pt-20 pb-8">
       <div className="container-wide">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-8">
           {/* Brand Column */}
           <div>
-            <a href="/" className="flex items-center gap-2 mb-6">
+            <Link to="/" onClick={() => handleNavClick("/")} className="flex items-center gap-2 mb-6">
               <img
                 src="/assets/footer/Logo.png"
                 alt="Anchor Business Valuations"
                 className="h-96 w-auto object-contain bg-white/1 rounded-lg p-1"
               />
-            </a>
+            </Link>
             <p className="text-primary-foreground/60 font-inter text-sm leading-relaxed mb-6">
               Anchor Business Valuations & Financial Services, LLC is a premier
               business valuation and consulting firm serving clients with
@@ -85,12 +74,13 @@ const Footer = () => {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
+                    onClick={() => handleNavClick(link.href)}
                     className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors duration-300"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -102,16 +92,15 @@ const Footer = () => {
               Our Services
             </h4>
             <ul className="space-y-2">
-              {services.map((service) => (
-                <li key={service.name}>
-                  <a
-                    href={service.href}
-                    className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors duration-300"
-                  >
-                    {service.name}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link
+                  to="/#services"
+                  onClick={() => handleNavClick("/#services")}
+                  className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors duration-300"
+                >
+                  What We Offer
+                </Link>
+              </li>
             </ul>
           </div>
 

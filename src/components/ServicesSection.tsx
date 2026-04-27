@@ -60,7 +60,7 @@ const services = [
   {
     icon: Shield,
     number: "07",
-    title: "Litigation Support",
+    title: "Divorce Litigation & Support",
     slug: "matrimonial-valuation-litigation-support",
     description:
       "Expert witness testimony, marital dissolution, economic damages, and lost profits analysis.",
@@ -92,7 +92,7 @@ const services = [
   {
     icon: BarChart3,
     number: "11",
-    title: "Valuation of Profits Interests & Tax Elections",
+    title: "Valuation of Profits Interests",
     slug: "valuation-of-profits-interests-and-tax-elections",
     description:
       "Specialized valuation services for profits interests under Rev. Proc. 93-27 and 83(b) elections.",

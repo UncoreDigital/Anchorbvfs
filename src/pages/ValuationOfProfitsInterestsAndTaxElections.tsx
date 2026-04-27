@@ -9,7 +9,7 @@ import { serviceLinks } from "@/lib/serviceLinks";
 
 const ValuationOfProfitsInterestsAndTaxElections = () => {
   const currentSlug = "valuation-of-profits-interests-and-tax-elections";
-  const title = "Valuation of Profits Interests and Tax Elections";
+  const title = "Valuation of Profits Interests";
 
   return (
     <div className="min-h-screen bg-background">
@@ -38,8 +38,8 @@ const ValuationOfProfitsInterestsAndTaxElections = () => {
                       <Link
                         to={`/services/${s.slug}`}
                         className={`flex items-center justify-between p-4 rounded-xl transition-all duration-300 ${s.slug === currentSlug
-                            ? "bg-gold text-navy font-semibold"
-                            : "bg-white hover:bg-gold/10 text-slate hover:text-navy"
+                          ? "bg-gold text-navy font-semibold"
+                          : "bg-white hover:bg-gold/10 text-slate hover:text-navy"
                           }`}
                       >
                         <span>{s.title}</span>
