@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import MarqueeSection from "@/components/MarqueeSection";
@@ -12,6 +14,22 @@ import Footer from "@/components/Footer";
 import FounderSection from "@/components/FounderSection";
 
 const Index = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.slice(1);
+    const attempt = (tries = 0) => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else if (tries < 10) {
+        setTimeout(() => attempt(tries + 1), 100);
+      }
+    };
+    setTimeout(() => attempt(), 50);
+  }, [hash]);
+
   return (
     <div className="min-h-screen bg-background w-full overflow-x-hidden">
       <Header />
