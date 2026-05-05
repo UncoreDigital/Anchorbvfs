@@ -97,6 +97,15 @@ const testimonials = [
     rating: 5,
     imageUrl: "/images/testimonials/image9.png",
   },
+  {
+    id: 11,
+    name: "William Bartels",
+    role: "President, Tanto Irrigation, LLC",
+    content:
+      "I want to thank you for the evaluation services that your organization has provided both initially and in our recent update. What I find most valuable about the process was your willingness to spend extra time in order to understand the niche of our industry and the value our organization generates by where we are positioned. Anyone can value through the crunching of numbers, but it is almost always the nuance surrounding the metrics, and the goodwill produced that has the biggest influence. That takes time to uncover. You went above and beyond what is typically necessary to understand that and I can't thank you enough for pushing to that depth.",
+    rating: 5,
+    imageUrl: "/images/testimonials/TantoLogo.png",
+  },
 ];
 
 const TestimonialsSection = () => {
