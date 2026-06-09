@@ -17,6 +17,7 @@ const MergersAcquisitions = lazy(() => import("./pages/MergersAcquisitions"));
 const Events = lazy(() => import("./pages/Events"));
 const Articles = lazy(() => import("./pages/Articles"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Upload = lazy(() => import("./pages/Upload"));
 const About = lazy(() => import("./pages/About"));
 const Team = lazy(() => import("./pages/Team"));
 
@@ -69,6 +70,9 @@ const ArticleEditor = lazy(
 const ManageEvents = lazy(() => import("./pages/admin/events/ManageEvents"));
 const EventEditor = lazy(() => import("./pages/admin/events/EventEditor"));
 const ManageLeads = lazy(() => import("./pages/admin/leads/ManageLeads"));
+const ManageUploads = lazy(
+  () => import("./pages/admin/uploads/ManageUploads"),
+);
 // Admin Imports
 
 const queryClient = new QueryClient();
@@ -85,6 +89,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/upload" element={<Upload />} />
 
                 {/* Service Routes */}
                 <Route
@@ -153,6 +158,10 @@ const App = () => (
                   <Route element={<AdminLayout />}>
                     <Route path="/admin/dashboard" element={<Dashboard />} />
                     <Route path="/admin/leads" element={<ManageLeads />} />
+                    <Route
+                      path="/admin/uploads"
+                      element={<ManageUploads />}
+                    />
                     <Route path="/admin/blogs" element={<ManageBlogs />} />
                     <Route path="/admin/blogs/:id" element={<BlogEditor />} />
                     <Route

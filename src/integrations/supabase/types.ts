@@ -186,6 +186,42 @@ export interface Database {
         };
         Relationships: [];
       };
+      document_submissions: {
+        Row: {
+          id: string;
+          created_at: string;
+          name: string;
+          email: string;
+          phone: string | null;
+          company: string | null;
+          notes: string | null;
+          files: Json;
+          total_size: number;
+        };
+        Insert: {
+          id?: string;
+          created_at?: string;
+          name: string;
+          email: string;
+          phone?: string | null;
+          company?: string | null;
+          notes?: string | null;
+          files?: Json;
+          total_size?: number;
+        };
+        Update: {
+          id?: string;
+          created_at?: string;
+          name?: string;
+          email?: string;
+          phone?: string | null;
+          company?: string | null;
+          notes?: string | null;
+          files?: Json;
+          total_size?: number;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;

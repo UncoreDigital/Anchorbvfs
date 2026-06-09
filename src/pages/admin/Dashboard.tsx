@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, Calendar, Files } from 'lucide-react';
+import { FileText, Calendar, Files, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -9,6 +9,7 @@ const Dashboard = () => {
         blogs: 0,
         articles: 0,
         events: 0,
+        uploads: 0,
     });
     const [loading, setLoading] = useState(true);
 
@@ -18,11 +19,13 @@ const Dashboard = () => {
                 const { count: blogsCount } = await supabase.from('blogs').select('*', { count: 'exact', head: true });
                 const { count: articlesCount } = await supabase.from('articles').select('*', { count: 'exact', head: true });
                 const { count: eventsCount } = await supabase.from('events').select('*', { count: 'exact', head: true });
+                const { count: uploadsCount } = await supabase.from('document_submissions').select('*', { count: 'exact', head: true });
 
                 setStats({
                     blogs: blogsCount || 0,
                     articles: articlesCount || 0,
                     events: eventsCount || 0,
+                    uploads: uploadsCount || 0,
                 });
             } catch (error) {
                 console.error('Error fetching stats:', error);
@@ -38,6 +41,7 @@ const Dashboard = () => {
         { name: 'Total Blogs', value: stats.blogs, icon: FileText, href: '/admin/blogs', color: 'text-blue-600', bg: 'bg-blue-50' },
         { name: 'Articles & Podcasts', value: stats.articles, icon: Files, href: '/admin/articles', color: 'text-purple-600', bg: 'bg-purple-50' },
         { name: 'Events', value: stats.events, icon: Calendar, href: '/admin/events', color: 'text-orange-600', bg: 'bg-orange-50' },
+        { name: 'Document Uploads', value: stats.uploads, icon: Upload, href: '/admin/uploads', color: 'text-emerald-600', bg: 'bg-emerald-50' },
     ];
 
     return (
@@ -47,7 +51,7 @@ const Dashboard = () => {
                 <p className="text-gray-500 mt-2">Welcome back to your administration panel.</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {statCards.map((stat) => (
                     <Link
                         key={stat.name}

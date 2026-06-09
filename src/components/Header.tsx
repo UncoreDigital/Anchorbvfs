@@ -1,7 +1,15 @@
 ﻿import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ArrowUpRight, Phone, MapPin } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ArrowUpRight,
+  Phone,
+  MapPin,
+  UploadCloud,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
@@ -10,6 +18,7 @@ interface NavItem {
   name: string;
   href: string;
   hasDropdown?: boolean;
+  highlight?: boolean;
   dropdownItems?: { name: string; href: string }[];
 }
 
@@ -312,7 +321,7 @@ const Header = () => {
               <img
                 src="/assets/logo.png"
                 alt="Anchor Business Valuations Logo"
-                className={`h-20 sm:h-20 md:h-16 lg:h-24 w-auto object-contain cursor-pointer transition-all duration-500 origin-left ${
+                className={`h-20 sm:h-20 md:h-16 lg:h-20 w-auto max-w-full lg:max-w-[200px] object-contain object-left cursor-pointer transition-all duration-500 origin-left ${
                   !isScrolled
                     ? "md:opacity-0 md:-translate-y-4 md:pointer-events-none"
                     : "md:opacity-100 md:translate-y-0"
@@ -347,7 +356,9 @@ const Header = () => {
                       />
                     )}
                   </>,
-                  "flex items-center gap-1 px-2 lg:px-3 py-2 font-inter text-sm lg:text-base font-medium transition-colors text-foreground hover:text-accent whitespace-nowrap shrink-0",
+                  item.highlight
+                    ? "flex items-center gap-1 px-3 lg:px-4 py-2 font-inter text-sm lg:text-base font-semibold rounded-full bg-accent/10 text-accent hover:bg-accent hover:text-white transition-colors whitespace-nowrap shrink-0"
+                    : "flex items-center gap-1 px-2 lg:px-3 py-2 font-inter text-sm lg:text-base font-medium transition-colors text-foreground hover:text-accent whitespace-nowrap shrink-0",
                   () => handleNavClick(item.href),
                 )}
 
@@ -381,12 +392,22 @@ const Header = () => {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center justify-end w-[120px] md:w-48 lg:w-56 gap-4">
+          <div className="flex items-center justify-end w-[120px] md:w-48 lg:w-auto gap-4">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="hidden lg:flex items-center"
+              className="hidden lg:flex items-center gap-3"
             >
+              <Link to="/upload">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-accent text-accent hover:bg-accent hover:text-white font-semibold whitespace-nowrap"
+                >
+                  Upload Documents
+                  <UploadCloud className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
               <Link to="/contact">
                 <Button variant="cta" size="lg">
                   Get In Touch
@@ -515,7 +536,20 @@ const Header = () => {
                   </div>
                 ))}
 
-                <div className="mt-8">
+                <div className="mt-8 flex flex-col gap-3">
+                  <Link
+                    to="/upload"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="w-full justify-center text-lg py-6 border-accent text-accent hover:bg-accent hover:text-white"
+                    >
+                      Upload Documents
+                      <UploadCloud className="w-5 h-5 ml-2" />
+                    </Button>
+                  </Link>
                   <Link
                     to="/contact"
                     onClick={() => setIsMobileMenuOpen(false)}
