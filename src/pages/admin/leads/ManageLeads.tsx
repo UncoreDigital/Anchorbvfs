@@ -449,7 +449,7 @@ const ManageLeads = () => {
         open={!!selectedLead}
         onOpenChange={(open) => !open && setSelectedLead(null)}
       >
-        <DialogContent className="max-w-2xl bg-white">
+        <DialogContent className="max-w-2xl bg-white max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-playfair font-bold text-primary">
               {activeTab === "leads" ? "Lead Details" : "Download Details"}
