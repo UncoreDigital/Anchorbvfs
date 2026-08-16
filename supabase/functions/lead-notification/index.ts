@@ -5,11 +5,11 @@ import nodemailer from "npm:nodemailer@6.9.7";
 // secrets aren't committed. Set them with:
 //   supabase secrets set SMTP_PASS=... NOTIFICATION_EMAIL=...
 // ---------------------------------------------------------------------------
-const SMTP_HOST = 'smtp.gmail.com';
+const SMTP_HOST = '';
 const SMTP_PORT = '465';
-const SMTP_USER = 'leadsinfoanchorbvfs@gmail.com';
-const SMTP_PASS = 'jblnhswnliyvjtki';
-const NOTIFICATION_EMAIL = 'info@anchorbv.com, trisch@anchorbvfs.com';
+const SMTP_USER = '';
+const SMTP_PASS = '';
+const NOTIFICATION_EMAIL = '';
 
 const transporter = nodemailer.createTransport({
   host: SMTP_HOST,
