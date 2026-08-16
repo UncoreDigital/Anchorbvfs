@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Linkedin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Instagram, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const quickLinks = [
@@ -6,6 +6,9 @@ const quickLinks = [
   { name: "About Us", href: "/about" },
   { name: "Industry Expertise", href: "/industry-expertise" },
   { name: "Upload Documents", href: "/upload" },
+  // Password + one-time-code protected; the lock sets that expectation before
+  // the client clicks through.
+  { name: "Client Questionnaire", href: "/questionnaire", locked: true },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -78,9 +81,15 @@ const Footer = () => {
                   <Link
                     to={link.href}
                     onClick={() => handleNavClick(link.href)}
-                    className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors duration-300"
+                    className="text-primary-foreground/60 font-inter text-sm hover:text-gold transition-colors duration-300 inline-flex items-center gap-1.5"
                   >
                     {link.name}
+                    {link.locked && (
+                      <Lock
+                        className="w-3 h-3 text-gold/70"
+                        aria-label="Password protected"
+                      />
+                    )}
                   </Link>
                 </li>
               ))}

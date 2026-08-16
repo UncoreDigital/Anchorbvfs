@@ -18,6 +18,7 @@ const Events = lazy(() => import("./pages/Events"));
 const Articles = lazy(() => import("./pages/Articles"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Upload = lazy(() => import("./pages/Upload"));
+const ClientQuestionnaire = lazy(() => import("./pages/ClientQuestionnaire"));
 const About = lazy(() => import("./pages/About"));
 const Team = lazy(() => import("./pages/Team"));
 
@@ -73,6 +74,9 @@ const ManageLeads = lazy(() => import("./pages/admin/leads/ManageLeads"));
 const ManageUploads = lazy(
   () => import("./pages/admin/uploads/ManageUploads"),
 );
+const ManageQuestionnaires = lazy(
+  () => import("./pages/admin/questionnaires/ManageQuestionnaires"),
+);
 // Admin Imports
 
 const queryClient = new QueryClient();
@@ -90,6 +94,10 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/upload" element={<Upload />} />
+                <Route
+                  path="/questionnaire"
+                  element={<ClientQuestionnaire />}
+                />
 
                 {/* Service Routes */}
                 <Route
@@ -161,6 +169,10 @@ const App = () => (
                     <Route
                       path="/admin/uploads"
                       element={<ManageUploads />}
+                    />
+                    <Route
+                      path="/admin/questionnaires"
+                      element={<ManageQuestionnaires />}
                     />
                     <Route path="/admin/blogs" element={<ManageBlogs />} />
                     <Route path="/admin/blogs/:id" element={<BlogEditor />} />

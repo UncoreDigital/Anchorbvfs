@@ -11,6 +11,7 @@ import {
   X,
   Mail,
   Upload,
+  ClipboardList,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils"; // Assuming this exists, typical in shadcn
@@ -32,6 +33,11 @@ const AdminLayout = () => {
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Leads", href: "/admin/leads", icon: Mail },
     { name: "Document Uploads", href: "/admin/uploads", icon: Upload },
+    {
+      name: "Questionnaires",
+      href: "/admin/questionnaires",
+      icon: ClipboardList,
+    },
     { name: "Blogs", href: "/admin/blogs", icon: FileText },
     { name: "Articles & Podcasts", href: "/admin/articles", icon: Files },
     { name: "Events", href: "/admin/events", icon: Calendar },

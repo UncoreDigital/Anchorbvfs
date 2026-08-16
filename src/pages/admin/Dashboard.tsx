@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, Calendar, Files, Upload } from 'lucide-react';
+import { FileText, Calendar, Files, Upload, ClipboardList } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -10,6 +10,7 @@ const Dashboard = () => {
         articles: 0,
         events: 0,
         uploads: 0,
+        questionnaires: 0,
     });
     const [loading, setLoading] = useState(true);
 
@@ -20,12 +21,14 @@ const Dashboard = () => {
                 const { count: articlesCount } = await supabase.from('articles').select('*', { count: 'exact', head: true });
                 const { count: eventsCount } = await supabase.from('events').select('*', { count: 'exact', head: true });
                 const { count: uploadsCount } = await supabase.from('document_submissions').select('*', { count: 'exact', head: true });
+                const { count: questionnairesCount } = await supabase.from('client_form_submissions').select('*', { count: 'exact', head: true });
 
                 setStats({
                     blogs: blogsCount || 0,
                     articles: articlesCount || 0,
                     events: eventsCount || 0,
                     uploads: uploadsCount || 0,
+                    questionnaires: questionnairesCount || 0,
                 });
             } catch (error) {
                 console.error('Error fetching stats:', error);
@@ -42,6 +45,7 @@ const Dashboard = () => {
         { name: 'Articles & Podcasts', value: stats.articles, icon: Files, href: '/admin/articles', color: 'text-purple-600', bg: 'bg-purple-50' },
         { name: 'Events', value: stats.events, icon: Calendar, href: '/admin/events', color: 'text-orange-600', bg: 'bg-orange-50' },
         { name: 'Document Uploads', value: stats.uploads, icon: Upload, href: '/admin/uploads', color: 'text-emerald-600', bg: 'bg-emerald-50' },
+        { name: 'Questionnaires', value: stats.questionnaires, icon: ClipboardList, href: '/admin/questionnaires', color: 'text-rose-600', bg: 'bg-rose-50' },
     ];
 
     return (

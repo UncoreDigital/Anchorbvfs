@@ -222,6 +222,45 @@ export interface Database {
         };
         Relationships: [];
       };
+      // Written exclusively by the `client-form` Edge Function (service role).
+      // The anon key can only SELECT/DELETE here, and only when signed in as an
+      // admin — see supabase/migrations/20260815_client_form.sql.
+      client_form_submissions: {
+        Row: {
+          id: string;
+          email: string;
+          status: string;
+          data: Json;
+          schema_version: number;
+          created_at: string;
+          updated_at: string;
+          submitted_at: string | null;
+          last_ip_hash: string | null;
+        };
+        Insert: {
+          id?: string;
+          email: string;
+          status?: string;
+          data?: Json;
+          schema_version?: number;
+          created_at?: string;
+          updated_at?: string;
+          submitted_at?: string | null;
+          last_ip_hash?: string | null;
+        };
+        Update: {
+          id?: string;
+          email?: string;
+          status?: string;
+          data?: Json;
+          schema_version?: number;
+          created_at?: string;
+          updated_at?: string;
+          submitted_at?: string | null;
+          last_ip_hash?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
