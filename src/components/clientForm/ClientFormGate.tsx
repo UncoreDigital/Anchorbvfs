@@ -50,10 +50,23 @@ function useCountdown(targetIso: string | null): number {
   return remaining;
 }
 
-function formatDuration(seconds: number): string {
+/** Clock form — only for the code-expiry timer, where "9:58" reads correctly. */
+function formatClock(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return `${m}:${String(s).padStart(2, "0")}`;
+}
+
+/**
+ * Words, not a clock. "13:57" next to "try again later" reads as 1:57pm, which
+ * is exactly the wrong thing to tell someone who is already locked out.
+ */
+function formatWait(seconds: number): string {
+  if (seconds < 60) return `${Math.max(seconds, 1)} seconds`;
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) return `${minutes} minute${minutes === 1 ? "" : "s"}`;
+  const hours = Math.round(minutes / 60);
+  return `${hours} hour${hours === 1 ? "" : "s"}`;
 }
 
 interface Props {
@@ -78,6 +91,11 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
   const [attemptsRemaining, setAttemptsRemaining] = useState<number | null>(
     null,
   );
+  const [errorRef, setErrorRef] = useState<string | null>(null);
+  /** Seconds until a rate limit lifts. Counts down live in the banner. */
+  const [retryIn, setRetryIn] = useState<number | null>(null);
+  /** Code requests left in the current hour, when the server reports it. */
+  const [requestsLeft, setRequestsLeft] = useState<number | null>(null);
 
   const codeExpiresIn = useCountdown(challenge?.expiresAt ?? null);
   const resendAvailableIn = useCountdown(challenge?.resendAvailableAt ?? null);
@@ -95,6 +113,7 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
 
       setBusy(true);
       setError(null);
+      setErrorRef(null);
       try {
         const result = await clientFormApi.requestOtp(trimmed, password);
         setEmail(trimmed);
@@ -104,6 +123,8 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
           resendAvailableAt: result.resendAvailableAt,
         });
         setAttemptsRemaining(null);
+        setRetryIn(null);
+        setRequestsLeft(result.requestsLeft ?? null);
         setCode("");
         submittedCode.current = null;
         setStep("code");
@@ -126,11 +147,9 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
               : current,
           );
         }
-        setError(
-          failure.retryAfter
-            ? `${failure.message} (about ${formatDuration(failure.retryAfter)})`
-            : failure.message,
-        );
+        setErrorRef(failure.ref ?? null);
+        setError(failure.message);
+        setRetryIn(failure.retryAfter ?? null);
       } finally {
         setBusy(false);
       }
@@ -145,6 +164,7 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
 
       setBusy(true);
       setError(null);
+      setErrorRef(null);
       try {
         const result = await clientFormApi.verifyOtp(email, value);
         onVerified(result);
@@ -170,17 +190,29 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
           setAttemptsRemaining(failure.attemptsRemaining);
         }
 
-        setError(
-          failure.retryAfter
-            ? `${failure.message} (about ${formatDuration(failure.retryAfter)})`
-            : failure.message,
-        );
+        setErrorRef(failure.ref ?? null);
+        setError(failure.message);
+        setRetryIn(failure.retryAfter ?? null);
       } finally {
         setBusy(false);
       }
     },
     [email, onVerified],
   );
+
+  // Tick the lockout down so the banner stays honest instead of freezing on
+  // whatever number the server happened to return.
+  useEffect(() => {
+    if (retryIn === null || retryIn <= 0) return;
+    const id = window.setInterval(() => {
+      setRetryIn((current) => {
+        if (current === null) return null;
+        if (current <= 1) return null;
+        return current - 1;
+      });
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [retryIn]);
 
   // Verify as soon as the last digit lands — no extra click needed.
   useEffect(() => {
@@ -194,6 +226,7 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
     setChallenge(null);
     setCode("");
     setError(null);
+    setErrorRef(null);
     setAttemptsRemaining(null);
     submittedCode.current = null;
   };
@@ -251,10 +284,21 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
           className="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
         >
           {error}
-          {attemptsRemaining !== null && attemptsRemaining > 0 && (
-            <span className="mt-1 block text-xs text-red-600">
-              {attemptsRemaining} attempt{attemptsRemaining === 1 ? "" : "s"}{" "}
-              remaining before this code is locked.
+          {retryIn !== null && retryIn > 0 && (
+            <span className="mt-1.5 block text-xs text-red-600">
+              You can try again in {formatWait(retryIn)}.
+            </span>
+          )}
+          {attemptsRemaining !== null && (
+            <span className="mt-1.5 block text-xs text-red-600">
+              {attemptsRemaining > 0
+                ? `${attemptsRemaining} ${attemptsRemaining === 1 ? "try" : "tries"} left before this code is locked.`
+                : "No tries left on this code — request a new one."}
+            </span>
+          )}
+          {errorRef && (
+            <span className="mt-1.5 block font-mono text-xs text-red-600/80">
+              Reference: {errorRef}
             </span>
           )}
         </div>
@@ -356,9 +400,18 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
                 This code has expired. Send a new one to continue.
               </span>
             ) : (
-              <>Code expires in {formatDuration(codeExpiresIn)}</>
+              <>Code expires in {formatClock(codeExpiresIn)}</>
             )}
           </p>
+
+          {/* Warn while there is still something to do about it. */}
+          {requestsLeft !== null && requestsLeft <= 2 && (
+            <p className="text-center text-xs text-amber-700">
+              {requestsLeft === 0
+                ? "That was your last code for this hour."
+                : `${requestsLeft} more ${requestsLeft === 1 ? "code" : "codes"} can be sent to this address this hour.`}
+            </p>
+          )}
 
           {busy && (
             <p className="flex items-center justify-center gap-2 text-sm text-slate">
@@ -375,7 +428,7 @@ const ClientFormGate = ({ onVerified, expiredNotice }: Props) => {
               className="w-full"
             >
               {resendAvailableIn > 0 && !codeExpired
-                ? `Resend code in ${formatDuration(resendAvailableIn)}`
+                ? `Resend code in ${formatClock(resendAvailableIn)}`
                 : "Send a new code"}
             </Button>
             <button

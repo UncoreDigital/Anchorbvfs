@@ -6,6 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   CloudOff,
+  FileSearch,
   Loader2,
   LogOut,
   Save,
@@ -25,10 +26,18 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import ClientFormField from "./ClientFormField";
 import ClientFormShell from "./ClientFormShell";
+import AnswerList from "./AnswerList";
 import {
   ClientFormError,
   clientFormApi,
@@ -100,6 +109,8 @@ const ClientFormWizard = ({
   const [submitted, setSubmitted] = useState(false);
   const [conflict, setConflict] = useState<FormValues | null>(null);
   const [restorePrompt, setRestorePrompt] = useState<LocalBackup | null>(null);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewBlanks, setPreviewBlanks] = useState(false);
   const [exitPrompt, setExitPrompt] = useState(false);
   const [exiting, setExiting] = useState(false);
   const [online, setOnline] = useState(
@@ -526,22 +537,46 @@ const ClientFormWizard = ({
   return (
     <ClientFormShell
       action={
-        <div className="flex shrink-0 items-center gap-3">
-          <span className="hidden text-xs text-slate md:inline">
+        <div className="flex shrink-0 items-center gap-2">
+          <span className="hidden text-xs text-slate lg:inline">
             {stats.percent}% complete
           </span>
           <Button
             variant="outline"
             size="sm"
+            onClick={() => setPreviewOpen(true)}
+            disabled={submitting || exiting}
+          >
+            <FileSearch className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Preview</span>
+          </Button>
+          <Button
+            size="sm"
+            onClick={() => void handleSubmit()}
+            disabled={submitting || exiting || !online}
+          >
+            {submitting ? (
+              <Loader2 className="h-4 w-4 animate-spin sm:mr-2" />
+            ) : (
+              <Send className="h-4 w-4 sm:mr-2" />
+            )}
+            <span className="hidden sm:inline">
+              {submitting ? "Submitting…" : "Submit"}
+            </span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => setExitPrompt(true)}
             disabled={exiting || submitting}
+            title="Save your progress and exit"
+            aria-label="Save your progress and exit"
           >
             {exiting ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className="h-4 w-4 animate-spin" />
             ) : (
-              <LogOut className="mr-2 h-4 w-4" />
+              <LogOut className="h-4 w-4" />
             )}
-            Save &amp; exit
           </Button>
         </div>
       }
@@ -904,6 +939,49 @@ const ClientFormWizard = ({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Preview — read back exactly what will be sent */}
+      <Dialog open={previewOpen} onOpenChange={setPreviewOpen}>
+        <DialogContent className="max-h-[90vh] max-w-4xl overflow-y-auto bg-white">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl font-bold text-navy">
+              Preview your answers
+            </DialogTitle>
+            <DialogDescription>
+              {stats.answered} of {stats.total} questions answered. Unanswered
+              questions are hidden here — tick the box below to see the gaps.
+            </DialogDescription>
+          </DialogHeader>
+
+          <label className="flex cursor-pointer items-center gap-2 border-b border-slate-100 pb-3 text-sm text-slate">
+            <input
+              type="checkbox"
+              checked={previewBlanks}
+              onChange={(e) => setPreviewBlanks(e.target.checked)}
+              className="rounded border-slate-300"
+            />
+            Show unanswered questions
+          </label>
+
+          <AnswerList values={values} includeBlanks={previewBlanks} />
+
+          <div className="sticky bottom-0 -mx-6 flex flex-col gap-2 border-t border-slate-100 bg-white px-6 pt-4 sm:flex-row sm:justify-end">
+            <Button variant="outline" onClick={() => setPreviewOpen(false)}>
+              Keep editing
+            </Button>
+            <Button
+              onClick={() => {
+                setPreviewOpen(false);
+                void handleSubmit();
+              }}
+              disabled={submitting || !online}
+            >
+              <Send className="mr-2 h-4 w-4" />
+              Submit questionnaire
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Save & exit */}
       <AlertDialog

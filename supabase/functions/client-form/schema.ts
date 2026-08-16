@@ -102,16 +102,15 @@ const YES_NO: FieldOption[] = [
 ];
 
 /**
- * Every question must be answered before the questionnaire can be submitted.
- * Where a question genuinely doesn't apply the client is told to write "N/A"
- * — see REQUIRED_HINT — which is more useful to an analyst than a blank box,
- * since it distinguishes "not applicable" from "not yet reached".
+ * Only section A (Personal Information) is required. Everything else may be
+ * left blank — we need to know who sent the questionnaire and how to reach
+ * them; the rest we can chase up.
  *
- * Drafts are exempt: `validateField(..., forDraft = true)` skips required
- * checks entirely, so partial saves keep working.
+ * Drafts are exempt from even that: `validateField(..., forDraft = true)`
+ * skips required checks entirely, so partial saves keep working.
  */
 export const REQUIRED_HINT =
-  'Every question needs an answer. Put "N/A" if it doesn\'t apply to your business.';
+  "Only your contact details in section A are required — answer what you can and leave the rest blank if it doesn't apply.";
 
 /** Every long-form answer is a resizable, auto-growing textarea. */
 function question(
@@ -123,7 +122,6 @@ function question(
     key,
     label,
     type: "textarea",
-    required: true,
     rows: 4,
     maxLength: MAX_LONG_TEXT_LENGTH,
     colSpan: 2,
@@ -140,7 +138,6 @@ function shortField(
     key,
     label,
     type: "text",
-    required: true,
     maxLength: MAX_TEXT_LENGTH,
     colSpan: 1,
     ...extra,
@@ -174,7 +171,9 @@ export const FORM_SECTIONS: SectionDef[] = [
         maxLength: 40,
         colSpan: 1,
       },
-      shortField("a_relationship", "Relationship with the Company"),
+      shortField("a_relationship", "Relationship with the Company", {
+        required: true,
+      }),
     ],
   },
 
@@ -183,7 +182,7 @@ export const FORM_SECTIONS: SectionDef[] = [
     id: "company",
     title: "Company Background",
     fields: [
-      shortField("b_legal_name", "Company's legal name", { required: true }),
+      shortField("b_legal_name", "Company's legal name"),
       shortField(
         "b_entity_type",
         "Type of entity (corporation, partnership, proprietorship)",
@@ -211,7 +210,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         label:
           "2. List the major stockholders, partners, or owners of the company and their percentage of ownership or number of shares owned.",
         type: "table",
-        required: true,
         colSpan: 2,
         initialRows: 3,
         columns: [
@@ -225,7 +223,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         label:
           "3. List all known related parties (subsidiaries, affiliates, or relatives) that the company does business with.",
         type: "table",
-        required: true,
         colSpan: 2,
         initialRows: 3,
         columns: [
@@ -238,7 +235,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         label:
           "4. List each location maintained by the company and the primary activity at each location such as executive office, plant, sales office, etc.",
         type: "table",
-        required: true,
         colSpan: 2,
         initialRows: 3,
         columns: [
@@ -274,7 +270,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         key: "c4_sales_breakdown",
         label: "4. Breakdown of sales and gross profit by product line:",
         type: "table",
-        required: true,
         colSpan: 2,
         initialRows: 4,
         columns: [
@@ -440,7 +435,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         key: "g1_key_management",
         label: "1. Please list key members of company management below.",
         type: "table",
-        required: true,
         colSpan: 2,
         initialRows: 4,
         columns: [
@@ -478,7 +472,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         label:
           "8. Does the Company employ any relatives or favored people who receive compensation from the business without working, or who are at a level of compensation greater than what you would pay an unrelated/unfavored worker?",
         type: "radio",
-        required: true,
         options: YES_NO,
         colSpan: 2,
       },
@@ -492,7 +485,6 @@ export const FORM_SECTIONS: SectionDef[] = [
         label:
           "9. An important step in valuing a closely held entity is to normalize the stream of historical Income Statement by adding back all the expenses which are personal in nature or not related to the operations of the firm. What benefits (company car, company health insurance, your share of 401k, conventions, etc.) and the dollar value of them have you, your partners or family members been taking?",
         type: "table",
-        required: true,
         colSpan: 2,
         initialRows: 4,
         columns: [

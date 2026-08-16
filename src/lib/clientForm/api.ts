@@ -40,6 +40,8 @@ export interface RequestOtpResult {
   expiresAt: string;
   resendAvailableAt: string;
   attemptsAllowed: number;
+  /** Code requests left for this address in the current hour. */
+  requestsLeft?: number;
 }
 
 export interface VerifyOtpResult extends SessionState {
@@ -68,6 +70,9 @@ export class ClientFormError extends Error {
   attemptsRemaining?: number;
   fieldErrors?: FormErrors;
   serverDraft?: SubmissionState | null;
+  /** Correlates with a `[ref] stage=…` line in the Edge Function logs. */
+  ref?: string;
+  stage?: string;
 
   constructor(
     code: string,
@@ -112,6 +117,8 @@ interface ApiEnvelope {
     message?: string;
     retryAfter?: number;
     attemptsRemaining?: number;
+    ref?: string;
+    stage?: string;
   };
   fieldErrors?: FormErrors;
   server?: SubmissionState | null;
@@ -169,6 +176,12 @@ async function call<T>(
 
   if (!response.ok || !body?.ok) {
     const error = body?.error ?? {};
+    if (error.ref) {
+      // Makes a production failure traceable from a screenshot alone.
+      console.error(
+        `client-form ${action} failed — ref ${error.ref}, stage ${error.stage ?? "?"}`,
+      );
+    }
     throw new ClientFormError(
       error.code ?? "SERVER_ERROR",
       error.message ?? "Something went wrong. Please try again.",
@@ -176,6 +189,8 @@ async function call<T>(
       {
         retryAfter: error.retryAfter,
         attemptsRemaining: error.attemptsRemaining,
+        ref: error.ref,
+        stage: error.stage,
         fieldErrors: body?.fieldErrors,
         serverDraft: body?.server ?? body?.submission ?? null,
       },

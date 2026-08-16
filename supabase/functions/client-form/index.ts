@@ -11,6 +11,7 @@
 //   save-draft   { token, data, expectedUpdatedAt } -> { updatedAt }
 //   submit       { token, data, expectedUpdatedAt } -> { id, submittedAt }
 //   sign-out     { token }                          -> { ok }
+//   health       { password }                       -> { healthy, checks }
 //
 // Deploy:
 //   supabase functions deploy client-form
@@ -139,6 +140,35 @@ function fail(
   return json({ ok: false, error: { code, message, ...extra } }, status, origin);
 }
 
+/**
+ * A 500 with a breadcrumb. `stage` is a coarse label ("otp-insert") and `ref`
+ * ties the client's error message to a specific log line, so a production
+ * failure can be traced without reproducing it. Neither leaks anything about
+ * the data or the secrets; the underlying driver error is logged, not returned.
+ */
+function serverError(
+  origin: string | null,
+  stage: string,
+  cause: unknown,
+  message = "Something went wrong. Please try again.",
+): Response {
+  const ref = crypto.randomUUID().slice(0, 8);
+  let detail: unknown = cause;
+  if (cause && typeof cause === "object") {
+    const e = cause as Record<string, unknown>;
+    // PostgrestError puts the useful part in code/details/hint, none of which
+    // survive a plain string coercion.
+    detail = {
+      code: e.code,
+      message: e.message,
+      details: e.details,
+      hint: e.hint,
+    };
+  }
+  console.error(`[${ref}] stage=${stage}`, JSON.stringify(detail));
+  return fail(origin, 500, "SERVER_ERROR", message, { ref, stage });
+}
+
 const encoder = new TextEncoder();
 
 function toHex(buffer: ArrayBuffer): string {
@@ -235,7 +265,7 @@ function escapeHtml(value: string): string {
 async function rateLimit(
   key: string,
   { limit, window }: { limit: number; window: number },
-): Promise<{ allowed: boolean; retryAfter: number }> {
+): Promise<{ allowed: boolean; remaining: number; retryAfter: number }> {
   const { data, error } = await admin.rpc("client_form_rate_limit", {
     p_key: key,
     p_limit: limit,
@@ -244,11 +274,12 @@ async function rateLimit(
   if (error) {
     // Never lock legitimate clients out because the counter table hiccuped.
     console.error("rate limit check failed", error);
-    return { allowed: true, retryAfter: 0 };
+    return { allowed: true, remaining: limit, retryAfter: 0 };
   }
   const row = Array.isArray(data) ? data[0] : data;
   return {
     allowed: row?.allowed !== false,
+    remaining: Number(row?.remaining ?? 0),
     retryAfter: Number(row?.retry_after ?? window),
   };
 }
@@ -455,7 +486,7 @@ async function handleRequestOtp(
       origin,
       429,
       "RATE_LIMITED",
-      "Too many code requests from this connection. Please try again later.",
+      "Too many code requests from this connection.",
       { retryAfter: ipLimit.retryAfter },
     );
   }
@@ -491,7 +522,7 @@ async function handleRequestOtp(
       origin,
       429,
       "RATE_LIMITED",
-      "Too many codes requested for this email address. Please try again later.",
+      "You have requested the maximum number of codes for this address.",
       { retryAfter: emailLimit.retryAfter },
     );
   }
@@ -514,7 +545,7 @@ async function handleRequestOtp(
         origin,
         429,
         "COOLDOWN",
-        "A code was just sent. Please wait before requesting another.",
+        "A code was just sent to you.",
         { retryAfter: Math.ceil(OTP_RESEND_COOLDOWN_SECONDS - elapsed) },
       );
     }
@@ -542,8 +573,7 @@ async function handleRequestOtp(
     .single();
 
   if (insertError || !inserted) {
-    console.error("otp insert failed", insertError);
-    return fail(origin, 500, "SERVER_ERROR", "Could not create an access code.");
+    return serverError(origin, "otp-insert", insertError, "Could not create an access code.");
   }
 
   try {
@@ -569,6 +599,7 @@ async function handleRequestOtp(
         Date.now() + OTP_RESEND_COOLDOWN_SECONDS * 1000,
       ).toISOString(),
       attemptsAllowed: OTP_MAX_ATTEMPTS,
+      requestsLeft: emailLimit.remaining,
     },
     200,
     origin,
@@ -598,7 +629,7 @@ async function handleVerifyOtp(
   const ipHash = await hmacHex(OTP_PEPPER, clientIp(req));
   const ipLimit = await rateLimit(`verify-ip:${ipHash}`, LIMITS.verifyPerIp);
   if (!ipLimit.allowed) {
-    return fail(origin, 429, "RATE_LIMITED", "Too many attempts. Try again later.", {
+    return fail(origin, 429, "RATE_LIMITED", "Too many attempts from this connection.", {
       retryAfter: ipLimit.retryAfter,
     });
   }
@@ -607,7 +638,7 @@ async function handleVerifyOtp(
     LIMITS.verifyPerEmail,
   );
   if (!emailLimit.allowed) {
-    return fail(origin, 429, "RATE_LIMITED", "Too many attempts. Try again later.", {
+    return fail(origin, 429, "RATE_LIMITED", "Too many code attempts for this address.", {
       retryAfter: emailLimit.retryAfter,
     });
   }
@@ -622,8 +653,7 @@ async function handleVerifyOtp(
     .maybeSingle();
 
   if (otpError) {
-    console.error("otp lookup failed", otpError);
-    return fail(origin, 500, "SERVER_ERROR", "Something went wrong. Try again.");
+    return serverError(origin, "otp-lookup", otpError);
   }
   if (!otp) {
     return fail(
@@ -698,8 +728,7 @@ async function handleVerifyOtp(
     });
 
   if (sessionError) {
-    console.error("session insert failed", sessionError);
-    return fail(origin, 500, "SERVER_ERROR", "Could not start your session.");
+    return serverError(origin, "session-insert", sessionError, "Could not start your session.");
   }
 
   const state = await loadState(email);
@@ -781,8 +810,7 @@ async function prepareWrite(
     .maybeSingle();
 
   if (error) {
-    console.error("draft lookup failed", error);
-    return { response: fail(origin, 500, "SERVER_ERROR", "Could not load your draft.") };
+    return { response: serverError(origin, "draft-lookup", error, "Could not load your draft.") };
   }
 
   // One questionnaire per email. Once it is in, it is read-only — no further
@@ -867,8 +895,7 @@ async function handleSaveDraft(
       .maybeSingle();
 
     if (error || !data) {
-      console.error("draft update failed", error);
-      return fail(origin, 500, "SERVER_ERROR", "Could not save your draft.");
+      return serverError(origin, "draft-update", error, "Could not save your draft.");
     }
     return json({ ok: true, id: data.id, updatedAt: data.updated_at }, 200, origin);
   }
@@ -924,8 +951,7 @@ async function handleSaveDraft(
         }
       }
     }
-    console.error("draft insert failed", error);
-    return fail(origin, 500, "SERVER_ERROR", "Could not save your draft.");
+    return serverError(origin, "draft-insert", error, "Could not save your draft.");
   }
 
   return json({ ok: true, id: data!.id, updatedAt: data!.updated_at }, 200, origin);
@@ -984,8 +1010,7 @@ async function handleSubmit(
       .maybeSingle();
 
     if (error) {
-      console.error("submit update failed", error);
-      return fail(origin, 500, "SERVER_ERROR", "Could not submit your questionnaire.");
+      return serverError(origin, "submit-update", error, "Could not submit your questionnaire.");
     }
     if (!data) {
       // Already flipped to submitted by a concurrent request — report success.
@@ -1035,8 +1060,7 @@ async function handleSubmit(
           );
         }
       }
-      console.error("submit insert failed", error);
-      return fail(origin, 500, "SERVER_ERROR", "Could not submit your questionnaire.");
+      return serverError(origin, "submit-insert", error, "Could not submit your questionnaire.");
     }
     if (!data) {
       return fail(origin, 500, "SERVER_ERROR", "Could not submit your questionnaire.");
@@ -1068,6 +1092,84 @@ async function handleSubmit(
   }
 
   return json({ ok: true, id, submittedAt }, 200, origin);
+}
+
+/**
+ * Deployment self-check. Reports which dependency is broken rather than making
+ * you correlate dashboard logs by hand. Gated behind the access password so it
+ * isn't a public probe of the project's internals.
+ *
+ *   curl -s -X POST "$SUPABASE_URL/functions/v1/client-form" \
+ *     -H "Authorization: Bearer $ANON_KEY" -H "apikey: $ANON_KEY" \
+ *     -H "Content-Type: application/json" \
+ *     -d '{"action":"health","password":"<access password>"}' | jq
+ */
+async function handleHealth(
+  body: Record<string, unknown>,
+  origin: string | null,
+): Promise<Response> {
+  const password = typeof body.password === "string" ? body.password : "";
+  if (!(await secretsMatch(password, ACCESS_PASSWORD))) {
+    return fail(origin, 401, "BAD_CREDENTIALS", "That access password isn't correct.");
+  }
+
+  const checks: Record<string, string> = {};
+
+  const missing = [
+    ["SUPABASE_URL", SUPABASE_URL],
+    ["SUPABASE_SERVICE_ROLE_KEY", SERVICE_ROLE_KEY],
+    ["CLIENT_FORM_PASSWORD", ACCESS_PASSWORD],
+    ["CLIENT_FORM_OTP_PEPPER", OTP_PEPPER],
+    ["SMTP_USER", SMTP_USER],
+    ["SMTP_PASS", SMTP_PASS],
+  ]
+    .filter(([, value]) => !value)
+    .map(([name]) => name);
+  checks.env = missing.length ? `missing: ${missing.join(", ")}` : "ok";
+  checks.smtp_target = `${SMTP_HOST}:${SMTP_PORT} secure=${SMTP_PORT === 465}`;
+  checks.notify_email = NOTIFY_EMAIL || "(unset — no internal alert on submit)";
+
+  for (const table of [
+    "client_form_submissions",
+    "client_form_otps",
+    "client_form_sessions",
+    "client_form_rate_limits",
+  ]) {
+    const { error } = await admin
+      .from(table)
+      .select("*", { count: "exact", head: true });
+    checks[table] = error ? `${error.code ?? "?"}: ${error.message}` : "ok";
+  }
+
+  const { error: rlError } = await admin.rpc("client_form_rate_limit", {
+    p_key: "health-check",
+    p_limit: 1_000_000,
+    p_window_seconds: 60,
+  });
+  checks.fn_rate_limit = rlError
+    ? `${rlError.code ?? "?"}: ${rlError.message}`
+    : "ok";
+
+  const { error: cleanupError } = await admin.rpc("client_form_cleanup");
+  checks.fn_cleanup = cleanupError
+    ? `${cleanupError.code ?? "?"}: ${cleanupError.message}`
+    : "ok";
+
+  // The most common production failure: SMTP credentials that don't
+  // authenticate. verify() opens a real connection and logs in.
+  try {
+    await transporter.verify();
+    checks.smtp = "ok";
+  } catch (error) {
+    checks.smtp = (error as Error)?.message ?? String(error);
+  }
+
+  const healthy = Object.entries(checks).every(
+    ([key, value]) =>
+      value === "ok" || key === "smtp_target" || key === "notify_email",
+  );
+
+  return json({ ok: true, healthy, checks }, 200, origin);
 }
 
 async function handleSignOut(
@@ -1148,11 +1250,12 @@ Deno.serve(async (req) => {
         return await handleSubmit(body, origin);
       case "sign-out":
         return await handleSignOut(body, origin);
+      case "health":
+        return await handleHealth(body, origin);
       default:
         return fail(origin, 400, "UNKNOWN_ACTION", "Unsupported action.");
     }
   } catch (error) {
-    console.error("client-form failed", error);
-    return fail(origin, 500, "SERVER_ERROR", "Something went wrong. Please try again.");
+    return serverError(origin, `action:${String(body.action)}`, error);
   }
 });

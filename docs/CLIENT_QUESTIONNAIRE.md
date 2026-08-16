@@ -20,11 +20,10 @@ form is long, it saves drafts and can be resumed later from any device.
   dead — walking away from a shared computer doesn't leave the questionnaire
   open. Verifying again later shows the read-only copy and revokes that session
   too.
-- **Every question must be answered to submit.** All 92 fields are required.
-  Where a question doesn't apply, clients are told to write "N/A", which is more
-  useful to an analyst than a blank box because it distinguishes "not
-  applicable" from "not yet reached". **Drafts are exempt** — partial saves work
-  exactly as before, the check only runs on submit.
+- **Only section A (Personal Information) is required** — name, email, phone and
+  relationship to the company. Every other question may be left blank: we need
+  to know who sent it and how to reach them, the rest we can chase up. Drafts
+  are exempt from even that.
 
 ---
 
@@ -38,7 +37,8 @@ form is long, it saves drafts and can be resumed later from any device.
 | `src/components/clientForm/ClientFormGate.tsx` | Email + password step, then the 6-digit code step. |
 | `src/components/clientForm/ClientFormWizard.tsx` | Sectioned form, autosave, save-draft, submit. |
 | `src/components/clientForm/ClientFormCompleted.tsx` | Read-only receipt + answers + PDF copy, shown once submitted. |
-| `src/components/clientForm/ClientFormShell.tsx` | Full-screen chrome for the form: slim identity bar, no site nav or footer. |
+| `src/components/clientForm/ClientFormShell.tsx` | Full-screen chrome for the form: slim identity bar with Preview / Submit / exit. |
+| `src/components/clientForm/AnswerList.tsx` | Read-only rendering of the answers, shared by Preview and the receipt. |
 | `src/components/clientForm/ClientFormField.tsx` | Renders one question. |
 | `src/components/clientForm/AutoGrowTextarea.tsx` | Answer box that grows with the text and is still manually resizable. |
 | `src/components/clientForm/ClientFormTable.tsx` | Add/remove-row editor for the questionnaire's tabular questions. |
@@ -257,9 +257,14 @@ opportunistically (~2% of requests); schedule it with `pg_cron` if you prefer.
   the last few answers on the way out would be the worst possible outcome.
   It is confirmed through a dialog, and the dialog stays open (with a spinner)
   until the save and sign-out have both finished.
-- All 92 answers are required on submit (drafts stay partial). Submit jumps to
-  the first missing one and focuses it; the review step lists the first eight
-  as jump links and counts the rest.
+- **Preview** and **Submit** sit in the top bar, reachable from any section.
+  Preview reads back exactly what will be sent (answered questions only, with a
+  toggle to show the gaps) and can submit straight from there.
+- Only section A is required on submit. Submit jumps to the first missing answer
+  and focuses it; the review step lists the first eight as jump links.
+- Rate-limit waits are written in words ("try again in 14 minutes"), never as a
+  clock — "13:57" beside "try again later" reads as a time of day. Remaining
+  tries are shown alongside, and the countdown ticks live.
 - Every long answer is an auto-growing textarea that is *also* manually
   resizable; the two mechanisms don't fight (the box stops auto-growing once the
   client drags it).
