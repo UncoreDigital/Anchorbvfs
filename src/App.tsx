@@ -6,6 +6,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import LoadingScreen from "./components/LoadingScreen";
+import { Analytics } from "@vercel/analytics/react";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -196,6 +197,7 @@ const App = () => (
         </AuthProvider>
       </TooltipProvider>
     </HelmetProvider>
+    <Analytics />
   </QueryClientProvider>
 );
 
