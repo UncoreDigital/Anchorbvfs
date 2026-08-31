@@ -29,6 +29,7 @@ import {
   ChevronRight,
   Filter,
   Download,
+  DownloadCloud,
   File as FileIcon,
   Paperclip,
 } from "lucide-react";
@@ -63,6 +64,7 @@ const ManageUploads = () => {
   }>({ key: "created_at", direction: "desc" });
   const [selected, setSelected] = useState<Submission | null>(null);
   const [downloadingPath, setDownloadingPath] = useState<string | null>(null);
+  const [downloadingAllId, setDownloadingAllId] = useState<string | null>(null);
   const itemsPerPage = 10;
 
   const { data, isLoading } = useQuery({
@@ -121,6 +123,20 @@ const ManageUploads = () => {
     setCurrentPage(1);
   };
 
+  // Signed URLs carry a Content-Disposition of attachment, so a plain anchor
+  // click saves the file instead of navigating away — and unlike window.open
+  // it survives pop-up blockers when several fire in a row.
+  const triggerBrowserDownload = (url: string, fileName: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    link.rel = "noopener";
+    link.style.display = "none";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
   const handleDownload = async (file: UploadedFile) => {
     try {
       setDownloadingPath(file.path);
@@ -133,6 +149,51 @@ const ManageUploads = () => {
       toast.error("Could not download file: " + error.message);
     } finally {
       setDownloadingPath(null);
+    }
+  };
+
+  // Files are signed and saved one at a time: the plural createSignedUrls only
+  // accepts a single download name for the whole batch, which would collapse
+  // every file onto the same filename.
+  const handleDownloadAll = async (submission: Submission) => {
+    const files = submission.files || [];
+    if (files.length === 0) {
+      toast.error("This submission has no files to download.");
+      return;
+    }
+
+    setDownloadingAllId(submission.id);
+    const failed: string[] = [];
+
+    try {
+      for (const file of files) {
+        try {
+          const { data, error } = await supabase.storage
+            .from(UPLOAD_BUCKET)
+            .createSignedUrl(file.path, 60, { download: file.name });
+          if (error) throw error;
+          triggerBrowserDownload(data.signedUrl, file.name);
+          // Give the browser a beat between saves; back-to-back clicks get
+          // dropped by some download managers.
+          await new Promise((resolve) => setTimeout(resolve, 400));
+        } catch {
+          failed.push(file.name);
+        }
+      }
+
+      if (failed.length === 0) {
+        toast.success(
+          `Downloading ${files.length} file${files.length === 1 ? "" : "s"}...`,
+        );
+      } else if (failed.length === files.length) {
+        toast.error("Could not download the files for this submission.");
+      } else {
+        toast.warning(
+          `${files.length - failed.length} of ${files.length} files downloaded. Failed: ${failed.join(", ")}`,
+        );
+      }
+    } finally {
+      setDownloadingAllId(null);
     }
   };
 
@@ -288,6 +349,24 @@ const ManageUploads = () => {
                     <Eye className="w-4 h-4 mr-2" />
                     View
                   </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => void handleDownloadAll(submission)}
+                    disabled={
+                      downloadingAllId === submission.id ||
+                      (submission.files?.length || 0) === 0
+                    }
+                    title="Download every file in this submission"
+                    className="hover:bg-primary/10 hover:text-primary mr-2"
+                  >
+                    {downloadingAllId === submission.id ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <DownloadCloud className="w-4 h-4" />
+                    )}
+                    <span className="ml-2 hidden sm:inline">Download All</span>
+                  </Button>
                   <DeleteDialog
                     onDelete={() => handleDelete(submission)}
                     title="Delete Submission"
@@ -429,10 +508,29 @@ const ManageUploads = () => {
               )}
 
               <div>
-                <label className="text-sm font-medium text-gray-500 block mb-2">
-                  Documents ({selected.files?.length || 0} ·{" "}
-                  {formatBytes(selected.total_size)})
-                </label>
+                <div className="flex items-center justify-between gap-3 mb-2">
+                  <label className="text-sm font-medium text-gray-500">
+                    Documents ({selected.files?.length || 0} ·{" "}
+                    {formatBytes(selected.total_size)})
+                  </label>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => void handleDownloadAll(selected)}
+                    disabled={
+                      downloadingAllId === selected.id ||
+                      (selected.files?.length || 0) === 0
+                    }
+                    title="Download every file in this submission"
+                  >
+                    {downloadingAllId === selected.id ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <DownloadCloud className="w-4 h-4" />
+                    )}
+                    <span className="ml-2">Download All</span>
+                  </Button>
+                </div>
                 <ul className="space-y-2">
                   {(selected.files || []).map((file) => (
                     <li
