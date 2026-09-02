@@ -73,12 +73,14 @@ const Events = () => {
           <div className="grid gap-8 max-w-5xl mx-auto">
             {events.map((event, index) => (
               <motion.div
-                key={index}
+                key={event.id}
+                // Anchor target for site-search results, which have no event detail page.
+                id={`event-${event.id}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-xl p-6 md:p-8 border border-border hover:shadow-elegant transition-all duration-300"
+                className="scroll-mt-40 bg-card rounded-xl p-6 md:p-8 border border-border hover:shadow-elegant transition-all duration-300"
               >
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
                   {/* Date Badge */}

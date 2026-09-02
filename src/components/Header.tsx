@@ -9,10 +9,12 @@ import {
   Phone,
   MapPin,
   UploadCloud,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
+import SearchDialog from "@/components/SearchDialog";
 
 interface NavItem {
   name: string;
@@ -113,6 +115,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileOpenDropdowns, setMobileOpenDropdowns] = useState<string[]>([]);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useBodyScrollLock(isMobileMenuOpen);
 
@@ -125,6 +128,25 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Ctrl/Cmd+K opens search from anywhere on the site.
+  useEffect(() => {
+    const handleShortcut = (e: KeyboardEvent) => {
+      if (e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsMobileMenuOpen(false);
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handleShortcut);
+    return () => window.removeEventListener("keydown", handleShortcut);
+  }, []);
+
+  const openSearch = () => {
+    setIsMobileMenuOpen(false);
+    setMobileOpenDropdowns([]);
+    setIsSearchOpen(true);
+  };
 
   useEffect(() => {
     if (location.hash) {
@@ -398,6 +420,14 @@ const Header = () => {
               animate={{ opacity: 1, x: 0 }}
               className="hidden lg:flex items-center gap-3"
             >
+              <button
+                onClick={openSearch}
+                aria-label="Search the site"
+                title="Search (Ctrl+K)"
+                className="p-2.5 text-primary hover:text-accent hover:bg-muted/60 rounded-full transition-colors"
+              >
+                <Search className="w-5 h-5" />
+              </button>
               <Link to="/upload">
                 <Button
                   variant="outline"
@@ -417,7 +447,14 @@ const Header = () => {
             </motion.div>
 
             {/* Mobile Menu Toggle */}
-            <div className="flex lg:hidden justify-end flex-1 items-center">
+            <div className="flex lg:hidden justify-end flex-1 items-center gap-1">
+              <button
+                onClick={openSearch}
+                aria-label="Search the site"
+                className="p-2 text-primary hover:bg-muted/50 rounded-md transition-colors"
+              >
+                <Search className="w-6 h-6" />
+              </button>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="p-2 -mr-2 text-primary hover:bg-muted/50 rounded-md transition-colors"
@@ -537,6 +574,15 @@ const Header = () => {
                 ))}
 
                 <div className="mt-8 flex flex-col gap-3">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={openSearch}
+                    className="w-full justify-center text-lg py-6"
+                  >
+                    Search
+                    <Search className="w-5 h-5 ml-2" />
+                  </Button>
                   <Link
                     to="/upload"
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -570,6 +616,8 @@ const Header = () => {
         </AnimatePresence>,
         document.body,
       )}
+
+      <SearchDialog open={isSearchOpen} onOpenChange={setIsSearchOpen} />
     </header>
   );
 };

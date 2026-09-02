@@ -25,6 +25,7 @@ const Team = lazy(() => import("./pages/Team"));
 const Faq = lazy(() => import("./pages/FAQ"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
+const Search = lazy(() => import("./pages/Search"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Individual Service Pages
@@ -160,6 +161,7 @@ const App = () => (
                 <Route path="/faqs" element={<Faq />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/search" element={<Search />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="/admin" element={<Login />} />
                 <Route element={<ProtectedRoute />}>
