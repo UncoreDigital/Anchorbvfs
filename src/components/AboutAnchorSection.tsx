@@ -57,10 +57,10 @@ const AboutAnchorSection = () => {
               className="w-full h-full object-cover"
               controls
               preload="metadata"
-              poster="https://anchorbvfs.com/wp-content/uploads/2023/01/about-right.jpg"
+              poster="/assets/about/about-right.jpg"
             >
               <source
-                src="https://anchorbvfs.com/wp-content/uploads/2023/01/v1.mp4"
+                src="/assets/about/about-video.mp4"
                 type="video/mp4"
               />
               Your browser does not support the video tag.
