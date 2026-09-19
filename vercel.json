@@ -1,6 +1,15 @@
 {
     "framework": "vite",
+    "functions": {
+        "api/blog-og.ts": {
+            "includeFiles": "dist/index.html"
+        }
+    },
     "rewrites": [
+        {
+            "source": "/blog/:id",
+            "destination": "/api/blog-og?id=:id"
+        },
         {
             "source": "/(.*)",
             "destination": "/index.html"

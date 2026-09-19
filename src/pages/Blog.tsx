@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/pagination";
 import { format } from "date-fns";
 import LoadingScreen from "@/components/LoadingScreen";
+import ShareOnLinkedIn from "@/components/ShareOnLinkedIn";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -132,7 +133,7 @@ const Blog = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-16"
+              className="relative mb-16"
             >
               <Link to={`/blog/${featuredPost.id}`} className="group">
                 <div className="grid lg:grid-cols-2 gap-8 items-center bg-muted rounded-2xl overflow-hidden">
@@ -177,6 +178,10 @@ const Blog = () => {
                   </div>
                 </div>
               </Link>
+              <ShareOnLinkedIn
+                url={`/blog/${featuredPost.id}`}
+                className="absolute bottom-6 right-6"
+              />
             </motion.div>
           )}
 
@@ -189,7 +194,7 @@ const Blog = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group border-b border-border pb-8 last:border-0"
+                className="group relative border-b border-border pb-8 last:border-0"
               >
                 <Link
                   to={`/blog/${post.id}`}
@@ -243,6 +248,10 @@ const Blog = () => {
                     </span>
                   </div>
                 </Link>
+                <ShareOnLinkedIn
+                  url={`/blog/${post.id}`}
+                  className="absolute bottom-8 right-0"
+                />
               </motion.article>
             ))}
           </div>

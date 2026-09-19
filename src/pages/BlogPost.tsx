@@ -7,10 +7,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Tag,
-  Share2,
-  Facebook,
-  Twitter,
-  Linkedin,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -19,6 +15,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageBanner from "@/components/PageBanner";
 import LoadingScreen from "@/components/LoadingScreen";
+import ShareOnLinkedIn from "@/components/ShareOnLinkedIn";
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -117,12 +114,20 @@ const BlogPost = () => {
                     {post.category}
                   </span>
                 )}
+                <ShareOnLinkedIn url={`/blog/${post.id}`} className="ml-auto" />
               </div>
 
               <div
                 className="prose prose-lg max-w-none font-inter text-foreground space-y-4"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
+
+              <div className="mt-12 pt-6 border-t border-border flex flex-wrap items-center justify-between gap-4">
+                <span className="font-inter text-sm text-muted-foreground">
+                  Found this useful? Share it with your network.
+                </span>
+                <ShareOnLinkedIn url={`/blog/${post.id}`} />
+              </div>
             </motion.article>
           </div>
         </div>
