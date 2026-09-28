@@ -36,9 +36,11 @@ import {
 import { DeleteDialog } from "@/components/DeleteDialog";
 import { format } from "date-fns";
 import { toast } from "sonner";
+import { zipSync } from "fflate";
 import {
   UPLOAD_BUCKET,
   formatBytes,
+  sanitizeFileName,
   type UploadedFile,
 } from "@/lib/documentUpload";
 
@@ -52,6 +54,23 @@ interface Submission {
   notes: string | null;
   files: UploadedFile[];
   total_size: number;
+}
+
+// ZIP entries are keyed by name, so two uploads called "scan.pdf" would
+// overwrite each other. Suffix repeats the way a file manager would:
+// "scan.pdf", "scan (2).pdf", ... Compared case-insensitively because
+// Windows treats "Scan.pdf" and "scan.pdf" as the same file on extract.
+function uniqueEntryName(name: string, used: Set<string>) {
+  const base = name.split(/[\\/]/).pop() || "file";
+  const dot = base.lastIndexOf(".");
+  const stem = dot > 0 ? base.slice(0, dot) : base;
+  const ext = dot > 0 ? base.slice(dot) : "";
+  let candidate = base;
+  for (let n = 2; used.has(candidate.toLowerCase()); n++) {
+    candidate = `${stem} (${n})${ext}`;
+  }
+  used.add(candidate.toLowerCase());
+  return candidate;
 }
 
 const ManageUploads = () => {
@@ -123,28 +142,35 @@ const ManageUploads = () => {
     setCurrentPage(1);
   };
 
-  // Signed URLs carry a Content-Disposition of attachment, so a plain anchor
-  // click saves the file instead of navigating away — and unlike window.open
-  // it survives pop-up blockers when several fire in a row.
-  const triggerBrowserDownload = (url: string, fileName: string) => {
+  const fetchFile = async (file: UploadedFile) => {
+    const { data, error } = await supabase.storage
+      .from(UPLOAD_BUCKET)
+      .download(file.path);
+    if (error) throw error;
+    return data;
+  };
+
+  // Files are fetched into memory and saved from a same-origin blob URL. A
+  // cross-origin storage URL ignores the anchor's `download` attribute and
+  // navigates instead, so the browser may open PDFs in a tab, and each new
+  // click cancels any earlier download whose response hasn't arrived yet.
+  const saveBlob = (blob: Blob, fileName: string) => {
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
     link.download = fileName;
-    link.rel = "noopener";
     link.style.display = "none";
     document.body.appendChild(link);
     link.click();
     link.remove();
+    // Revoking straight away can abort the save in some browsers.
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
   };
 
   const handleDownload = async (file: UploadedFile) => {
     try {
       setDownloadingPath(file.path);
-      const { data, error } = await supabase.storage
-        .from(UPLOAD_BUCKET)
-        .createSignedUrl(file.path, 60, { download: file.name });
-      if (error) throw error;
-      window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+      saveBlob(await fetchFile(file), file.name);
     } catch (error: any) {
       toast.error("Could not download file: " + error.message);
     } finally {
@@ -152,9 +178,8 @@ const ManageUploads = () => {
     }
   };
 
-  // Files are signed and saved one at a time: the plural createSignedUrls only
-  // accepts a single download name for the whole batch, which would collapse
-  // every file onto the same filename.
+  // Bundles every file into one ZIP. Browsers block or drop a burst of
+  // separate downloads, which left most of a large submission unsaved.
   const handleDownloadAll = async (submission: Submission) => {
     const files = submission.files || [];
     if (files.length === 0) {
@@ -163,35 +188,50 @@ const ManageUploads = () => {
     }
 
     setDownloadingAllId(submission.id);
-    const failed: string[] = [];
 
     try {
-      for (const file of files) {
-        try {
-          const { data, error } = await supabase.storage
-            .from(UPLOAD_BUCKET)
-            .createSignedUrl(file.path, 60, { download: file.name });
-          if (error) throw error;
-          triggerBrowserDownload(data.signedUrl, file.name);
-          // Give the browser a beat between saves; back-to-back clicks get
-          // dropped by some download managers.
-          await new Promise((resolve) => setTimeout(resolve, 400));
-        } catch {
+      const results = await Promise.allSettled(files.map(fetchFile));
+      const entries: Record<string, Uint8Array> = {};
+      const usedNames = new Set<string>();
+      const failed: string[] = [];
+
+      for (const [i, result] of results.entries()) {
+        const file = files[i];
+        if (result.status === "rejected") {
           failed.push(file.name);
+          continue;
         }
+        entries[uniqueEntryName(file.name, usedNames)] = new Uint8Array(
+          await result.value.arrayBuffer(),
+        );
       }
 
+      if (failed.length === files.length) {
+        toast.error("Could not download the files for this submission.");
+        return;
+      }
+
+      // Level 0 stores without recompressing: PDFs, Office files and images
+      // are already compressed, so deflating them again only costs time.
+      const zipped = zipSync(entries, { level: 0 });
+      const date = format(new Date(submission.created_at), "yyyy-MM-dd");
+      saveBlob(
+        new Blob([zipped], { type: "application/zip" }),
+        sanitizeFileName(`${submission.name}-documents-${date}.zip`),
+      );
+
+      const saved = files.length - failed.length;
       if (failed.length === 0) {
         toast.success(
-          `Downloading ${files.length} file${files.length === 1 ? "" : "s"}...`,
+          `Downloaded ${saved} file${saved === 1 ? "" : "s"} as a ZIP.`,
         );
-      } else if (failed.length === files.length) {
-        toast.error("Could not download the files for this submission.");
       } else {
         toast.warning(
-          `${files.length - failed.length} of ${files.length} files downloaded. Failed: ${failed.join(", ")}`,
+          `ZIP contains ${saved} of ${files.length} files. Could not fetch: ${failed.join(", ")}`,
         );
       }
+    } catch (error: any) {
+      toast.error("Could not create the ZIP: " + error.message);
     } finally {
       setDownloadingAllId(null);
     }
