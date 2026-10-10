@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { BOOKING_URL } from "@/lib/booking";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -95,10 +96,27 @@ const ContactForm = () => {
       <h2 className="text-3xl md:text-4xl font-display font-bold text-navy mb-2">
         Send us a Message
       </h2>
-      <p className="text-slate mb-8">
+      <p className="text-slate mb-6">
         We'd love to hear from you. Fill out the form below and we'll be in
         touch.
       </p>
+
+      <div className="mb-8 flex flex-col gap-4 rounded-xl border border-gold/30 bg-gold/5 p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-display font-bold text-navy">
+            Prefer to talk it through?
+          </p>
+          <p className="text-sm text-slate">
+            Book a 1:1 Zoom meeting at a time that suits you.
+          </p>
+        </div>
+        <Button asChild variant="gold" className="shrink-0 px-6">
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+            <CalendarDays />
+            Schedule a Meeting
+          </a>
+        </Button>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
